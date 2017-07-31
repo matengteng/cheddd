@@ -4,13 +4,14 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -110,11 +111,10 @@ public class MoreActivity extends MyBaseActivity implements View.OnClickListener
         mButtonCancel = (Button) view.findViewById(R.id.bt_more_calloff);
         mTextViewPhone = (TextView) view.findViewById(R.id.tv_more_call);
         Window window = mDialog.getWindow();
-        window.getDecorView().setPadding(0, 0, 20, 20);
         window.setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        mDialog.getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.dialog_loan_notice_back));
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mDialog.show();
-        mDialog.getWindow().setContentView((LinearLayout) view);
+        mDialog.getWindow().setContentView(view);
     }
 
     //拨打电话
