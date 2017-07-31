@@ -1,0 +1,54 @@
+package com.cheddd.bean;
+
+/**
+ * Created by Administrator on 2017/6/7 0007.
+ */
+
+public class MineBankBean {
+    private String bigMap;
+    private String icon;
+    private String mark;
+    private int number;
+
+    public MineBankBean() {
+    }
+
+    public MineBankBean(String bigMap, int number, String mark, String icon) {
+        this.bigMap = bigMap;
+        this.number = number;
+        this.mark = mark;
+        this.icon = icon;
+    }
+
+    public String getBigMap() {
+        return bigMap;
+    }
+
+    public void setBigMap(String bigMap) {
+        this.bigMap = bigMap;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public String getMark() {
+        return mark;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+}

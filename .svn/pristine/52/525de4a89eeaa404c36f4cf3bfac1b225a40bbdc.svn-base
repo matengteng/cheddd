@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_more_idea"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context="com.cheddd.activity.MoreIdeaActivity">
+
+    <com.cheddd.view.TopNavigationBar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tnb_moreidea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigation_title="@string/app_moreidea" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tnb_moreidea"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="206dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorBackground">
+
+                <EditText
+                    android:id="@+id/et_moreidea_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="left"
+                    android:hint="您的宝贵意见，就是我们进步的源泉" />
+            </RelativeLayout>
+
+            <View style="@style/ViewTop" />
+
+            <RelativeLayout
+                style="@style/InfoRelativeLayout"
+                android:background="@color/colorBackground">
+
+                <EditText
+                    android:id="@+id/et_moreidea_style"
+                    style="@style/EditText"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/colorWhite"
+                    android:hint="请留下您的联系方式" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/bt_moreidea_submit"
+                style="@style/Button"
+                android:text="@string/app_submit" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

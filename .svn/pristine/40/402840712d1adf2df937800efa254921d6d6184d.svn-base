@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_lend_bank"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    tools:context="com.cheddd.activity.LendBankActivity">
+
+    <com.cheddd.view.TopNavigationBar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tnb_lendbank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigation_title="@string/app_lend_bank" />
+
+    <View style="@style/ViewTop" />
+
+    <RelativeLayout style="@style/InfoRelativeLayout">
+
+        <TextView
+            style="@style/InfoTextView"
+            android:text="@string/app_receipt" />
+    </RelativeLayout>
+
+    <View style="@style/ViewTop" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        android:background="@color/colorWhite">
+
+        <ImageView
+            android:id="@+id/iv_lendbank_mark"
+            android:layout_width="@dimen/_dp_28"
+            android:layout_height="@dimen/_dp_28"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_lendbank_mark"
+            android:gravity="center"
+            android:text="招商银行卡储存卡（9999）" />
+
+        <ImageView style="@style/RightImageView" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/InfoRelativeLayout"
+        android:background="@color/colorBackground">
+
+        <TextView
+            style="@style/InfoTextView"
+            android:text="@string/app_receipt_detal" />
+
+        <TextView
+            android:id="@+id/tv_lendbank_bank"
+            style="@style/InfoTextView"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="@string/app_receipt_bank"
+            android:textColor="@color/colorRed" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/bt_lendbank_next"
+        style="@style/Button"
+        android:text="@string/app_next" />
+</LinearLayout>

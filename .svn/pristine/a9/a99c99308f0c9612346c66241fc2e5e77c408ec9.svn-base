@@ -1,0 +1,78 @@
+package com.cheddd.activity;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import com.cheddd.R;
+import com.cheddd.adapter.MinebankAdapter;
+import com.cheddd.base.MyBaseActivity;
+import com.cheddd.bean.MineBankBean;
+import com.cheddd.view.TopNavigationBar;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MineBankActivity extends MyBaseActivity implements AdapterView.OnItemClickListener {
+
+    private TopNavigationBar mTnb;
+    private ListView mListView;
+    private MinebankAdapter mAdapter;
+    private List<MineBankBean> mData;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_mine_bank);
+        initView();
+        initData();
+        setData();
+        setListener();
+    }
+
+    private void setData() {
+        mListView.setAdapter(mAdapter);
+    }
+
+    private void initData() {
+        mData = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            mData.add(new MineBankBean());
+        }
+        mAdapter = new MinebankAdapter(mData, this);
+    }
+
+    private void setListener() {
+        mListView.setOnItemClickListener(this);
+        mTnb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void initView() {
+        mTnb = (TopNavigationBar) findViewById(R.id.tnb_minebank);
+        mListView = (ListView) findViewById(R.id.lv_minebank);
+    }
+
+    //listView的点击事件
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        MineBankBean mineBankBean = mData.get(position);
+        String mark = mineBankBean.getMark();
+        String icon = mineBankBean.getIcon();
+        int number = mineBankBean.getNumber();
+        Intent intnt = new Intent(this, LendBankActivity.class);
+        intnt.putExtra("mark", mark);
+        intnt.putExtra("number", number);
+        intnt.putExtra("icon", icon);
+        setResult(100, intnt);
+        startActivity(intnt);
+        finish();
+    }
+}

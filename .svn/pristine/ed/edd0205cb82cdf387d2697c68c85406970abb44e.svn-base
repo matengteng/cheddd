@@ -1,0 +1,87 @@
+package com.cheddd.adapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+
+import com.cheddd.R;
+import com.cheddd.base.MyBaseAdapter;
+import com.cheddd.bean.AdvanceBean;
+
+import java.util.List;
+
+/**
+ * Created by Administrator on 2017/6/7 0007.
+ */
+
+public class AdvanceAdapter extends MyBaseAdapter {
+    private List<AdvanceBean> mData;
+    private Context mContext;
+    private boolean mMode;
+    private CompoundButton.OnCheckedChangeListener mChangeListener;
+
+    public AdvanceAdapter(List data, Context mContext) {
+        super(data);
+        this.mData = data;
+        this.mContext = mContext;
+        mChangeListener = (CompoundButton.OnCheckedChangeListener) mContext;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        AdvanceViewHolder holder = null;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.adapter_advance, null);
+            holder = new AdvanceViewHolder(convertView);
+            convertView.setTag(holder);
+        } else {
+            holder = (AdvanceViewHolder) convertView.getTag();
+        }
+       /* holder.mTextViewIndent.setText(mData.get(position).indent);
+        holder.mTextViewTime.setText(mData.get(position).time);
+        holder.mTextViewRefund.setText(mData.get(position).refund + "");
+        holder.mTextViewRespond.setText(mData.get(position).respond + "");*/
+        holder.mCheckBox.setOnCheckedChangeListener(mChangeListener);
+        holder.mCheckBox.setTag(position);
+        holder.mCheckBox.setChecked(mData.get(position).isChecked);
+        return convertView;
+    }
+
+
+    public static class AdvanceViewHolder {
+        //订单号 、时间、贷款 、应还
+        private TextView mTextViewIndent, mTextViewTime, mTextViewRefund, mTextViewRespond;
+        private CheckBox mCheckBox;
+
+        public AdvanceViewHolder(View view) {
+            mTextViewIndent = (TextView) view.findViewById(R.id.tv_advance_indent);
+            mTextViewTime = (TextView) view.findViewById(R.id.tv_advance_time);
+            mTextViewRefund = (TextView) view.findViewById(R.id.tv_advance_refund);
+            mTextViewRespond = (TextView) view.findViewById(R.id.tv_advance_respond);
+            mCheckBox = (CheckBox) view.findViewById(R.id.cb_advance_check);
+        }
+    }
+
+    public void setMode(boolean mode) {
+        this.mMode = mode;
+        notifyDataSetChanged();
+    }
+
+    public int getMoney() {
+        int money = 0;
+        if (mData == null || mData.size() == 0) {
+            return money;
+        }
+        for (int i = 0; i < mData.size(); i++) {
+            AdvanceBean advanceBean = mData.get(i);
+            if (advanceBean.isChecked) {
+                money += money;
+            }
+        }
+        return money;
+    }
+}

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_apply_for"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cheddd.activity.ApplyForActivity">
+
+    <com.cheddd.view.TopNavigationBar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tnb_applyfor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigation_title="@string/app_applyfor" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tnb_applyfor"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_applrfor_cycle"
+                style="@style/InfoRelativeLayout">
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:text="续贷周期" />
+
+                <TextView
+                    android:id="@+id/tv_applyfor_cycle"
+                    style="@style/InfoTextView"
+                    android:layout_marginLeft="140dp"
+                    android:text="1个月"
+                    android:textColor="@color/colorRed" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout
+                android:id="@+id/rl_applrfor_style"
+                style="@style/InfoRelativeLayout">
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:text="还款方式" />
+
+                <TextView
+                    android:id="@+id/tv_applyfor_style"
+                    style="@style/InfoTextView"
+                    android:layout_marginLeft="140dp"
+                    android:text="归本8%"
+                    android:textColor="@color/colorRed" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:text="续贷1个月需要归还本金3%"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:text="垫资费" />
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:text="100.00" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:text="归还本金" />
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:text="100.00" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="110dp"
+                    android:text="总计" />
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:text="100.00"
+                    android:textColor="@color/colorRed" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_bank"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cheddd.activity.SafetyActivity">
+
+    <com.cheddd.view.TopNavigationBar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tnb_safety"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigation_title="@string/app_usersafety" />
+
+    <ScrollView
+        android:layout_below="@id/tnb_safety"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_safety_bank"
+                style="@style/InfoRelativeLayout">
+
+                <ImageView
+                    android:id="@+id/iv_safety_bank"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@mipmap/mine_bank" />
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:layout_toRightOf="@id/iv_safety_bank"
+                    android:text="@string/app_mine_bank" />
+
+                <TextView
+                    android:id="@+id/tv_safety_num"
+                    style="@style/InfoTextView"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:text="1张" />
+
+                <ImageView style="@style/RightImageView" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout
+                android:id="@+id/rl_safety_password"
+                style="@style/InfoRelativeLayout">
+
+                <ImageView
+                    android:id="@+id/iv_safety_password"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@mipmap/mine_bank" />
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:layout_toRightOf="@id/iv_safety_password"
+                    android:text="@string/app_payoff_password" />
+
+                <TextView
+                    android:id="@+id/tv_safety_password"
+                    style="@style/InfoTextView"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:text="未设置" />
+
+                <ImageView style="@style/RightImageView" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout
+                android:id="@+id/rl_safety_amend"
+                style="@style/InfoRelativeLayout">
+
+                <ImageView
+                    android:id="@+id/iv_safety_amend"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@mipmap/mine_bank" />
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:layout_toRightOf="@id/iv_safety_amend"
+                    android:text="@string/app_login" />
+
+                <TextView
+                    android:id="@+id/tv_safety_amend"
+                    style="@style/InfoTextView"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:text="修改" />
+
+                <ImageView style="@style/RightImageView" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout
+                android:id="@+id/rl_safety_gesture"
+                style="@style/InfoRelativeLayout">
+
+                <ImageView
+                    android:id="@+id/iv_safety_gesture"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@mipmap/mine_bank" />
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:layout_toRightOf="@id/iv_safety_gesture"
+                    android:text="@string/app_gesture" />
+
+                <ImageView style="@style/RightImageView" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

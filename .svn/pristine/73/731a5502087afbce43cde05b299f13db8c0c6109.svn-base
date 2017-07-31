@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_refund_indent"
+        style="@style/loanRelativeLayout">
+
+        <TextView
+            style="@style/InfoTextView"
+            android:text="@string/app_loanbean_indent" />
+
+        <TextView
+            android:id="@+id/tv_refund_indent"
+            style="@style/InfoTextView"
+            android:layout_marginLeft="140dp"
+            android:text="123456789" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_refund_time"
+        style="@style/loanRelativeLayout"
+        android:layout_below="@+id/rl_refund_indent">
+
+        <TextView
+            style="@style/InfoTextView"
+            android:text="@string/app_loanbean_time" />
+
+        <TextView
+            android:id="@+id/tv_refund_time"
+            style="@style/InfoTextView"
+            android:layout_marginLeft="140dp"
+            android:text="2017.09.09" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_refund_money"
+        style="@style/loanRelativeLayout"
+        android:layout_below="@id/rl_refund_time">
+
+        <TextView
+            style="@style/InfoTextView"
+            android:text="@string/app_loanbean_money" />
+
+        <TextView
+            android:id="@+id/tv_refund_money"
+            style="@style/InfoTextView"
+            android:layout_marginLeft="140dp"
+            android:text="9999" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_refund_month"
+        style="@style/loanRelativeLayout"
+        android:layout_below="@id/rl_refund_money">
+
+        <TextView
+            style="@style/InfoTextView"
+            android:text="@string/app_loanbean_month" />
+
+        <TextView
+            android:id="@+id/tv_refund_month"
+            style="@style/InfoTextView"
+            android:layout_marginLeft="140dp"
+            android:text="3个月" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_refund_interest"
+        style="@style/loanRelativeLayout"
+        android:layout_below="@id/rl_refund_month">
+
+        <TextView
+            style="@style/InfoTextView"
+            android:text="@string/app_loanbean_interest" />
+
+        <TextView
+            android:id="@+id/tv_refund_interest"
+            style="@style/InfoTextView"
+            android:layout_marginLeft="140dp"
+            android:text="1%" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_refund_refund"
+        style="@style/loanRelativeLayout"
+        android:layout_below="@id/rl_refund_interest">
+
+        <TextView
+            style="@style/InfoTextView"
+            android:text="@string/app_loanbean_refund" />
+
+        <TextView
+            android:id="@+id/tv_refund_refund"
+            style="@style/InfoTextView"
+            android:layout_marginLeft="140dp"
+            android:text="3期" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_refund_way"
+        style="@style/loanRelativeLayout"
+        android:layout_below="@id/rl_refund_refund">
+
+        <TextView
+            style="@style/InfoTextView"
+            android:text="@string/app_loanbean_way" />
+
+        <TextView
+            android:id="@+id/tv_refund_way"
+            style="@style/InfoTextView"
+            android:layout_marginLeft="140dp"
+            android:text="现金分期" />
+
+        <TextView
+            android:id="@+id/tv_refund_list"
+            style="@style/InfoTextView"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="还款明细"
+            android:textColor="#df9f82" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/v"
+        style="@style/ViewTop"
+        android:layout_below="@id/rl_refund_way" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@id/v"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_refund_already"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="已还金额"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_refund_already_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_refund_already"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="999.00"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_refund_stay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="待还金额"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_refund_stay_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_refund_stay"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="999.00"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_refund_current"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_refund_current"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="本期应还"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_refund_current_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_refund_current"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="0.00"
+                android:textSize="16sp" />
+
+           <ImageView
+               android:layout_centerInParent="true"
+             style="@style/RightImageView" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/id_refund_map"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="50dp"
+        android:src="@mipmap/ic_launcher" />
+
+</RelativeLayout>

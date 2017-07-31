@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_retrieve_payment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cheddd.activity.RetrievePaymentActivity">
+    <com.cheddd.view.TopNavigationBar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tnb_retrievePayment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigation_title="@string/app_forgetpayment" />
+
+    <RelativeLayout
+        android:id="@+id/rl_retrievePayment_one"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tnb_retrievePayment">
+
+        <TextView
+            android:id="@+id/tv_retrievePayment_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:gravity="center"
+            android:text="请输入支付密码" />
+
+        <com.cheddd.view.PwdEditText
+            android:id="@+id/et_retrievePayment_one"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_below="@id/tv_retrievePayment_password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="120dp"
+            android:cursorVisible="false"
+            android:enabled="true"
+            android:focusable="true"
+            android:inputType="number"
+            android:maxLength="6" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_retrievePayment_one"
+            android:layout_marginTop="19dp"
+            android:gravity="center"
+            android:text="支付密码为六位数，用于您在平台的还款" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_retrievePayment_two"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tnb_retrievePayment"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_retrievePayment_password2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:gravity="center"
+            android:text="请再次输入支付密码" />
+
+        <com.cheddd.view.PwdEditText
+            android:id="@+id/et_retrievePayment_two"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_below="@id/tv_retrievePayment_password2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="120dp"
+            android:cursorVisible="false"
+            android:enabled="true"
+            android:focusable="true"
+            android:inputType="number"
+            android:maxLength="6" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_retrievePayment_two"
+            android:layout_marginTop="19dp"
+            android:gravity="center"
+            android:text="支付密码为六位数，用于您在平台的还款" />
+    </RelativeLayout>
+</RelativeLayout>

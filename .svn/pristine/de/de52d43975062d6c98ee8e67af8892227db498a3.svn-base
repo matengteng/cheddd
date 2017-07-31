@@ -1,0 +1,44 @@
+package com.cheddd.bean;
+
+/**
+ * Created by Administrator on 2017/6/6 0006.
+ */
+
+public class BorrowMoneyBean {
+    private String time;
+    private String money;
+    private String insert;
+
+    public BorrowMoneyBean() {
+    }
+
+    public BorrowMoneyBean(String time, String insert, String money) {
+        this.time = time;
+        this.insert = insert;
+        this.money = money;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getInsert() {
+        return insert;
+    }
+
+    public void setInsert(String insert) {
+        this.insert = insert;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+}

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/ll_refund_refund_setPassword"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dialog_loan_notice_back"
+        android:orientation="vertical">
+
+        <RelativeLayout style="@style/InfoRelativeLayout">
+
+            <TextView
+                style="@style/InfoTextView"
+                android:layout_centerInParent="true"
+                android:text="请输入支付密码"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <View style="@style/View" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100">
+
+            <TextView
+                android:id="@+id/tv_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="还款"
+                android:textColor="#333" />
+
+            <TextView
+                android:id="@+id/tv_dialog_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_dialog"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:text="￥0.00"
+                android:textSize="30sp" />
+        </RelativeLayout>
+
+        <View style="@style/View" />
+
+        <RelativeLayout
+            android:id="@+id/rl_dialog_bank"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_55">
+
+            <ImageView
+                android:id="@+id/iv_dialog_bank"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tv_dialog_bank"
+                style="@style/InfoTextView"
+                android:layout_toRightOf="@id/iv_dialog_bank"
+                android:text="中国银行"
+                android:textSize="@dimen/sp_16" />
+
+            <ImageView style="@style/RightImageView" />
+        </RelativeLayout>
+
+        <View style="@style/View" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_55"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorWhite"
+            android:gravity="center">
+
+            <com.cheddd.view.PwdEditText
+                android:id="@+id/pet_pwd"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:cursorVisible="false"
+                android:enabled="true"
+                android:focusable="true"
+                android:inputType="number"
+                android:maxLength="6" />
+        </RelativeLayout>
+
+        <View style="@style/View" />
+    </LinearLayout>
+</LinearLayout>

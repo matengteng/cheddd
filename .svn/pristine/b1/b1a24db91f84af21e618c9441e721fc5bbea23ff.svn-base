@@ -1,0 +1,96 @@
+package com.cheddd.activity;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.cheddd.R;
+import com.cheddd.base.MyBaseActivity;
+import com.cheddd.view.PwdEditText;
+import com.cheddd.view.TopNavigationBar;
+
+/**
+ * 修改支付密码的界面
+ */
+
+public class AmendPaymentActivity extends MyBaseActivity implements View.OnClickListener {
+    private TopNavigationBar mTnb;
+    //第一次输入密码，第二次输入密码
+    private RelativeLayout mRelativeOne, mRelativeTwo, mRelativeFormer;
+    private PwdEditText mEditTextOne, mEditTexgtTwo, mEditTexgtFormer;
+    private TextView mTextViewForget;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_amend_payment);
+        initView();
+        setListener();
+    }
+
+    private void setListener() {
+        mTextViewForget.setOnClickListener(this);
+        mTnb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        mEditTexgtFormer.setOnInputFinishListener(new PwdEditText.OnInputFinishListener() {
+            @Override
+            public void onInputFinish(String password) {
+                int selectionEnd = mEditTexgtFormer.getSelectionEnd();
+                if (selectionEnd == 6) {
+                    mRelativeFormer.setVisibility(View.INVISIBLE);
+                    mRelativeOne.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        mEditTextOne.setOnInputFinishListener(new PwdEditText.OnInputFinishListener() {
+            @Override
+            public void onInputFinish(String password) {
+                int selectionEnd = mEditTexgtFormer.getSelectionEnd();
+                if (selectionEnd == 6) {
+                    mRelativeOne.setVisibility(View.INVISIBLE);
+                    mRelativeTwo.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        mEditTexgtTwo.setOnInputFinishListener(new PwdEditText.OnInputFinishListener() {
+            @Override
+            public void onInputFinish(String password) {
+                int selectionEnd = mEditTexgtFormer.getSelectionEnd();
+                if (selectionEnd == 6) {
+                    startActivity(new Intent(AmendPaymentActivity.this, SafetyActivity.class));
+                    finish();
+                }
+            }
+        });
+    }
+
+    private void initView() {
+        mTnb = (TopNavigationBar) findViewById(R.id.tnb_amendpayment);
+        mTextViewForget = (TextView) findViewById(R.id.tv_amendPayment_forget);
+        mRelativeOne = (RelativeLayout) findViewById(R.id.rl_amendpayment_one);
+        mRelativeTwo = (RelativeLayout) findViewById(R.id.rl_amendpayment_two);
+        mRelativeFormer = (RelativeLayout) findViewById(R.id.rl_amendpayment_former);
+        mEditTextOne = (PwdEditText) findViewById(R.id.et_amendpayment_one);
+        mEditTexgtTwo = (PwdEditText) findViewById(R.id.et_amendpayment_two);
+        mEditTexgtFormer = (PwdEditText) findViewById(R.id.et_amendpayment_former);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v != null) {
+            switch (v.getId()) {
+                case R.id.tv_amendPayment_forget:
+                    startActivity(new Intent(this, ForgetPaymentActivty.class));
+                    finish();
+                    break;
+            }
+        }
+    }
+}

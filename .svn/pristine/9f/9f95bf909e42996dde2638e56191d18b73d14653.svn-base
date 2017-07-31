@@ -1,0 +1,145 @@
+package com.cheddd.activity;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Checkable;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.cheddd.R;
+import com.cheddd.base.MyBaseActivity;
+import com.cheddd.fragment.InfoFragment;
+import com.cheddd.utils.ToastUtil;
+import com.cheddd.view.TopNavigationBar;
+/*
+手机认证
+*/
+public class PhoneApproveActivity extends MyBaseActivity implements View.OnClickListener {
+
+    private TopNavigationBar mTnb;
+    private EditText mEditTextPhone, mEditTextPassword;//手机号码，服务密码
+    private RelativeLayout mRelativeAddress, mRelativeLocation, mRelativeDuanxin;//通讯录，位置，短信
+    private CheckBox mCheckBoxAgree; //是否同意
+    private TextView mTextViewPassword;//忘记密码
+    private Button mButtonSubmit;
+    private TextView mTextViewMotion;
+    private SharedPreferences mSpf;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_phone_approve);
+        initView();
+        initData();
+        setListener();
+    }
+
+    private void initData() {
+    }
+
+    private void setListener() {
+        mRelativeLocation.setOnClickListener(this);
+        mRelativeDuanxin.setOnClickListener(this);
+        mRelativeAddress.setOnClickListener(this);
+        mButtonSubmit.setOnClickListener(this);
+        mTextViewMotion.setOnClickListener(this);
+        mCheckBoxAgree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mTextViewMotion.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //运营时的服务协议
+                            motain();
+                        }
+                    });
+                } else {
+                    ToastUtil.show(PhoneApproveActivity.this, "请您同意后才能查看");
+                    return;
+                }
+            }
+        });
+        mTnb.setOnBackListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v != null) {
+                    finish();
+                }
+            }
+        });
+    }
+
+    private void motain() {
+        Intent intent = new Intent(PhoneApproveActivity.this, MotionActivity.class);
+        intent.putExtra("url", "http://baidu.com");
+        startActivity(intent);
+        finish();
+    }
+
+    private void initView() {
+        mTnb = (TopNavigationBar) findViewById(R.id.tnb_phoneApprove);
+        mEditTextPhone = (EditText) findViewById(R.id.et_phoneApprove_phone);
+        mEditTextPassword = (EditText) findViewById(R.id.et_phoneApprove_password);
+        mRelativeAddress = (RelativeLayout) findViewById(R.id.rl_phoneApprove_address);
+        mRelativeDuanxin = (RelativeLayout) findViewById(R.id.rl_phoneApprove_duanxin);
+        mRelativeLocation = (RelativeLayout) findViewById(R.id.rl_phoneApprove_location);
+        mCheckBoxAgree = (CheckBox) findViewById(R.id.cb_phone_apporve);
+        mButtonSubmit = (Button) findViewById(R.id.bt_phoneApprove_submit);
+        mTextViewMotion = (TextView) findViewById(R.id.tv_phoneApprove_motain);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v != null) {
+            switch (v.getId()) {
+                case R.id.rl_phoneApprove_location:
+                    break;
+                case R.id.rl_phoneApprove_duanxin:
+                    break;
+                case R.id.rl_phoneApprove_address:
+                    break;
+                case R.id.bt_phoneApprove_submit:
+                    phone();
+                    serverPassword();
+                    finish();
+                    break;
+                case R.id.tv_phoneApprove_motain:
+                    mSpf = getSharedPreferences("PhoneApproveActivity", MODE_PRIVATE);
+                    boolean config = mSpf.getBoolean("config", true);
+                    if (config) {
+                        mCheckBoxAgree.setChecked(true);
+                        motain();
+                    } else {
+                        mCheckBoxAgree.setChecked(false);
+                        ToastUtil.show(this, "请勾选");
+                    }
+                    break;
+            }
+        }
+    }
+
+    private void serverPassword() {
+        ToastUtil.show(this, "服务密码是啥啊");
+    }
+
+    private void phone() {
+        String phone = mEditTextPhone.getText().toString().trim();
+        if (TextUtils.isEmpty(phone)) {
+            ToastUtil.show(this, "手机号码不能为空");
+            return;
+        }
+        if (!phone.matches("1\\d{10}")) {
+            ToastUtil.show(this, "手机格式错误");
+            return;
+        }
+    }
+}

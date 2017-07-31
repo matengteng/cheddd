@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_pledge"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    tools:context="com.cheddd.activity.PledgeActivity">
+
+    <com.cheddd.view.TopNavigationBar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tnb_pledge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigation_title="@string/app_extreme" />
+
+    <View style="@style/ViewTop" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_pledge_dot"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_hear_dot" />
+
+                <TextView
+                    android:id="@+id/tv_pledge_dots"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_toRightOf="@id/tv_pledge_dot"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="#333"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_pledge_relation"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_relation" />
+
+                <TextView
+                    android:id="@+id/tv_pledge_relations"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_toRightOf="@id/tv_pledge_relation"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="#333"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout
+                style="@style/InfoRelativeLayout"
+                android:background="@color/colorBackground">
+
+                <Button
+                    android:id="@+id/bt_pledge_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="产品介绍"
+                    android:textColor="#E83D2E"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_pledge_money"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_apply_money" />
+
+                <TextView
+                    android:id="@+id/tv_pledge_moneys"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_toRightOf="@id/tv_pledge_money"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="#333"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:text="服务明细"
+                android:textColor="#3E9EE1"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <View style="@style/View" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/colorWhite" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite">
+
+                <Button
+                    android:id="@+id/bt_pledge_redtop"
+                    android:layout_width="15dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="50dp"
+                    android:background="@mipmap/flow_redtop" />
+
+                <TextView
+                    android:id="@+id/tv_pledge_applyfor1"
+                    style="@style/InfoTextView"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/bt_pledge_redtop"
+                    android:text="贷款申请"
+                    android:textColor="#24CA86" />
+
+                <TextView
+                    android:id="@+id/tv_pledge_applyforTime"
+                    style="@style/InfoTextView"
+                    android:layout_below="@id/tv_pledge_applyfor1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_toRightOf="@id/bt_pledge_redtop"
+                    android:text="2017年8月19日 12:24:36"
+                    android:textColor="#24CA86"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite">
+
+                <Button
+                    android:id="@+id/bt_pledge_risk"
+                    android:layout_width="15dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="50dp"
+                    android:background="@drawable/flow_center"
+                    android:enabled="false" />
+
+                <TextView
+                    android:id="@+id/tv_pledge_applyfor"
+                    style="@style/InfoTextView"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@id/bt_pledge_risk"
+                    android:enabled="false"
+                    android:text="风控审核"
+                    android:textColor="@color/text_tab" />
+
+                <TextView
+                    android:id="@+id/tv_pledge_riskTime"
+                    style="@style/InfoTextView"
+                    android:layout_below="@id/tv_pledge_applyfor"
+                    android:layout_centerHorizontal="true"
+                    android:layout_toRightOf="@id/bt_pledge_risk"
+                    android:text=""
+                    android:textColor="#24CA86"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite">
+
+                <Button
+                    android:id="@+id/bt_pledge_finance"
+                    android:layout_width="15dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="50dp"
+                    android:background="@drawable/flow_center"
+                    android:enabled="false" />
+
+                <TextView
+                    android:id="@+id/tv_pledge_finance"
+                    style="@style/InfoTextView"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@id/bt_pledge_finance"
+                    android:enabled="false"
+                    android:text="财务审核"
+                    android:textColor="@color/text_tab" />
+
+                <TextView
+                    android:id="@+id/tv_pledge_financeTime"
+                    style="@style/InfoTextView"
+                    android:layout_below="@id/tv_pledge_finance"
+                    android:layout_centerHorizontal="true"
+                    android:layout_toRightOf="@id/bt_pledge_finance"
+                    android:text=""
+                    android:textColor="#24CA86"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite">
+
+                <Button
+                    android:id="@+id/bt_pledge_finsh"
+                    android:layout_width="15dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="50dp"
+                    android:background="@drawable/flow_button"
+                    android:enabled="false" />
+
+                <TextView
+                    android:id="@+id/tv_pledge_finsh"
+                    style="@style/InfoTextView"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@id/bt_pledge_finsh"
+                    android:enabled="false"
+                    android:text="付款成功"
+                    android:textColor="@color/text_tab" />
+
+                <TextView
+                    android:id="@+id/tv_pledge_succeedTime"
+                    style="@style/InfoTextView"
+                    android:layout_below="@id/tv_pledge_finsh"
+                    android:layout_centerHorizontal="true"
+                    android:layout_toRightOf="@id/bt_pledge_finsh"
+                    android:text=""
+                    android:textColor="#24CA86"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/colorWhite" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

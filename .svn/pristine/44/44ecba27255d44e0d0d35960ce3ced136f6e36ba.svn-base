@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_lend_money"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    tools:context="com.cheddd.activity.LendMoneyActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.cheddd.view.TopNavigationBar xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/tnb_lendmoney"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigation_title="@string/app_money" />
+
+        <View style="@style/ViewTop" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout style="@style/InfoRelativeLayout">
+
+                    <TextView
+                        style="@style/InfoTextView"
+                        android:text="@string/app_money"
+                        android:textColor="#333333" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/colorWhite">
+
+                    <TextView
+                        android:id="@+id/tv_lendmoney_money"
+                        style="@style/InfoTextView"
+                        android:text="￥"
+                        android:textSize="36sp" />
+
+                    <EditText
+                        android:id="@+id/et_lendmoney_money"
+                        style="@style/EditText"
+                        android:layout_marginLeft="1dp"
+                        android:layout_toRightOf="@id/tv_lendmoney_money"
+                        android:hint="0.00"
+                        android:textSize="36sp" />
+                </RelativeLayout>
+
+                <View style="@style/View" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/colorWhite">
+
+                    <TextView
+                        style="@style/InfoTextView"
+                        android:text="@string/app_month_money"
+                        android:textColor="@color/colorRed" />
+                </RelativeLayout>
+
+                <View style="@style/ViewTop" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_lendmoney_style"
+                    style="@style/InfoRelativeLayout">
+
+                    <TextView
+                        style="@style/InfoTextView"
+                        android:text="@string/app_lendMonetStyle" />
+
+                    <TextView
+                        android:id="@+id/tv_lendmoney_style"
+                        style="@style/InfoTextView"
+                        android:layout_marginLeft="150dp"
+                        android:text="单期借款" />
+
+                    <ImageView style="@style/RightImageView" />
+                </RelativeLayout>
+
+                <View style="@style/View" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_lendmoney_refund"
+                    style="@style/InfoRelativeLayout">
+
+                    <TextView
+                        style="@style/InfoTextView"
+                        android:text="@string/app_refund_time" />
+
+                    <TextView
+                        android:id="@+id/tv_lendmoney_month"
+                        style="@style/InfoTextView"
+                        android:layout_marginLeft="150dp"
+                        android:text="7天" />
+
+                    <ImageView style="@style/RightImageView" />
+                </RelativeLayout>
+
+                <View style="@style/ViewTop" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/colorWhite">
+
+                    <TextView
+                        style="@style/InfoTextView"
+                        android:text="@string/app_refund_first" />
+
+                    <TextView
+                        style="@style/InfoTextView"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:text="￥107.54（6月24日）" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/colorWhite">
+
+                    <TextView
+                        style="@style/InfoTextView"
+                        android:text="@string/app_refund_day" />
+
+                    <TextView
+                        style="@style/InfoTextView"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:text="每月24日" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_lendmoney_check"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/colorWhite">
+
+                    <TextView
+                        style="@style/InfoTextView"
+                        android:text="@string/app_refund_relation" />
+
+                    <TextView
+                        style="@style/InfoTextView"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:text="查看"
+                        android:textColor="@color/colorRed" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    style="@style/InfoRelativeLayout"
+                    android:background="@color/colorBackground">
+
+                    <TextView
+                        style="@style/InfoTextView"
+                        android:text="@string/app_refund_morrow"
+                        android:textColor="@color/colorRed"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/bt_lendmoney_next"
+                    style="@style/Button"
+                    android:layout_marginBottom="60dp"
+                    android:text="@string/app_next" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorBackground"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/bt_lendmoney_know"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:background="@null"
+            android:onClick="onClick"
+            android:text="@string/app_lendMoneyknow"
+            android:textColor="#333333" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="15dp"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/bt_lendmoney_know"
+            android:background="#333333" />
+
+        <Button
+            android:id="@+id/bt_petty_problem"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@id/bt_lendmoney_know"
+            android:background="@null"
+            android:onClick="onClick"
+            android:text="@string/app_lendProblem"
+            android:textColor="#333333" />
+    </RelativeLayout>
+</RelativeLayout>

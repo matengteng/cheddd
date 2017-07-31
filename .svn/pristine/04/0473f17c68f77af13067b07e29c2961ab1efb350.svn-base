@@ -1,0 +1,32 @@
+package com.cheddd.activity;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.cheddd.R;
+import com.cheddd.base.MyBaseActivity;
+
+public class ForgetPasswordActivity extends MyBaseActivity {
+    //手机号码，验证码，新密码
+    private EditText mEditTextPhone, mEditTextAuthcode, mEditTextPassword;
+    private Button mButtonAffirm;
+    private TextView mTextViewAuthCode;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_forget_password);
+        initView();
+    }
+
+    private void initView() {
+        mEditTextPhone = (EditText) findViewById(R.id.et_forget_phone);
+        mEditTextPassword = (EditText) findViewById(R.id.et_forget_password);
+        mEditTextAuthcode = (EditText) findViewById(R.id.et_forget_authcode);
+        mButtonAffirm = (Button) findViewById(R.id.bt_forget_login);
+        mTextViewAuthCode = (TextView) findViewById(R.id.tv_forget_authcode);
+    }
+}

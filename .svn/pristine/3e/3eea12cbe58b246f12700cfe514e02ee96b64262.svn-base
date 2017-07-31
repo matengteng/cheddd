@@ -1,0 +1,153 @@
+package com.cheddd.activity;
+
+import android.app.Dialog;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.cheddd.R;
+import com.cheddd.base.MyBaseActivity;
+import com.cheddd.view.MyGridView;
+import com.cheddd.view.TopNavigationBar;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
+
+//借款银行卡
+public class LendBankActivity extends MyBaseActivity implements View.OnClickListener {
+
+    private Dialog mDialog;
+    private TopNavigationBar mTnb;
+    //查看支持的银行、
+    private TextView mTextViewBank, mTextViewMark, mTextViewnumber;
+    private MyGridView myGridView;
+    private List<String> mList;
+    private ArrayAdapter<String> mAdapter;
+    private Button mBbuttonNext, mButtonKonw;
+    private RelativeLayout mRelativeBank, mRelativeKnow;
+    //图片
+    private ImageView mImageView;
+    private String mark;
+    private String number;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_lend_bank);
+        initView();
+        initData();
+        // setData();
+        setListener();
+
+    }
+
+
+    private void initData() {
+        mList = new ArrayList<>();
+        for (int i = 0; i < 50; i++) {
+            mList.add(i + "");
+        }
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mList);
+
+    }
+
+    private void setListener() {
+        mButtonKonw.setOnClickListener(this);
+        mRelativeBank.setOnClickListener(this);
+        mBbuttonNext.setOnClickListener(this);
+        mTextViewBank.setOnClickListener(this);
+        mTnb.setOnBackListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void initView() {
+        mButtonKonw = (Button) findViewById(R.id.bt_bank_know);
+        mTextViewnumber = (TextView) findViewById(R.id.tv_lendbank_number);
+        mTextViewMark = (TextView) findViewById(R.id.tv_lendbank_mark);
+        mImageView = (ImageView) findViewById(R.id.iv_lendbank_mark);
+        mRelativeBank = (RelativeLayout) findViewById(R.id.rl_lendmoney_bank);
+        mTnb = (TopNavigationBar) findViewById(R.id.tnb_lendbank);
+        mTextViewBank = (TextView) findViewById(R.id.tv_lendbank_bank);
+        mBbuttonNext = (Button) findViewById(R.id.bt_lendbank_next);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v != null) {
+            switch (v.getId()) {
+                case R.id.tv_lendbank_bank:
+                    bank();
+                    break;
+                case R.id.bt_lendbank_next:
+                    startActivity(new Intent(this, LendEntryActivity.class));
+                    break;
+                case R.id.rl_lendmoney_bank:
+                    Intent intent = new Intent(this, MineBankActivity.class);
+                    startActivityForResult(intent, 100);
+                    finish();
+                    break;
+                case R.id.bt_bank_know:
+                    know();
+                    break;
+                case R.id.rl_dialog_close:
+                    mDialog.dismiss();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void know() {
+        mDialog = new AlertDialog.Builder(this).create();
+        View view = LayoutInflater.from(this).inflate(R.layout.dialong_lend_konw, null);
+        mDialog.setCanceledOnTouchOutside(false);
+        mRelativeKnow = (RelativeLayout) view.findViewById(R.id.rl_dialog_close);
+        mRelativeKnow.setOnClickListener(this);
+        mDialog.show();
+        mDialog.getWindow().setContentView((LinearLayout) view);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (100 == resultCode) {
+            mark = data.getExtras().getString("mark");
+            number = data.getExtras().getString("number");
+            String icon = data.getExtras().getString("icon");
+            mTextViewMark.setText(mark);
+            mTextViewnumber.setText(number);
+            // Picasso.with(this).load(icon).into(mImageView);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+
+    }
+
+    //查看支持的银行卡
+    private void bank() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_lendbank, null);
+        builder.setView(view);
+        myGridView = (MyGridView) view.findViewById(R.id.gv_lendbank_bank);
+        myGridView.setAdapter(mAdapter);
+        builder.create().show();
+    }
+
+
+}

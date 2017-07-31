@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_relation"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    tools:context="com.cheddd.activity.RelationActivity">
+    <com.cheddd.view.TopNavigationBar
+        android:id="@+id/tnb_relation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigation_title="联系人" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBackground"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_relation_container1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/bt_relation_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ll_relation_container1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_round_blue"
+                    android:text="增加"
+                    android:textColor="@color/colorWhite" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <RelativeLayout style="@style/InfoRelativeLayout">
+
+                    <TextView
+                        style="@style/InfoTextView"
+                        android:text="@string/app_relation_urgency" />
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/InfoRelativeLayout">
+
+                    <TextView
+                        android:id="@+id/tv_relation_urgency"
+                        style="@style/InfoTextView"
+                        android:text="@string/app_username" />
+
+                    <EditText
+                        android:id="@+id/et_relation_urgency_name"
+                        style="@style/EditText"
+                        android:layout_marginLeft="60dp"
+                        android:layout_toRightOf="@id/tv_relation_urgency"
+                        android:hint="@string/app_relation_input" />
+                </RelativeLayout>
+
+                <View style="@style/View" />
+
+                <RelativeLayout style="@style/InfoRelativeLayout">
+
+                    <TextView
+                        android:id="@+id/tv_relation_regency_phone"
+                        style="@style/InfoTextView"
+                        android:text="@string/app_phone" />
+
+                    <EditText
+                        android:id="@+id/et_relation_regency_phone"
+                        style="@style/EditText"
+                        android:layout_toRightOf="@id/tv_relation_regency_phone"
+                        android:hint="@string/app_cellphone" />
+
+                    <ImageView
+                        android:id="@+id/iv_relation_urgency_phone"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@android:drawable/sym_action_call" />
+                </RelativeLayout>
+
+                <View style="@style/View" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/bt_relation_submit"
+                style="@style/Button"
+                android:layout_marginBottom="30dp"
+                android:text="@string/app_submit" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

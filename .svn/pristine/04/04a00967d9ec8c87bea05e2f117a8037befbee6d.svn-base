@@ -1,0 +1,83 @@
+package com.cheddd.activity;
+
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.RelativeLayout;
+
+import com.cheddd.R;
+import com.cheddd.base.MyBaseActivity;
+import com.cheddd.view.TopNavigationBar;
+
+public class MoreActivity extends MyBaseActivity implements View.OnClickListener {
+
+    //意见反馈、常见问题、关于我们、门店地址、服务热线
+    private RelativeLayout mRelativeIdea, RelativeQuestion, RelativeMine, RelativeDot, RelativeServe;
+    private TopNavigationBar mTnb;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_more);
+        initView();
+        setListener();
+    }
+
+    private void setListener() {
+        mRelativeIdea.setOnClickListener(this);
+        RelativeQuestion.setOnClickListener(this);
+        RelativeMine.setOnClickListener(this);
+        RelativeDot.setOnClickListener(this);
+        RelativeServe.setOnClickListener(this);
+        mTnb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void initView() {
+        mRelativeIdea = (RelativeLayout) findViewById(R.id.rl_more_idea);
+        RelativeQuestion = (RelativeLayout) findViewById(R.id.rl_more_question);
+        RelativeMine = (RelativeLayout) findViewById(R.id.rl_more_mine);
+        RelativeDot = (RelativeLayout) findViewById(R.id.rl_more_dot);
+        RelativeServe = (RelativeLayout) findViewById(R.id.rl_more_serve);
+        mTnb = (TopNavigationBar) findViewById(R.id.tnb_more);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v != null) {
+            switch (v.getId()) {
+                case R.id.rl_more_dot:
+                    startActivity(new Intent(this, MoreDotActivity.class));
+                    break;
+                case R.id.rl_more_question:
+                    startActivity(new Intent(this, MoreQuestionActivity.class));
+                    break;
+                case R.id.rl_more_idea:
+                    startActivity(new Intent(this, MoreIdeaActivity.class));
+                    break;
+                case R.id.rl_more_mine:
+                    startActivity(new Intent(this, MoreMineActivity.class));
+                    break;
+                case R.id.rl_more_serve:
+                    serve();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void serve() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_more_phone, null);
+        builder.setView(view);
+        builder.create().show();
+    }
+}

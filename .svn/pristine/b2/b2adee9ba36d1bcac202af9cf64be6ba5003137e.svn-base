@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sex">
+        <item>男</item>
+        <item>女</item>
+        <item>未知</item>
+    </string-array>
+    <string-array name="marriage">
+        <item>已婚</item>
+        <item>未婚</item>
+        <item>离婚</item>
+    </string-array>
+    <string-array name="education">
+        <item>小学</item>
+        <item>初中</item>
+        <item>高中</item>
+        <item>大专</item>
+        <item>大学</item>
+        <item>研究生</item>
+        <item>博士生</item>
+    </string-array>
+    <string-array name="relation">
+        <item>配偶</item>
+        <item>父亲</item>
+        <item>母亲</item>
+        <item>子女</item>
+        <item>亲属</item>
+        <item>同事</item>
+        <item>朋友</item>
+    </string-array>
+
+    <string-array name="house">
+        <item>租房</item>
+        <item>自购</item>
+        <item>亲友房屋</item>
+        <item>父母同住</item>
+        <item>其他</item>
+    </string-array>
+    <string-array name="house_product">
+        <item>正常</item>
+        <item>按揭</item>
+        <item>抵押</item>
+        <item>质押</item>
+    </string-array>
+    <string-array name="work_year">
+        <item>1-3年</item>
+        <item>3-5年</item>
+        <item>5-10年</item>
+        <item>10年以上</item>
+    </string-array>
+    <string-array name="work_month">
+        <item>2000以下</item>
+        <item>2000-5000</item>
+        <item>5000-10000</item>
+        <item>10000-20000</item>
+        <item>20000以上</item>
+    </string-array>
+    <string-array name="whether">
+        <item>否</item>
+        <item>是</item>
+    </string-array>
+</resources>

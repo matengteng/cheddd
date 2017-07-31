@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_lend_bank"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    tools:context="com.cheddd.activity.LendBankActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.cheddd.view.TopNavigationBar xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/tnb_lendbank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigation_title="@string/app_lend_bank" />
+
+        <View style="@style/ViewTop" />
+
+        <RelativeLayout style="@style/InfoRelativeLayout">
+
+            <TextView
+                style="@style/InfoTextView"
+                android:text="@string/app_receipt" />
+        </RelativeLayout>
+
+        <View style="@style/ViewTop" />
+
+        <RelativeLayout
+            android:id="@+id/rl_lendmoney_bank"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_80"
+            android:background="@color/colorWhite">
+
+            <ImageView
+                android:id="@+id/iv_lendbank_mark"
+                android:layout_width="@dimen/dp_48"
+                android:layout_height="@dimen/dp_48"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tv_lendbank_mark"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/iv_lendbank_mark"
+                android:gravity="center"
+                android:text=""
+                android:textColor="#333"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_lendbank_number"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tv_lendbank_mark"
+                android:gravity="center"
+                android:text=""
+                android:textColor="#333"
+                android:textSize="16sp" />
+
+            <ImageView style="@style/RightImageView" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/InfoRelativeLayout"
+            android:background="@color/colorBackground">
+
+            <TextView
+                style="@style/InfoTextView"
+                android:text="@string/app_receipt_detal"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_lendbank_bank"
+                style="@style/InfoTextView"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:text="@string/app_receipt_bank"
+                android:textColor="@color/colorRed" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/bt_lendbank_next"
+            style="@style/Button"
+            android:enabled="true"
+            android:text="@string/app_next" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorBackground"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/bt_bank_know"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:background="@null"
+            android:onClick="onClick"
+            android:text="@string/app_lendMoneyknow"
+            android:textColor="#333333" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="15dp"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/bt_bank_know"
+            android:background="#333333" />
+
+        <Button
+            android:id="@+id/bt_petty_problem"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@id/bt_bank_know"
+            android:background="@null"
+            android:onClick="onClick"
+            android:text="@string/app_lendProblem"
+            android:textColor="#333333" />
+    </RelativeLayout>
+</RelativeLayout>

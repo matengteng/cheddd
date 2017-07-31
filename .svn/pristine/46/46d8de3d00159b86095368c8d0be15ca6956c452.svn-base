@@ -1,0 +1,68 @@
+package com.cheddd.activity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.RelativeLayout;
+
+import com.cheddd.R;
+import com.cheddd.base.MyBaseActivity;
+import com.cheddd.view.PwdEditText;
+import com.cheddd.view.TopNavigationBar;
+
+/**
+ * 设置支付密码页面
+ */
+
+public class SetPaymentActivity extends MyBaseActivity {
+
+    private TopNavigationBar mTnb;
+    //第一次输入密码，第二次输入密码
+    private RelativeLayout mRelativeOne, mRelativeTwo;
+    private PwdEditText mEditTextOne, mEditTexgtTwo;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_set_payment);
+        initView();
+        setListener();
+    }
+
+    private void setListener() {
+        mEditTexgtTwo.setOnInputFinishListener(new PwdEditText.OnInputFinishListener() {
+            @Override
+            public void onInputFinish(String password) {
+                int selectionEnd = mEditTexgtTwo.getSelectionEnd();
+                if (selectionEnd == 6) {
+                    startActivity(new Intent(SetPaymentActivity.this, SafetyActivity.class));
+                }
+            }
+        });
+        //第一次输入密码
+        mEditTextOne.setOnInputFinishListener(new PwdEditText.OnInputFinishListener() {
+            @Override
+            public void onInputFinish(String password) {
+                int selectionEnd = mEditTextOne.getSelectionEnd();
+                if (selectionEnd == 6) {
+                    mRelativeOne.setVisibility(View.INVISIBLE);
+                    mRelativeTwo.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        mTnb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void initView() {
+        mTnb = (TopNavigationBar) findViewById(R.id.tnb_payment);
+        mEditTextOne = (PwdEditText) findViewById(R.id.et_payment_one);
+        mEditTexgtTwo = (PwdEditText) findViewById(R.id.et_payment_two);
+        mRelativeOne = (RelativeLayout) findViewById(R.id.rl_payment_one);
+        mRelativeTwo = (RelativeLayout) findViewById(R.id.rl_payment_two);
+    }
+}

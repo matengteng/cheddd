@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_register"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    tools:context="com.cheddd.activity.RegisterActivity">
+
+    <com.cheddd.view.TopNavigationBar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tnb_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigation_title="@string/app_register" />
+
+    <RelativeLayout style="@style/MineRelativeLayout">
+
+        <ImageView
+            android:id="@+id/iv_register_phone"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/login_phone" />
+
+        <EditText
+            android:id="@+id/et_register_phone"
+            style="@style/EditText"
+            android:layout_toRightOf="@id/iv_register_phone"
+            android:hint="@string/app_cellphone"
+            android:maxLength="11" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <RelativeLayout style="@style/MineRelativeLayout">
+
+        <ImageView
+            android:id="@+id/iv_register_authcode"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/login_key" />
+
+        <EditText
+            android:id="@+id/et_register_authcode"
+            style="@style/EditText"
+            android:layout_toRightOf="@id/iv_register_authcode"
+            android:hint="@string/app_authCode"
+            android:maxLength="11" />
+
+        <TextView
+            android:id="@+id/tv_forget_authcode"
+            style="@style/AuthCode" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <RelativeLayout style="@style/MineRelativeLayout">
+
+        <ImageView
+            android:id="@+id/iv_register_password"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/login_password" />
+
+        <EditText
+            android:id="@+id/et_register_password"
+            style="@style/EditText"
+            android:layout_toRightOf="@id/iv_register_password"
+            android:hint="@string/app_password"
+            android:maxLength="11" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <RelativeLayout style="@style/MineRelativeLayout">
+
+        <ImageView
+            android:id="@+id/iv_register_broker"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/mine_default" />
+
+        <EditText
+            android:id="@+id/et_register_broker"
+            style="@style/EditText"
+            android:layout_toRightOf="@id/iv_register_broker"
+            android:hint="@string/app_broker"
+            android:maxLength="11" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
+
+    <Button
+        android:id="@+id/bt_register_register"
+        style="@style/Button"
+        android:layout_marginTop="20dp"
+        android:text="@string/app_register" />
+</LinearLayout>

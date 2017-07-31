@@ -1,0 +1,64 @@
+package com.cheddd.bean;
+
+/**
+ * Created by Administrator on 2017/6/28 0028.
+ */
+
+public class InfoPhoneBean {
+    private String clientType;
+    private String telNo;
+    private String token;
+    private String spPassword;
+
+    public InfoPhoneBean() {
+    }
+
+    public InfoPhoneBean(String clientType, String spPassword, String token, String telNo) {
+        this.clientType = clientType;
+        this.spPassword = spPassword;
+        this.token = token;
+        this.telNo = telNo;
+    }
+
+    public String getClientType() {
+        return clientType;
+    }
+
+    public void setClientType(String clientType) {
+        this.clientType = clientType;
+    }
+
+    public String getSpPassword() {
+        return spPassword;
+    }
+
+    public void setSpPassword(String spPassword) {
+        this.spPassword = spPassword;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getTelNo() {
+        return telNo;
+    }
+
+    public void setTelNo(String telNo) {
+        this.telNo = telNo;
+    }
+
+    @Override
+    public String toString() {
+        return "InfoPhoneBean{" +
+                "clientType='" + clientType + '\'' +
+                ", telNo='" + telNo + '\'' +
+                ", token='" + token + '\'' +
+                ", spPassword='" + spPassword + '\'' +
+                '}';
+    }
+}

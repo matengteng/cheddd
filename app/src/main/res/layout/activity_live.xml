@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_live"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    tools:context="com.cheddd.activity.LiveActivity">
+
+    <com.cheddd.view.TopNavigationBar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tnb_live"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigation_title="居住信息" />
+
+    <View style="@style/ViewTop" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_live_house"
+                style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_live_house"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_house" />
+
+                <TextView
+                    android:id="@+id/tv_live_house_select"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_toRightOf="@id/tv_live_house"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="#333"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp" />
+
+                <ImageView style="@style/RightImageView" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout
+
+                style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_live_month"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_month_monry" />
+
+                <EditText
+                    android:id="@+id/et_live_month"
+                    style="@style/EditText"
+                    android:layout_marginLeft="52dp"
+                    android:layout_toRightOf="@id/tv_live_month"
+                    android:hint="@string/app_house_money"
+                    android:textColor="#333"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout
+                android:id="@+id/rl_live_product"
+                style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_live_product"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_property" />
+
+                <TextView
+                    android:id="@+id/tv_live_house_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="43dp"
+                    android:layout_toRightOf="@id/tv_live_product"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="#333"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp" />
+
+                <ImageView style="@style/RightImageView" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_live_unit"
+                    style="@style/InfoTextView"
+                    android:text="现住址" />
+
+                <EditText
+                    android:id="@+id/et_live_unit"
+                    style="@style/EditText"
+                    android:layout_marginLeft="55dp"
+                    android:layout_toRightOf="@id/tv_live_unit"
+                    android:hint="请输入您现在的住址" />
+            </RelativeLayout>
+            <View style="@style/ViewTop" />
+
+            <Button
+                android:id="@+id/bt_live_submit"
+                style="@style/Button"
+                android:text="@string/app_submit" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

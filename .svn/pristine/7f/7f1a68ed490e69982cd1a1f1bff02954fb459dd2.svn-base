@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout style="@style/InfoRelativeLayout">
+
+        <CheckBox
+            android:id="@+id/cb_advance_check"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_advance_indent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/cb_advance_check"
+            android:text="A11099"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_advance_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_advance_indent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/cb_advance_check"
+            android:text="17.09.09"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_advance_refund"
+            style="@style/InfoTextView"
+            android:layout_centerInParent="true"
+            android:text="贷款￥500.00" />
+
+        <TextView
+            android:id="@+id/tv_advance_respond"
+            style="@style/InfoTextView"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="应还￥500.00" />
+
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_car_approve"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.cheddd.activity.CarApproveActivity">
+
+    <com.cheddd.view.TopNavigationBar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tnb_car"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigation_title="@string/app_car" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_car_type"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_car_type" />
+
+                <TextView
+                    android:id="@+id/tv_car_types"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_toRightOf="@id/tv_car_type"
+                    android:gravity="center_vertical"
+                    android:text="宝马"
+                    android:textIsSelectable="true" />
+
+                <ImageView style="@style/RightImageView" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_car_mark"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_car_mark" />
+
+                <EditText
+                    android:id="@+id/et_car_mark"
+                    style="@style/EditText"
+                    android:layout_marginLeft="50dp"
+                    android:layout_toRightOf="@id/tv_car_mark"
+                    android:hint="@string/app_car_mark_input" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_car_km"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_km" />
+
+                <EditText
+                    android:id="@+id/et_car_km"
+                    style="@style/EditText"
+                    android:layout_marginLeft="50dp"
+                    android:layout_toRightOf="@id/tv_car_km"
+                    android:hint="@string/app_km_input" />
+            </RelativeLayout>
+
+            <View style="@style/ViewTop" />
+
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_car_if"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_if" />
+
+                <TextView
+                    android:id="@+id/tv_car_whether"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_toRightOf="@id/tv_car_if"
+                    android:gravity="center_vertical"
+                    android:text="是"
+                    android:textIsSelectable="true" />
+
+                <ImageView style="@style/RightImageView" />
+
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_car_time"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_user_time" />
+
+                <TextView
+                    android:id="@+id/tv_car_user_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_toRightOf="@id/tv_car_time"
+                    android:gravity="center_vertical"
+                    android:text="是"
+                    android:textIsSelectable="true" />
+
+                <ImageView style="@style/RightImageView" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/bt_car_submit"
+                style="@style/Button"
+                android:text="@string/app_submit" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,32 @@
+package com.cheddd.config;
+
+/**
+ * Created by Administrator on 2017/6/14 0014.
+ */
+
+public interface NetConfig {
+    //基地址 release版本
+    //http://47.93.163.237
+   // String BASE_URL = "http://47.93.157.28:28080/app/";
+    String BASE_URL = "http://47.93.163.237:28080/app/";
+    String CLIENTTYPE = "?content={\"clientType\":2,}";
+    String TYPE = "?";
+    //消息滚动条
+    String NOTICE = BASE_URL + "index/notice" + CLIENTTYPE;
+    //手机动态登录验证码
+    String lOGIN_AUTHCODE = BASE_URL + "oauth/sms" + TYPE;
+    //手机动态登录
+    String PHONE_TREND = BASE_URL + "oauth/login_sms" + TYPE;
+    //注册时的验证码
+    String REGISTER_AUTHCODE = BASE_URL + "oauth/register_sms" + TYPE;
+    //注册
+    String REGISTER = BASE_URL + "oauth/register" + TYPE;
+    //忘记密码时的验证码
+    String FORGETPASSWORD_AUTHCODE = BASE_URL + "oauth/password_sms" + TYPE;
+    //忘记密码
+    String FORGETPASSWORD = BASE_URL + "oauth/password_reset" + TYPE;
+    //密码登录
+    String LOGIN_PASSWORD = BASE_URL + "oauth/login_pw" + TYPE;
+    //工作信息
+    String INFO_WORK = BASE_URL + "user_info/work_submit" + TYPE;
+}

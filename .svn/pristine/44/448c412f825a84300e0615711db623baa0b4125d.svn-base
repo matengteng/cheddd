@@ -1,0 +1,98 @@
+package com.cheddd.activity;
+
+import android.app.Dialog;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.cheddd.R;
+import com.cheddd.base.MyBaseActivity;
+import com.cheddd.view.MyGridView;
+import com.cheddd.view.TopNavigationBar;
+
+import java.util.ArrayList;
+import java.util.List;
+
+//借款银行卡
+public class LendBankActivity extends MyBaseActivity implements View.OnClickListener {
+
+    private TopNavigationBar mTnb;
+    private TextView mTextViewBank;
+    private MyGridView myGridView;
+    private List<String> mList;
+    private ArrayAdapter<String> mAdapter;
+    private Button mBbuttonNext;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_lend_bank);
+        initView();
+        initData();
+        // setData();
+        setListener();
+
+    }
+
+    private void setData() {
+        myGridView.setAdapter(mAdapter);
+    }
+
+    private void initData() {
+        mList = new ArrayList<>();
+        for (int i = 0; i < 50; i++) {
+            mList.add(i + "");
+        }
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mList);
+
+    }
+
+    private void setListener() {
+        mBbuttonNext.setOnClickListener(this);
+        mTextViewBank.setOnClickListener(this);
+        mTnb.setOnBackListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void initView() {
+        mTnb = (TopNavigationBar) findViewById(R.id.tnb_lendbank);
+        mTextViewBank = (TextView) findViewById(R.id.tv_lendbank_bank);
+        mBbuttonNext = (Button) findViewById(R.id.bt_lendbank_next);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v != null) {
+            switch (v.getId()) {
+                case R.id.tv_lendbank_bank:
+                    bank();
+                    break;
+                case R.id.bt_lendbank_next:
+                    startActivity(new Intent(this, LendEntryActivity.class));
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void bank() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_lendbank, null);
+        builder.setView(view);
+        myGridView = (MyGridView) view.findViewById(R.id.gv_lendbank_bank);
+        myGridView.setAdapter(mAdapter);
+        builder.create().show();
+    }
+}

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_more_mine"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context="com.cheddd.activity.MoreMineActivity">
+
+    <com.cheddd.view.TopNavigationBar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tnb_moremine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigation_title="@string/app_moremine" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tnb_moremine">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <ImageView
+                    android:id="@+id/iv_morenine_map"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:layout_below="@id/iv_morenine_map"
+                    android:layout_centerHorizontal="true"
+                    android:text="车贷贷2.0"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:text="官方微信" />
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:text="cheddd" />
+            </RelativeLayout>
+            <View style="@style/View" />
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:text="官方微博" />
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:text="cheddd" />
+            </RelativeLayout>
+            <View style="@style/View" />
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:text="官方网站" />
+
+                <TextView
+                    style="@style/InfoTextView"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:text="www.cheddd.com" />
+
+                <ImageView style="@style/RightImageView" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

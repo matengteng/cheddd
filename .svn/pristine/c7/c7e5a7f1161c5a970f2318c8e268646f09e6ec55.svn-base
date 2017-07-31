@@ -1,0 +1,20 @@
+package com.cheddd.activity;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import com.cheddd.R;
+import com.cheddd.base.MyBaseActivity;
+
+/**
+ * 提前还请借款
+ */
+
+public class AdvanceActivtiy extends MyBaseActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_advance_activtiy);
+    }
+}

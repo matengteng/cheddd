@@ -1,0 +1,54 @@
+package com.cheddd.application;
+
+import android.app.Application;
+import android.content.Context;
+import android.content.res.Resources;
+
+import com.cheddd.utils.OkhttpUtils;
+
+/**
+ * Created by Administrator on 2017/5/24 0024.
+ */
+
+public class MyApplications extends Application {
+    private static Context mContext;
+    private static MyApplications mApp;
+    private OkhttpUtils mHttpUtils;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mApp = this;
+        initOkHttpUtils();
+    }
+
+    private void initOkHttpUtils() {
+        mHttpUtils = OkhttpUtils.getInstance(mApp);
+    }
+
+    public static MyApplications getApp() {
+
+        return mApp;
+    }
+
+    public OkhttpUtils getOkHttpUtils() {
+
+        return this.mHttpUtils;
+    }
+
+    public static Context getAppContext() {
+
+        return mContext;
+    }
+
+    public static Resources getAppResources() {
+
+        return getAppContext().getResources();
+    }
+
+    @Override
+    public void onTerminate() {
+
+        super.onTerminate();
+    }
+}

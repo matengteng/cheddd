@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_stats_approve"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.cheddd.activity.StatsApproveActivity">
+
+    <com.cheddd.view.TopNavigationBar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tnb_stats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigation_title="个人信息" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_stats_name"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_username" />
+
+                <EditText
+                    android:id="@+id/et_stats_name"
+                    style="@style/EditText"
+                    android:layout_toRightOf="@id/tv_stats_name"
+                    android:hint="@string/app_input_username" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_stats_IDCard"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_IDCard" />
+
+                <EditText
+                    android:id="@+id/et_stats_IDCard"
+                    style="@style/EditText"
+                    android:layout_toRightOf="@id/tv_stats_IDCard"
+                    android:hint="请输入二代省份证"
+                    android:maxLength="18" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_stats_phone"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_phone" />
+
+                <EditText
+                    android:id="@+id/et_stats_phone"
+                    style="@style/EditText"
+                    android:layout_toRightOf="@id/tv_stats_phone"
+                    android:hint="@string/app_cellphone" />
+            </RelativeLayout>
+
+            <View style="@style/ViewTop" />
+
+            <RelativeLayout style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_stats_sex1"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_sex" />
+
+                <TextView
+                    android:id="@+id/tv_stats_sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_toRightOf="@id/tv_stats_sex1"
+                    android:gravity="center_vertical"
+                    android:text="男" />
+
+                <ImageView style="@style/RightImageView" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout
+                android:id="@+id/rl_stats_marriage"
+                style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_stats_marriage1"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_marriage" />
+
+                <TextView
+                    android:id="@+id/tv_stats_marriage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_toRightOf="@id/tv_stats_marriage1"
+                    android:gravity="center_vertical"
+                    android:text="已婚"
+                    android:textIsSelectable="true" />
+
+                <ImageView style="@style/RightImageView" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout
+                android:id="@+id/rl_stats_education"
+                style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_stats_education"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_education" />
+
+                <TextView
+                    android:id="@+id/tv_stats_educations"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_toRightOf="@id/tv_stats_education"
+                    android:gravity="center_vertical"
+                    android:text="本科"
+                    android:textIsSelectable="true" />
+
+                <ImageView style="@style/RightImageView" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout
+                android:id="@+id/rl_stats_household"
+                style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_stats_household1"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_household" />
+
+                <TextView
+                    android:id="@+id/tv_stats_household"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_toRightOf="@id/tv_stats_household1"
+                    android:gravity="center_vertical"
+                    android:text="北京海淀" />
+
+                <ImageView style="@style/RightImageView" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout
+                android:id="@+id/rl_stats_"
+                style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_stats_details"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_detalis" />
+
+                <EditText
+                    android:id="@+id/et_stats_details"
+                    style="@style/EditText"
+                    android:layout_toRightOf="@id/tv_stats_details"
+                    android:hint="@string/app_input_details" />
+            </RelativeLayout>
+
+            <View style="@style/ViewTop"></View>
+
+            <RelativeLayout
+                android:id="@+id/rl_stats_work"
+                style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_stats_work"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_work" />
+                <!--
+                <EditText
+                    android:id="@+id/et_stats_work"
+                    style="@style/EditText"
+                    android:layout_toRightOf="@id/tv_stats_work" />
+                    -->
+                <ImageView
+                    android:id="@+id/iv_stats_work_optfor"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@mipmap/opt_for" />
+
+                <ImageView style="@style/RightImageView" />
+            </RelativeLayout>
+
+            <View style="@style/View"></View>
+
+            <RelativeLayout
+                android:id="@+id/rl_stats_relation"
+                style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_stats_relation"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_relation" />
+                <!--
+                <EditText
+                    android:id="@+id/et_stats_relation"
+                    style="@style/EditText"
+                    android:layout_toRightOf="@id/tv_stats_relation" />
+`                   -->
+                <ImageView
+                    android:id="@+id/iv_stats_relation_optfor"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@mipmap/opt_for" />
+
+                <ImageView style="@style/RightImageView" />
+            </RelativeLayout>
+
+            <View style="@style/View"></View>
+
+            <RelativeLayout
+                android:id="@+id/rl_stats_live"
+                style="@style/InfoRelativeLayout">
+
+                <TextView
+                    android:id="@+id/tv_stats_live"
+                    style="@style/InfoTextView"
+                    android:text="@string/app_live" />
+                <!--
+                <EditText
+                    android:id="@+id/et_stats_live"
+                    style="@style/EditText"
+                    android:layout_toRightOf="@id/tv_stats_live" />
+                    -->
+                <ImageView
+                    android:id="@+id/iv_stats_live_optfor"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@mipmap/opt_for" />
+
+                <ImageView style="@style/RightImageView" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/bt_stats_input"
+                style="@style/Button"
+                android:layout_marginBottom="30dp"
+                android:text="提交" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

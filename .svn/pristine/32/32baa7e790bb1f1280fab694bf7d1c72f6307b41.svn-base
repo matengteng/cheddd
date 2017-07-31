@@ -1,0 +1,77 @@
+package com.cheddd.activity;
+
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.RelativeLayout;
+
+import com.cheddd.R;
+import com.cheddd.base.MyBaseActivity;
+import com.cheddd.view.CircleProgressBar;
+
+/*
+小额贷款的界面
+*/
+public class PettyLoanActivity extends MyBaseActivity implements View.OnClickListener {
+    //借款，我的借款
+    private RelativeLayout mRelativeLendMoney, mRelativeBorrowMoney;
+    private int mProgress;
+    private CircleProgressBar mProgressBar;
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (mProgress < 100) {
+                mProgress++;
+                mProgressBar.setProgress(mProgress);
+                mHandler.sendEmptyMessageDelayed(1, 100);
+            }
+        }
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_petty_loan);
+        initView();
+        setListener();
+    }
+
+    private void setListener() {
+        mRelativeLendMoney.setOnClickListener(this);
+        mRelativeBorrowMoney.setOnClickListener(this);
+    }
+
+    private void initView() {
+        mProgressBar = (CircleProgressBar) findViewById(R.id.cpb_petty_round);
+        mRelativeLendMoney = (RelativeLayout) findViewById(R.id.rl_petty_lendmoney);
+        mRelativeBorrowMoney = (RelativeLayout) findViewById(R.id.rl_petty_borrowMoney);
+    }
+
+    public void onClick(View view) {
+        if (view != null) {
+            switch (view.getId()) {
+                case R.id.bt_circle_start:
+                    mProgress = 0;
+                    mHandler.sendEmptyMessageDelayed(1, 100);
+                    break;
+                case R.id.rl_petty_lendmoney:
+                    lendMoney();
+                    break;
+                case R.id.rl_petty_borrowMoney:
+                    startActivity(new Intent(this, BorrowMoneyActivtiy.class));
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void lendMoney() {
+
+        startActivity(new Intent(this, LendMoneyActivity.class));
+    }
+}

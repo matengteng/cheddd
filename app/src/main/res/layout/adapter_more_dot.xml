@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View style="@style/ViewTop" />
+
+    <RelativeLayout style="@style/InfoRelativeLayout">
+
+        <TextView
+            android:id="@+id/tv_moreDot_hand"
+            style="@style/InfoTextView"
+            android:text="总部"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/InfoRelativeLayout">
+
+        <ImageView
+            android:id="@+id/iv_more_dot"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tv_moreDot_storeName"
+            style="@style/InfoTextView"
+            android:layout_toRightOf="@id/iv_more_dot"
+            android:text="111111111111" />
+
+        <ImageView style="@style/RightImageView" />
+    </RelativeLayout>
+</LinearLayout>

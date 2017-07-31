@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_phone_approve"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    tools:context="com.cheddd.activity.PhoneApproveActivity">
+
+    <com.cheddd.view.TopNavigationBar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tnb_phoneApprove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigation_title="手机认证" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/colorWhite">
+
+                <ImageView
+                    android:id="@+id/iv_phoneApprove"
+                    android:layout_width="14dp"
+                    android:layout_height="22dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@mipmap/login_phone" />
+
+                <EditText
+                    android:id="@+id/et_phoneApprove_phone"
+                    style="@style/EditText"
+                    android:layout_toRightOf="@id/iv_phoneApprove"
+                    android:hint="@string/app_cellphone"
+                    android:imeOptions="actionNext"
+                    android:maxLength="11"
+                    android:nextFocusForward="@+id/et_phoneApprove_password" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/colorWhite">
+
+                <ImageView
+                    android:id="@+id/iv_phoneApprove_mappaaaword"
+                    android:layout_width="16dp"
+                    android:layout_height="22dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@mipmap/login_password" />
+
+                <EditText
+                    android:id="@+id/et_phoneApprove_password"
+                    style="@style/EditText"
+                    android:layout_toRightOf="@id/iv_phoneApprove_mappaaaword"
+                    android:hint="@string/app_password_server" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_phone_motion"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <CheckBox
+                    android:id="@+id/cb_phone_apporve"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:checked="true"
+                    android:text="@string/app_agree"
+                    android:textColor="#333333"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_phoneApprove_motain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="17dp"
+                    android:layout_toRightOf="@id/cb_phone_apporve"
+                    android:text="@string/app_motion"
+                    android:textColor="#2d54b8"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tv_phoneApprove_forget_pasword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:text="@string/app_login_forget_password"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_phoneApprove_address"
+               style="@style/InfoRelativeLayout"
+                android:background="@color/colorWhite">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="@string/app_address"
+                    android:textSize="14dp" />
+
+                <Button
+                    android:id="@+id/bt_phoneApprove_address"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/approve_tab"
+                    android:enabled="false" />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="14dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="18dp"
+                    android:src="@mipmap/rollback_normal" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout
+                android:id="@+id/rl_phoneApprove_location"
+                style="@style/InfoRelativeLayout"
+                android:background="@color/colorWhite">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="@string/app_location"
+                    android:textSize="14dp" />
+
+                <Button
+                    android:id="@+id/bt_phoneApprove_location"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/approve_tab"
+                    android:enabled="false" />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="14dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="18dp"
+                    android:src="@mipmap/rollback_normal" />
+            </RelativeLayout>
+
+            <View style="@style/View" />
+
+            <RelativeLayout
+                android:id="@+id/rl_phoneApprove_duanxin"
+                style="@style/InfoRelativeLayout"
+                android:background="@color/colorWhite">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="@string/app_duanxin"
+                    android:textSize="14dp" />
+
+                <Button
+                    android:id="@+id/bt_phoneApprove_duanxin"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/approve_tab"
+                    android:enabled="false" />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="14dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="18dp"
+                    android:src="@mipmap/rollback_normal" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/bt_phoneApprove_submit"
+                style="@style/Button"
+                android:text="提交" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

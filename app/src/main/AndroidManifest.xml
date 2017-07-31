@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cheddd"
+    android:installLocation="preferExternal">
+
+    <!-- 友盟-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- SD卡读取权限，用户写入离线定位数据 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <application
+        android:name=".application.MyApplications"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="cnX0VNk0GMUxvjsE4X2WEapnMUjfllnX" />
+
+        <activity android:name=".activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.PettyLoanActivity" />
+        <activity android:name=".activity.ExtremeMortageActivity" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.ForgetPasswordActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity
+            android:name=".activity.PhoneApproveActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.StatsApproveActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.CarApproveActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.BankApproveActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.MotionActivity" />
+        <activity
+            android:name=".activity.WorkActivity"
+            android:windowSoftInputMode="stateHidden" />/>
+        <activity
+            android:name=".activity.RelationActivity"
+            android:windowSoftInputMode="stateHidden" />/>
+        <activity
+            android:name=".activity.LiveActivity"
+            android:windowSoftInputMode="stateHidden" />/>
+        <activity android:name=".activity.PledgeActivity" />
+        <activity android:name=".activity.LendMoneyActivity" />
+        <activity android:name=".activity.BorrowMoneyActivtiy" />
+        <activity android:name=".activity.LendBankActivity" />
+        <activity android:name=".activity.LendEntryActivity" />
+        <activity android:name=".activity.LendSucceedActivity" />
+        <activity android:name=".activity.AdvanceActivtiy" />
+        <activity android:name=".activity.RecordActivity" />
+        <activity android:name=".activity.SafetyActivity" />
+        <activity android:name=".activity.MoreActivity" />
+        <activity android:name=".activity.LoanActivity" />
+        <activity android:name=".activity.RefundRecordActivity" />
+        <activity android:name=".activity.ApplyForActivity" />
+        <activity android:name=".activity.MineBankActivity" />
+        <activity android:name=".activity.SetPaymentActivity" />
+        <activity android:name=".activity.AmendPaymentActivity" />
+        <activity android:name=".activity.ForgetPaymentActivty" />
+        <activity android:name=".activity.RetrievePaymentActivity" />
+        <activity android:name=".activity.RetrieveLoginActivity" />
+        <activity android:name=".activity.LendDetailsActivity" />
+        <activity android:name=".activity.MoreDotActivity" />
+        <activity android:name=".activity.MoreQuestionActivity" />
+        <activity android:name=".activity.MoreIdeaActivity" />
+        <activity android:name=".activity.MoreMineActivity" />
+        <activity android:name=".activity.RelationsActivity" />
+        <activity android:name=".activity.MineLoanActivity" />
+        <activity android:name=".activity.GuideActivity" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
+        <activity android:name=".activity.RefundDetailsActivity" />
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.HetongActivity"></activity>
+
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="
+	597bf227734be47450003132" />
+
+    </application>
+
+</manifest>

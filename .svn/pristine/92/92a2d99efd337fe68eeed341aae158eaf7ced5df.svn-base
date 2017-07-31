@@ -1,0 +1,20 @@
+package com.cheddd.activity;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import com.cheddd.R;
+import com.cheddd.base.MyBaseActivity;
+
+/**
+ * 我的银行卡，已登录从我的界面跳转过来
+ */
+
+public class SafetyActivity extends MyBaseActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_bank);
+    }
+}

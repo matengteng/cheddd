@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <RelativeLayout
+        android:id="@+id/rl_index_horn"
+        style="@style/InfoRelativeLayout">
+
+        <ImageView
+            android:id="@+id/iv_index_horn"
+            android:layout_width="22dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/index_horn" />
+
+        <com.cheddd.view.LooperTextView
+            android:id="@+id/ltv_index_slide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/iv_index_horn"
+            android:background="@color/colorWhite" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/v_index1"
+        style="@style/ViewTop"
+        android:layout_below="@id/rl_index_horn" />
+
+    <LinearLayout
+        android:id="@+id/ll_index_detalis"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_below="@id/v_index1"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:id="@+id/rl_index_petty"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_index_petty"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:src="@mipmap/petty_loan" />
+
+            <TextView
+                android:id="@+id/tv_index_petty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/iv_index_petty"
+                android:layout_toRightOf="@+id/iv_index_petty"
+                android:gravity="center"
+                android:text="@string/app_petty_loan"
+                android:textColor="@color/colorBlue"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_index_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_index_petty"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/iv_index_petty"
+                android:gravity="center"
+                android:text="10分钟轻松借到"
+                android:textColor="#666"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_index_time"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@id/iv_index_petty"
+                android:gravity="center"
+                android:text="1000元-10000元"
+                android:textColor="#666"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_index_extreme"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_index_extreme"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:src="@mipmap/extreme_mortgage" />
+
+            <TextView
+                android:id="@+id/tv_index_extreme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/iv_index_extreme"
+                android:gravity="center"
+                android:text="@string/app_extreme_mortgage"
+                android:textColor="@color/colorYellow"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_index_hour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_index_extreme"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/iv_index_extreme"
+                android:gravity="center"
+                android:text="2小时，押手续"
+                android:textColor="#666"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_index_hour"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@id/iv_index_extreme"
+                android:gravity="center"
+                android:text="最高可借50万"
+                android:textColor="#666"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_index2"
+        style="@style/ViewTop"
+        android:layout_below="@id/ll_index_detalis" />
+
+    <RelativeLayout
+        android:id="@+id/rl_index_pingpai"
+        style="@style/InfoRelativeLayout"
+        android:layout_below="@id/v_index2">
+
+        <TextView
+            style="@style/InfoTextView"
+            android:text="品牌优势"
+            android:textColor="#333333"
+            android:textSize="17sp" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_index_pingpai"
+        android:background="@color/colorWhite"
+        android:weightSum="4">
+
+        <RelativeLayout
+            style="@style/RelativeLayout"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/iv_index_low"
+                android:layout_width="22dp"
+                android:layout_height="25dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/low_threshold" />
+
+            <TextView
+                android:id="@+id/tv_index_low"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_index_low"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/app_low_threshold"
+                android:textColor="#333"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_index_low"
+                android:layout_marginTop="5dp"
+                android:text="@string/app_low_threshold_car"
+                android:textColor="#999"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/RelativeLayout"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/iv_index_high"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/high_quota" />
+
+            <TextView
+                android:id="@+id/tv_index_high"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_index_high"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/app_high_quota"
+                android:textColor="#333"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_index_high"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/app_high_quota_value"
+                android:textColor="#999"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/RelativeLayout"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/iv_index_not"
+                android:layout_width="25dp"
+                android:layout_height="19dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/not_riding" />
+
+            <TextView
+                android:id="@+id/tv_index_not"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_index_not"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:text="@string/app_not_riding"
+                android:textColor="#333"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_index_not"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/app_not_riding_car"
+                android:textColor="#999"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/RelativeLayout"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/iv_index_fast"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/to_fast" />
+
+            <TextView
+                android:id="@+id/tv_index_fast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_index_fast"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/app_to_fast"
+                android:textColor="#333"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_index_fast"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/app_to_fast_day"
+                android:textColor="#999"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

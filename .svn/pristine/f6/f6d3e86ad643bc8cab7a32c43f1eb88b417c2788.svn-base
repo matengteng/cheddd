@@ -1,0 +1,80 @@
+package com.cheddd.activity;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.cheddd.R;
+import com.cheddd.base.MyBaseActivity;
+import com.cheddd.view.TopNavigationBar;
+
+public class MoreIdeaActivity extends MyBaseActivity implements TextWatcher, View.OnClickListener {
+
+    private EditText mEditTextText, mEditTextPhone;
+    private Button mButtonSubmit;
+    private TopNavigationBar mTnb;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_more_idea);
+        initView();
+        setListener();
+    }
+
+    private void setListener() {
+        mEditTextText.addTextChangedListener(this);
+        mEditTextPhone.addTextChangedListener(this);
+        mButtonSubmit.setOnClickListener(this);
+        mTnb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void initView() {
+        mEditTextText = (EditText) findViewById(R.id.et_moreidea_input);
+        mEditTextPhone = (EditText) findViewById(R.id.et_moreidea_style);
+        mButtonSubmit = (Button) findViewById(R.id.bt_moreidea_submit);
+        mTnb = (TopNavigationBar) findViewById(R.id.tnb_moreidea);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        if (mEditTextPhone.getText().toString().length() > 0)
+            if (mEditTextText.getText().toString().length() > 0) {
+                mButtonSubmit.setEnabled(true);
+            } else {
+                mButtonSubmit.setEnabled(false);
+            }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v != null) {
+            switch (v.getId()) {
+                case R.id.bt_moreidea_submit:
+                    finish();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}

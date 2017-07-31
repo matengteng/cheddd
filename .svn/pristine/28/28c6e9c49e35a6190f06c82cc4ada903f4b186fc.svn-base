@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sex">
+        <item>男</item>
+        <item>女</item>
+    </string-array>
+    <string-array name="marriage">
+        <item>已婚</item>
+        <item>未婚</item>
+        <item>离婚</item>
+    </string-array>
+    <string-array name="education">
+        <item>大学</item>
+        <item>高中</item>
+        <item>初中</item>
+    </string-array>
+</resources>

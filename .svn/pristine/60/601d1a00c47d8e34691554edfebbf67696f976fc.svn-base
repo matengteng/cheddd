@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/colorWhite">
+
+        <TextView
+            android:id="@+id/tv_borrowmoney_adapter_time"
+            style="@style/InfoTextView"
+            android:text="4月15日" />
+
+        <TextView
+            android:id="@+id/tv_borrowmoney_adapter_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:text="888"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_marginBottom="5dp"
+            android:id="@+id/tv_borrowmoney_adapter_insert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tv_borrowmoney_money"
+            android:layout_marginRight="10dp"
+            android:text="111"
+            android:layout_alignParentBottom="true"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+</LinearLayout>

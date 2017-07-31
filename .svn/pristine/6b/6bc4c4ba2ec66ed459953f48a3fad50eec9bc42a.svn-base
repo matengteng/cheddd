@@ -1,0 +1,165 @@
+package com.cheddd.activity;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.cheddd.R;
+import com.cheddd.base.MyBaseActivity;
+import com.cheddd.bean.InfoLiveBean;
+import com.cheddd.utils.ToastUtil;
+import com.cheddd.view.TopNavigationBar;
+import com.google.gson.Gson;
+
+/*
+居住信息
+*/
+public class LiveActivity extends MyBaseActivity implements View.OnClickListener, TextWatcher {
+    private static String TAG = LiveActivity.class.getSimpleName();
+    //住房状态 、产权状态
+    private RelativeLayout mRelativeHouse, mRelativeProduct;
+    private TextView mTextViewHouse, mTextViewProduct;
+    //月租金 、单位地址
+    private EditText mEditTextMonth, mEditTextUnit;
+    private TopNavigationBar mTnb;
+    private Button mButtonSubmit;
+    private int position = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_live);
+        initView();
+        setListener();
+    }
+
+    private void setListener() {
+        mEditTextMonth.addTextChangedListener(this);
+        //mEditTextUnit.addTextChangedListener(this);
+        mTextViewProduct.addTextChangedListener(this);
+        mTextViewHouse.addTextChangedListener(this);
+        mButtonSubmit.setOnClickListener(this);
+        mTextViewProduct.setOnClickListener(this);
+        mTextViewHouse.setOnClickListener(this);
+        mTnb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LiveActivity.this, StatsApproveActivity.class));
+                finish();
+            }
+        });
+    }
+
+    private void initView() {
+        mTnb = (TopNavigationBar) findViewById(R.id.tnb_live);
+        mEditTextMonth = (EditText) findViewById(R.id.et_live_month);
+       // mEditTextUnit = (EditText) findViewById(R.id.et_live_unit);
+        mTextViewHouse = (TextView) findViewById(R.id.tv_live_house_select);
+        mTextViewProduct = (TextView) findViewById(R.id.tv_live_house_product);
+        mButtonSubmit = (Button) findViewById(R.id.bt_live_submit);
+        //mTextViewHouse = (TextView) findViewById(R.id.tv_live_house);
+       // mTextViewProduct = (TextView) findViewById(R.id.tv_live_product);
+        mButtonSubmit = (Button) findViewById(R.id.bt_live_submit);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v != null) {
+            switch (v.getId()) {
+                case R.id.tv_live_house_select:
+                    house();
+                    break;
+                case R.id.tv_live_house_product:
+                    houseProduct();
+                    break;
+                case R.id.bt_live_submit:
+                    finishSubmit();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    //提交
+    private void finishSubmit() {
+        String month = mEditTextMonth.getText().toString().trim();
+        if (!month.matches("^[0-9]*$")) {
+            ToastUtil.show(this, "月租金输入错误");
+            return;
+        }
+        InfoLiveBean live = new InfoLiveBean();
+        live.setClientType("2");
+        live.setToken("");
+        live.setMonthRent(month);
+        live.setHousingStatus(mTextViewHouse.getText().toString());
+        live.setPropertyStatus(mTextViewProduct.getText().toString());
+        Gson gson = new Gson();
+        String json = gson.toJson(live);
+        Log.d(TAG, json);
+        finish();
+    }
+
+    private void houseProduct() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setSingleChoiceItems(R.array.house_product, position, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                position = which;
+                final String[] aryShop = getResources().getStringArray(R.array.house_product);
+                mTextViewProduct.setText(aryShop[which]);
+                dialog.dismiss();
+            }
+        }).create().show();
+    }
+
+    private void house() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setSingleChoiceItems(R.array.house, position, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                position = which;
+                final String[] aryShop = getResources().getStringArray(R.array.house);
+                mTextViewHouse.setText(aryShop[which]);
+                dialog.dismiss();
+            }
+        }).create().show();
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        if (mTextViewHouse.getText().toString().length() > 0) {
+            if (mEditTextMonth.getText().toString().trim().length() > 2) {
+                if (mTextViewProduct.getText().toString().length() > 0) {
+                    mButtonSubmit.setEnabled(true);
+                } else {
+                    mButtonSubmit.setEnabled(false);
+                }
+            } else {
+                mButtonSubmit.setEnabled(false);
+            }
+        } else {
+            mButtonSubmit.setEnabled(false);
+        }
+    }
+}

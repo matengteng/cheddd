@@ -1,0 +1,77 @@
+package com.cheddd.activity;
+
+import android.content.Intent;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.cheddd.R;
+import com.cheddd.base.MyBaseActivity;
+
+//抵押贷款界面
+public class ExtremeMortageActivity extends MyBaseActivity implements View.OnClickListener {
+
+    private TextView mTextViewProvince, mTextViewDot;
+    private Button mButtonSubmit;
+    private EditText mEditTextMoney;
+    private ListView mListViewDialog;
+    private ArrayAdapter<String> mAdapter;
+    private FragmentManager fm;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_extreme_mortage);
+        initView();
+        initData();
+        setListener();
+    }
+
+    private void initData() {
+        fm = getSupportFragmentManager();
+    }
+
+
+    private void setListener() {
+       // mButtonSubmit.setOnClickListener(this);
+        mTextViewProvince.setOnClickListener(this);
+        mTextViewDot.setOnClickListener(this);
+    }
+
+
+    private void initView() {
+        mButtonSubmit = (Button) findViewById(R.id.bt_extreme_submit);
+        mEditTextMoney = (EditText) findViewById(R.id.et_extreme_money);
+        mTextViewDot = (TextView) findViewById(R.id.tv_extreme_dots);
+        mTextViewProvince = (TextView) findViewById(R.id.tv_extreme_provinces);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v != null) {
+            switch (v.getId()) {
+                case R.id.bt_extreme_submit:
+                    submit();
+                    break;
+                case R.id.tv_extreme_dots:
+                    dot();
+                    break;
+            }
+        }
+    }
+
+    private void submit() {
+       startActivity(new Intent(this,PledgeActivity.class));
+
+    }
+
+    private void dot() {
+
+    }
+}

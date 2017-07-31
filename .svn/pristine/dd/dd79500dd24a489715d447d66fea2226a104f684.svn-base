@@ -1,0 +1,32 @@
+package com.cheddd.activity;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.cheddd.R;
+import com.cheddd.base.MyBaseActivity;
+
+public class RegisterActivity extends MyBaseActivity {
+
+    //手机号 验证码 密码 经纪人
+    private EditText mEditTextPhone, mEditTextAuthCode, mEditTextPassword, mEditTextBroker;
+    //验证码
+    private Button mButonRegister;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+        initView();
+    }
+
+    private void initView() {
+        mEditTextPhone = (EditText) findViewById(R.id.et_register_phone);
+        mEditTextAuthCode = (EditText) findViewById(R.id.et_register_authcode);
+        mEditTextPassword = (EditText) findViewById(R.id.et_register_password);
+        mEditTextBroker = (EditText) findViewById(R.id.et_register_broker);
+        mButonRegister = (Button) findViewById(R.id.bt_register_register);
+    }
+}

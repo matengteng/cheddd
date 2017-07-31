@@ -1,0 +1,255 @@
+package com.cheddd.fragment;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.cheddd.R;
+import com.cheddd.activity.ExtremeMortageActivity;
+import com.cheddd.activity.PettyLoanActivity;
+import com.cheddd.adapter.IndexHeaderAdapter;
+import com.cheddd.asynctask.NetTask;
+import com.cheddd.base.BaseFragment;
+import com.cheddd.bean.Account;
+import com.cheddd.bean.SlideBean;
+import com.cheddd.view.LooperTextView;
+import com.cheddd.view.TopNavigationBar;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+
+/**
+ * Created by Administrator on 2017/5/18 0018.
+ * 首页的界面
+ */
+
+public class IndexFragment extends BaseFragment implements View.OnClickListener {
+    private TopNavigationBar mTnb;
+    private LooperTextView looperview;
+    private RelativeLayout mRelativePetty, mRelativeExtreme;
+    private TextView mSlideTextView, mRollTextView;
+    private Context mContent;
+    private String path = "http://chanyouji.com/api/trips/featured.json?page=1";
+    private ViewPager mViewPage;
+    private LinearLayout mRound;
+    private TextView mTextViewtitle;
+    private List<Account> mAccount;
+    private List<String> mTitle;
+    private List<ImageView> mImageView;
+    private IndexHeaderAdapter mAdapter;
+    // 自动循环 标记 当当前Activity 销毁 停止循环
+    private boolean isStop = true;
+    // 记录是否有重复添加页卡
+    private boolean isAdd = false;
+    // 记录当前的dot 位置 作为下一次滑动的改变值
+    private int currentIntex;
+    private ImageView mView;
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            mViewPage.setCurrentItem(mViewPage.getCurrentItem() + 1);
+            mHandler.sendEmptyMessageDelayed(0, 3000);
+        }
+    };
+
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_index, null);
+        mContent = getActivity();
+        initView(view);
+        initData();
+        setData();
+        setListener();
+        return view;
+    }
+
+    private void setData() {
+        mViewPage.setAdapter(mAdapter);
+        if (mAccount.size() != 0) {
+            int current = Integer.MAX_VALUE / 2 - Integer.MAX_VALUE / 2 % mAccount.size();
+            mViewPage.setCurrentItem(current);
+            mRound.getChildAt(0).setEnabled(true);
+            mTextViewtitle.setText(mAccount.get(0).getName());
+            mHandler.sendEmptyMessageDelayed(0, 3000);
+        } else {
+            return;
+        }
+    }
+
+    private void setListener() {
+        mRelativeExtreme.setOnClickListener(this);
+        mRelativePetty.setOnClickListener(this);
+        mViewPage.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (isAdd) {
+                    mTextViewtitle.setText(mAccount.get(position % mAccount.size()).getName());
+                    mRound.getChildAt(position % (mImageView.size() / 2)).setEnabled(true);
+                    mRound.getChildAt(currentIntex).setEnabled(false);
+                    currentIntex = position % (mAccount.size() / 2);
+                } else {
+                    mTextViewtitle.setText(mAccount.get(position % mAccount.size()).getName());
+                    mRound.getChildAt(position % (mImageView.size())).setEnabled(true);
+                    mRound.getChildAt(currentIntex).setEnabled(false);
+                    currentIntex = position % (mAccount.size());
+                }
+
+            }
+
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mHandler.sendEmptyMessageDelayed(0, 3000);
+            }
+        }).start();
+    }
+
+    private void initData() {
+        mTnb.setBackVisibility(false);
+        looperview.setTipList(generateTips());
+        mTitle = new ArrayList<>();
+        mImageView = new ArrayList<>();
+        mAccount = new ArrayList<>();
+        new NetTask() {
+            @Override
+            public void onCallBack(String result) {
+                List<String> list = new ArrayList<String>();
+                try {
+                    JSONArray array = new JSONArray(result);
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject obj = array.getJSONObject(i);
+                        JSONObject object = obj.getJSONObject("user");
+                        String image = object.getString("image");
+                        String name = object.getString("name");
+                        Account account = new Account(name, image);
+                        mAccount.add(account);
+                    }
+                    intRound();
+                    if (mAccount.size() < 4) {
+                        isAdd = true;
+                        for (int i = 0; i < mAccount.size() * 2; i++) {
+                            ViewPager.LayoutParams params = new ViewPager.LayoutParams();
+                            params.height = ViewPager.LayoutParams.MATCH_PARENT;
+                            params.width = ViewPager.LayoutParams.MATCH_PARENT;
+                            mView = new ImageView(mContent);
+                            //设置图片充满imageView中
+                            mView.setScaleType(ImageView.ScaleType.FIT_XY);
+                            Picasso.with(mContent).load(mAccount.get(i % mAccount.size()).getImage()).into(mView);
+                            mImageView.add(mView);
+                        }
+                    } else {
+                        isAdd = false;
+                        for (int i = 0; i < mAccount.size(); i++) {
+                            ViewPager.LayoutParams params = new ViewPager.LayoutParams();
+                            params.height = ViewPager.LayoutParams.MATCH_PARENT;
+                            params.width = ViewPager.LayoutParams.MATCH_PARENT;
+                            mView = new ImageView(mContent);
+                            //设置图片充满imageView中
+                            mView.setScaleType(ImageView.ScaleType.FIT_XY);
+                            Picasso.with(mContent).load(mAccount.get(i).getImage()).into(mView);
+                            mImageView.add(mView);
+                        }
+                    }
+                    mAdapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.execute(path);
+
+        mAdapter = new IndexHeaderAdapter(mImageView);
+
+    }
+
+    private void intRound() {
+        for (int i = 0; i < mAccount.size(); i++) {
+            View dot = new View(mContent);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(20, 20);
+            dot.setBackgroundResource(R.drawable.viewpage_round);
+            dot.setLayoutParams(lp);
+            dot.setEnabled(false);
+            mRound.addView(dot);
+
+        }
+    }
+
+    private List<String> generateTips() {
+        List<String> tips = new ArrayList<>();
+        tips.add("星期一");
+        tips.add("星期二");
+        tips.add("星期三");
+        tips.add("星期四");
+        tips.add("星期五");
+        return tips;
+    }
+
+    private void initView(View view) {
+        mTnb = (TopNavigationBar) view.findViewById(R.id.tnb_index);
+        looperview = (LooperTextView) view.findViewById(R.id.ltv_index_slide);
+        mRelativePetty = (RelativeLayout) view.findViewById(R.id.rl_index_petty);
+        mRelativeExtreme = (RelativeLayout) view.findViewById(R.id.rl_index_extreme);
+        mViewPage = (ViewPager) view.findViewById(R.id.vp_index_head);
+        mTextViewtitle = (TextView) view.findViewById(R.id.tv_index_text);
+        mRound = (LinearLayout) view.findViewById(R.id.ll_index_round);
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        if (view != null) {
+            switch (view.getId()) {
+                case R.id.rl_index_petty:
+                    //小额贷款
+                    Intent intent1 = new Intent(getActivity(), PettyLoanActivity.class);
+                    getActivity().startActivity(intent1);
+                    break;
+                case R.id.rl_index_extreme:
+                    //极速抵押
+                    Intent intent2 = new Intent(getActivity(), ExtremeMortageActivity.class);
+                    getActivity().startActivity(intent2);
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        isStop = false;
+    }
+}
