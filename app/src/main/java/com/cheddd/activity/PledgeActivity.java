@@ -1,12 +1,15 @@
 package com.cheddd.activity;
 
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -182,8 +185,9 @@ public class PledgeActivity extends MyBaseActivity implements View.OnClickListen
         mDialog.setCanceledOnTouchOutside(false);
         mRelativeClose = (RelativeLayout) view.findViewById(R.id.rl_dialog_product);
         mRelativeClose.setOnClickListener(this);
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mDialog.show();
         mDialog.getWindow().setContentView((LinearLayout) view);
-        mDialog.getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.dialog_loan_notice_back));
+
     }
 }

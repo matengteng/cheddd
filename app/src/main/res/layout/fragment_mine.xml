@@ -94,10 +94,11 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:background="@drawable/layout_clicked_selector"
                 android:id="@+id/rl_mine_loan"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@color/colorWhite"
+
                 android:gravity="center">
 
                 <ImageView style="@style/RightImageView" />

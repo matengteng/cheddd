@@ -39,6 +39,7 @@
         android:weightSum="2">
 
         <RelativeLayout
+            android:background="@drawable/layout_clicked_selector"
             android:id="@+id/rl_index_petty"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -93,6 +94,7 @@
         <View style="@style/View" />
 
         <RelativeLayout
+            android:background="@drawable/layout_clicked_selector"
             android:id="@+id/rl_index_extreme"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -263,7 +265,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/iv_index_not"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="7dp"
                 android:text="@string/app_not_riding"
                 android:textColor="#666"
                 android:textSize="14sp" />

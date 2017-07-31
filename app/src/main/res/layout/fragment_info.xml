@@ -13,9 +13,9 @@
 
 
     <ScrollView
-        android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -99,16 +99,16 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@color/colorWhite">
+                    android:background="@drawable/layout_clicked_selector">
 
                     <Button
                         android:id="@+id/bt_info_phone"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:clickable="false"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
                         android:background="@drawable/info_phone"
+                        android:clickable="false"
                         android:enabled="true" />
 
                     <TextView
@@ -123,13 +123,12 @@
                         android:textSize="14sp" />
 
                     <ImageView
-                        android:visibility="gone"
                         android:id="@+id/iv_phone_shenhe"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentRight="true"
                         android:background="@mipmap/shenhe"
-                        />
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/iv_phone_shenhetonghuo"
@@ -154,20 +153,21 @@
                     android:background="@color/colorBackground" />
 
                 <RelativeLayout
+                    android:background="@drawable/layout_clicked_selector"
                     android:id="@+id/rl_info_car"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@color/colorWhite">
+                    >
 
                     <Button
                         android:id="@+id/bt_info_car"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:clickable="false"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
                         android:background="@drawable/info_car"
+                        android:clickable="false"
                         android:enabled="true" />
 
                     <TextView
@@ -181,13 +181,12 @@
                         android:textColor="#333" />
 
                     <ImageView
-                        android:visibility="gone"
                         android:id="@+id/iv_car_shenhe"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentRight="true"
                         android:src="@mipmap/shenhe"
-                      />
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/iv_car_shenhetonghuo"
@@ -218,11 +217,12 @@
                 android:weightSum="2">
 
                 <RelativeLayout
+                    android:background="@drawable/layout_clicked_selector"
                     android:id="@+id/rl_info_stats"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
-                    android:background="@color/colorWhite">
+                   >
 
                     <Button
                         android:id="@+id/bt_info_status"
@@ -230,8 +230,8 @@
                         android:layout_height="50dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
-                        android:clickable="false"
                         android:background="@drawable/info_states"
+                        android:clickable="false"
                         android:enabled="true" />
 
                     <TextView
@@ -276,11 +276,12 @@
                     android:background="@color/colorBackground" />
 
                 <RelativeLayout
+                    android:background="@drawable/layout_clicked_selector"
                     android:id="@+id/rl_info_bank"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@color/colorWhite">
+                   >
 
                     <Button
                         android:id="@+id/bt_info_bank"
@@ -288,8 +289,8 @@
                         android:layout_height="50dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
-                        android:clickable="false"
                         android:background="@drawable/info_bank"
+                        android:clickable="false"
                         android:enabled="true" />
 
                     <TextView
@@ -345,10 +346,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
+                android:layout_marginBottom="10dp"
                 android:background="@color/colorWhite"
                 android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_marginBottom="10dp">
+                android:weightSum="3">
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -380,6 +381,7 @@
                         android:src="@mipmap/opt_for"
                         android:visibility="gone" />
                 </RelativeLayout>
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
@@ -415,10 +417,12 @@
                         android:src="@mipmap/opt_for"
                         android:visibility="gone" />
                 </RelativeLayout>
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/colorBackground" />
+
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
