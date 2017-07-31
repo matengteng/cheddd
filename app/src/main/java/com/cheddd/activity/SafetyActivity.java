@@ -1,21 +1,22 @@
 package com.cheddd.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cheddd.R;
 import com.cheddd.application.MyApplications;
 import com.cheddd.base.MyBaseActivity;
-import com.cheddd.bean.LoginTokenBean;
 import com.cheddd.config.NetConfig;
 import com.cheddd.utils.LoginTokenUtils;
 import com.cheddd.utils.OkhttpUtils;
 import com.cheddd.view.TopNavigationBar;
-import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -90,6 +91,22 @@ public class SafetyActivity extends MyBaseActivity implements View.OnClickListen
                     break;
                 case R.id.rl_safety_bank:
                     startActivity(new Intent(this, MineBankActivity.class));
+                    break;
+                case R.id.rl_logout:
+
+                    new AlertDialog.Builder(this).setMessage("确认退出账户吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            MyApplications.setToken(null);
+                            Toast.makeText(SafetyActivity.this, "退出登录", Toast.LENGTH_SHORT).show();
+                        }
+                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+
                     break;
                 default:
                     break;
