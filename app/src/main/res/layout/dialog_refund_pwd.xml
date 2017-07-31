@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/dialog_loan_notice_back"
     android:orientation="vertical">
 
 
     <LinearLayout
         android:id="@+id/ll_refund_refund_setPassword"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/dialog_loan_notice_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <RelativeLayout style="@style/InfoRelativeLayout">

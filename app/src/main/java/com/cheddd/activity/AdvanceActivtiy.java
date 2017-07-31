@@ -3,12 +3,15 @@ package com.cheddd.activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -275,7 +278,7 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
 
     private void payoff() {
         mDialog = new AlertDialog.Builder(this).create();
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_refund_pwd, null);
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_refund_pwd,null);
         mEditTextPay = (PwdEditText) view.findViewById(R.id.pet_pwd);
         mEditTextPay.setOnClickListener(this);
         mLinearLayoutSet = (LinearLayout) view.findViewById(R.id.ll_refund_refund_setPassword);
@@ -285,6 +288,8 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
         mLinearLayoutSet.setOnClickListener(this);
         mDialog.setCanceledOnTouchOutside(false);
         mDialog.show();
+       // mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        mDialog.getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.dialog_loan_notice_back));
         mDialog.getWindow().setContentView((LinearLayout) view);
         mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         mDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE |

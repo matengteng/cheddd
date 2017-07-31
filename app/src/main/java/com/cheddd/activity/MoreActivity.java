@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -108,7 +109,10 @@ public class MoreActivity extends MyBaseActivity implements View.OnClickListener
         mButtonAffire = (Button) view.findViewById(R.id.bt_more_affire);
         mButtonCancel = (Button) view.findViewById(R.id.bt_more_calloff);
         mTextViewPhone = (TextView) view.findViewById(R.id.tv_more_call);
-
+        Window window = mDialog.getWindow();
+        window.getDecorView().setPadding(0, 0, 20, 20);
+        window.setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        mDialog.getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.dialog_loan_notice_back));
         mDialog.show();
         mDialog.getWindow().setContentView((LinearLayout) view);
     }

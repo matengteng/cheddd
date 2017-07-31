@@ -184,5 +184,6 @@ public class PledgeActivity extends MyBaseActivity implements View.OnClickListen
         mRelativeClose.setOnClickListener(this);
         mDialog.show();
         mDialog.getWindow().setContentView((LinearLayout) view);
+        mDialog.getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.dialog_loan_notice_back));
     }
 }

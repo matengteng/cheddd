@@ -68,13 +68,14 @@
             <View style="@style/View" />
 
             <RelativeLayout
-                style="@style/InfoRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
                 android:background="@color/colorBackground">
 
                 <Button
                     android:id="@+id/bt_pledge_product"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:background="@null"
                     android:text="产品介绍"
                     android:textColor="#E83D2E"
