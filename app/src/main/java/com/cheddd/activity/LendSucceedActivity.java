@@ -2,6 +2,8 @@ package com.cheddd.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -169,12 +171,12 @@ public class LendSucceedActivity extends MyBaseActivity implements View.OnClickL
     }
 
     private void know() {
-
         mDialog = new AlertDialog.Builder(this).create();
         View view = LayoutInflater.from(this).inflate(R.layout.dialong_lend_konw, null);
         mDialog.setCanceledOnTouchOutside(false);
         mRelativeKnow = (RelativeLayout) view.findViewById(R.id.rl_dialog_close);
         mRelativeKnow.setOnClickListener(this);
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mDialog.show();
         mDialog.getWindow().setContentView((LinearLayout) view);
     }

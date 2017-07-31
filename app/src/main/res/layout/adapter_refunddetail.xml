@@ -2,45 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
     android:orientation="vertical">
-    <!--
-        <RelativeLayout
-            android:id="@+id/rl_refundadapter_close"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_100"
-            android:background="@color/colorWhite">
-
-            <TextView
-                android:id="@+id/tv_refundadapter_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="@string/app_refund_relation"
-                android:textSize="@dimen/sp_15" />
-
-            <TextView
-                android:id="@+id/tv_refundadapter_day"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_refundadapter_detail"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="@string/app_refund_base"
-                android:textSize="@dimen/sp_15" />
-
-            <TextView
-                android:id="@+id/tv_refundadapter_lend"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_refundadapter_day"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="@string/app_refund_lend"
-                android:textSize="@dimen/sp_15" />
-        </RelativeLayout>
-    -->
     <View style="@style/View" />
 
     <ScrollView
@@ -50,7 +12,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="@color/colorWhite"
             android:gravity="center_vertical">
 
             <TextView

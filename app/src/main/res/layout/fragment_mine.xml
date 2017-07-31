@@ -58,7 +58,7 @@
                     android:gravity="center"
                     android:text="0.00"
                     android:textColor="@color/colorWhite"
-                    android:textSize="45sp" />
+                    android:textSize="40sp" />
 
                 <Button
                     android:id="@+id/bt_mine_withdraw"

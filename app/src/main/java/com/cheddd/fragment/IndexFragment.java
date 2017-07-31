@@ -505,5 +505,4 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
             }
         });
     }
-
 }

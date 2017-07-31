@@ -99,6 +99,8 @@ public class SafetyActivity extends MyBaseActivity implements View.OnClickListen
                         public void onClick(DialogInterface dialog, int which) {
                             MyApplications.setToken(null);
                             Toast.makeText(SafetyActivity.this, "退出登录", Toast.LENGTH_SHORT).show();
+                           // System.exit(0);
+                            finish();
                         }
                     }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                         @Override

@@ -35,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import okhttp3.FormBody;
 import okhttp3.Request;
@@ -130,6 +131,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
+                        Log.d(TAG,"借钱"+result);
                         JSONObject object = new JSONObject(result);
                         returnCode1 = object.getString("returnCode");
                         returnMsg1 = object.getString("returnMsg");
@@ -141,7 +143,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                             MyApplications.setOrderNo(orderNo);
                             String newRepaymentDate = entity.getString("newRepaymentDate");
                             double newRepayment = entity.getDouble("newRepayment");
-                            mTextViewMoney.setText(loanLimit / 100 + "");
+                            DecimalFormat format = new DecimalFormat("#,###.00");
+                            mTextViewMoney.setText(format.format(loanLimit / 100));
                         } else {
                             return;
                         }

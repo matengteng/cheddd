@@ -2,6 +2,8 @@ package com.cheddd.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -228,6 +230,7 @@ public class LendEntryActivity extends MyBaseActivity implements View.OnClickLis
         mDialog.setCanceledOnTouchOutside(false);
         mRelativeClose = (RelativeLayout) view.findViewById(R.id.rl_dialog_close);
         mRelativeClose.setOnClickListener(this);
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mDialog.show();
         mDialog.getWindow().setContentView((LinearLayout) view);
     }

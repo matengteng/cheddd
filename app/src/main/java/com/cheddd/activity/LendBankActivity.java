@@ -2,6 +2,8 @@ package com.cheddd.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -226,6 +228,7 @@ public class LendBankActivity extends MyBaseActivity implements View.OnClickList
         mDialog.setCanceledOnTouchOutside(false);
         mRelativeKnow = (RelativeLayout) view.findViewById(R.id.rl_dialog_close);
         mRelativeKnow.setOnClickListener(this);
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mDialog.show();
         mDialog.getWindow().setContentView((LinearLayout) view);
     }
