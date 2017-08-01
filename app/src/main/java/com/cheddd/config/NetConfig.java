@@ -8,7 +8,7 @@ public interface NetConfig {
     //基地址 release版本
     //http://47.93.163.237:9080/
     //测试环境192.168.2.102
-     String BASE_URL = "http://47.93.163.237:9080/app/";//测试
+     String BASE_URL = "https://bssapp.cheddd.com/app/";//测试
 
     //String BASE_URL = "http://192.168.2.108:8080/cddd-app-server/app/";//科长
     //String BASE_URL = "http://192.168.2.102:8080/cddd-app-server/app/";
