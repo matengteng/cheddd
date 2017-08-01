@@ -643,4 +643,11 @@ public class PhoneApproveActivity extends MyBaseActivity implements View.OnClick
 
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(mLocationClient.isStarted())
+            mLocationClient.stop();
+    }
 }

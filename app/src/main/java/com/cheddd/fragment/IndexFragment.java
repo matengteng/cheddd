@@ -435,7 +435,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
             mContent.startActivity(new Intent(getActivity(), PettyLoanActivity.class));
         } else if ("0017".equals(returnCode)) {
             mContent.startActivity(new Intent(getActivity(), LoginActivity.class));
-            ToastUtil.show(mContent, returnMsg);
+           // ToastUtil.show(mContent, returnMsg);
         }
     }
 

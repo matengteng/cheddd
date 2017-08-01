@@ -104,6 +104,12 @@ public class PettyLoanActivity extends MyBaseActivity implements View.OnClickLis
                             mTextViewData.setText(newRepaymentDate + "应还");
                             mTextViewMoney.setText("￥" + newRepayment / 100 + "");
                             mTextViewSmall.setText(loanLimit / 100 + "");
+                        }else  if("0017".equals(returnCode)){
+                            startActivity(new Intent(PettyLoanActivity.this,LoginActivity.class));
+                        }else if("0021".equals(returnCode)){
+                            mRelativeAdvance.setVisibility(View.GONE);
+                            mRelativeBorrowMoney.setVisibility(View.GONE);
+                            mTextViewLendMoney.setEnabled(false);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

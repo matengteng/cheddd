@@ -228,7 +228,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                         startActivity(new Intent(getActivity(), MineLoanActivity.class));
                     } else if ("0017".equals(returnCode)) {
                         startActivity(new Intent(getActivity(), LoginActivity.class));
-                        ToastUtil.show(mContext, returnMsg);
+                      //  ToastUtil.show(mContext, returnMsg);
                     } else {
                         return;
                     }
@@ -246,7 +246,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                         startActivity(new Intent(getActivity(), RecordActivity.class));
                     } else if ("0017".equals(returnCode)) {
                         startActivity(new Intent(getActivity(), LoginActivity.class));
-                        ToastUtil.show(mContext, returnMsg);
+                       // ToastUtil.show(mContext, returnMsg);
                     } else {
                         return;
                     }
@@ -257,7 +257,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                         startActivity(new Intent(getActivity(), SafetyActivity.class));
                     } else if ("0017".equals(returnCode)) {
                         startActivity(new Intent(getActivity(), LoginActivity.class));
-                        ToastUtil.show(mContext, returnMsg);
+                       // ToastUtil.show(mContext, returnMsg);
                     } else {
                         return;
                     }
@@ -268,7 +268,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                         startActivity(new Intent(getActivity(), MoreActivity.class));
                     } else if ("0017".equals(returnCode)) {
                         startActivity(new Intent(getActivity(), LoginActivity.class));
-                        ToastUtil.show(mContext, returnMsg);
+                       // ToastUtil.show(mContext, returnMsg);
                     } else {
                         return;
                     }

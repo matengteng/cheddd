@@ -52,7 +52,6 @@ public class InfoFragment extends BaseFragment implements View.OnClickListener {
     //手机认证，信息认证，车辆信息,银行卡的图片按钮
     private Button mButtonPhone, mButtonState, mButtonCar, mButtonBank;
     private ProgressBar mProgressBar;
-    private int posiotion = 25;
     private TextView mTextViewInfo;
     private int loanInitAud;
     private String returnCode;
@@ -105,14 +104,13 @@ public class InfoFragment extends BaseFragment implements View.OnClickListener {
                             int carInfoAuth = object.getInt("carInfoAuth");
                             int bankInfoAuth = object.getInt("bankInfoAuth");
                             int personalAuth = object.getInt("personalAuth");
+
+                            mProgressBar.setProgress(0);
+
                             if (phoneAuth != 3) {
                                 int p = mProgressBar.getProgress() + 25;
                                 mProgressBar.setProgress(p);
                                 mTextViewInfo.setText(p + "%");
-                            } else {
-                                int p1 = mProgressBar.getProgress() + 0;
-                                mProgressBar.setProgress(p1);
-                                mTextViewInfo.setText(p1 + "%");
                             }
                             if (0 == phoneAuth) {
                                 mPhoneShenhe.setVisibility(View.VISIBLE);
@@ -128,10 +126,6 @@ public class InfoFragment extends BaseFragment implements View.OnClickListener {
                                 int p = mProgressBar.getProgress() + 25;
                                 mProgressBar.setProgress(p);
                                 mTextViewInfo.setText(p + "%");
-                            } else {
-                                int p1 = mProgressBar.getProgress() + 0;
-                                mProgressBar.setProgress(p1);
-                                mTextViewInfo.setText(p1 + "%");
                             }
                             if (0 == carInfoAuth) {
                                 mCarShenHe.setVisibility(View.VISIBLE);
@@ -147,10 +141,6 @@ public class InfoFragment extends BaseFragment implements View.OnClickListener {
                                 int p = mProgressBar.getProgress() + 25;
                                 mProgressBar.setProgress(p);
                                 mTextViewInfo.setText(p + "%");
-                            } else {
-                                int p1 = mProgressBar.getProgress() + 0;
-                                mProgressBar.setProgress(p1);
-                                mTextViewInfo.setText(p1 + "%");
                             }
                             if (0 == personalAuth) {
                                 mStatesShenhe.setVisibility(View.VISIBLE);
@@ -163,13 +153,9 @@ public class InfoFragment extends BaseFragment implements View.OnClickListener {
                                 mButtonState.setEnabled(false);
                             }
                             if (bankInfoAuth != 3) {
-                                int p = mProgressBar.getProgress();
+                                int p = mProgressBar.getProgress()+25;
                                 mProgressBar.setProgress(p);
                                 mTextViewInfo.setText(p + "%");
-                            } else {
-                                int p1 = mProgressBar.getProgress() + 0;
-                                mProgressBar.setProgress(p1);
-                                mTextViewInfo.setText(p1 + "%");
                             }
                             if (0 == bankInfoAuth) {
                                 mBnakShen.setVisibility(View.VISIBLE);
