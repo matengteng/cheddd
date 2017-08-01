@@ -383,7 +383,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 case R.id.rl_index_extreme:
                     //极速抵押
                     //getActivity().startActivity(new Intent(mContent, ExtremeMortageActivity.class));
-                   extremeMoreage1();
+                    extremeMoreage1();
                     break;
             }
         }
@@ -431,11 +431,11 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
 
     //小额借款
     private void indexPetty1() {
-        if ("000000".equals(returnCode)) {
-            mContent.startActivity(new Intent(getActivity(), PettyLoanActivity.class));
-        } else if ("0017".equals(returnCode)) {
+        if ("0017".equals(returnCode)) {
             mContent.startActivity(new Intent(getActivity(), LoginActivity.class));
-           // ToastUtil.show(mContent, returnMsg);
+            // ToastUtil.show(mContent, returnMsg);
+        } else {
+            mContent.startActivity(new Intent(getActivity(), PettyLoanActivity.class));
         }
     }
 
