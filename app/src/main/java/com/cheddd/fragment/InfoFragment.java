@@ -2,15 +2,16 @@ package com.cheddd.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,31 +24,19 @@ import com.cheddd.activity.LoginActivity;
 import com.cheddd.activity.PhoneApproveActivity;
 import com.cheddd.activity.PledgeActivity;
 import com.cheddd.activity.StatsApproveActivity;
-import com.cheddd.application.MyApplications;
 import com.cheddd.base.BaseFragment;
-import com.cheddd.bean.LoginTokenBean;
 import com.cheddd.config.NetConfig;
 import com.cheddd.utils.LoginTokenUtils;
 import com.cheddd.utils.OkhttpUtils;
-import com.cheddd.utils.SharedPreferencesUtils;
-import com.cheddd.utils.ToastUtil;
 import com.cheddd.view.TopNavigationBar;
-import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.FormBody;
-import okhttp3.Headers;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
-
-import static com.cheddd.config.NetConfig.OAUTH_SETP;
 
 /**
  * Created by Administrator on 2017/5/18 0018.
@@ -120,7 +109,7 @@ public class InfoFragment extends BaseFragment implements View.OnClickListener {
                                 int p = mProgressBar.getProgress() + 25;
                                 mProgressBar.setProgress(p);
                                 mTextViewInfo.setText(p + "%");
-                            }else {
+                            } else {
                                 int p1 = mProgressBar.getProgress() + 0;
                                 mProgressBar.setProgress(p1);
                                 mTextViewInfo.setText(p1 + "%");
@@ -139,7 +128,7 @@ public class InfoFragment extends BaseFragment implements View.OnClickListener {
                                 int p = mProgressBar.getProgress() + 25;
                                 mProgressBar.setProgress(p);
                                 mTextViewInfo.setText(p + "%");
-                            }else {
+                            } else {
                                 int p1 = mProgressBar.getProgress() + 0;
                                 mProgressBar.setProgress(p1);
                                 mTextViewInfo.setText(p1 + "%");
@@ -158,7 +147,7 @@ public class InfoFragment extends BaseFragment implements View.OnClickListener {
                                 int p = mProgressBar.getProgress() + 25;
                                 mProgressBar.setProgress(p);
                                 mTextViewInfo.setText(p + "%");
-                            }else {
+                            } else {
                                 int p1 = mProgressBar.getProgress() + 0;
                                 mProgressBar.setProgress(p1);
                                 mTextViewInfo.setText(p1 + "%");
@@ -174,10 +163,10 @@ public class InfoFragment extends BaseFragment implements View.OnClickListener {
                                 mButtonState.setEnabled(false);
                             }
                             if (bankInfoAuth != 3) {
-                                int p = mProgressBar.getProgress() ;
+                                int p = mProgressBar.getProgress();
                                 mProgressBar.setProgress(p);
                                 mTextViewInfo.setText(p + "%");
-                            }else {
+                            } else {
                                 int p1 = mProgressBar.getProgress() + 0;
                                 mProgressBar.setProgress(p1);
                                 mTextViewInfo.setText(p1 + "%");
@@ -200,7 +189,7 @@ public class InfoFragment extends BaseFragment implements View.OnClickListener {
             }
         });
         infoPledge();
-       // loanInfo();
+        // loanInfo();
     }
 
     private void loanInfo() {
@@ -216,7 +205,7 @@ public class InfoFragment extends BaseFragment implements View.OnClickListener {
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                        Log.d(TAG,result);
+                        Log.d(TAG, result);
                         JSONObject object = new JSONObject(result);
                         JSONObject entity = object.getJSONObject("entity");
                         int loanInitAud = entity.getInt("loanInitAud");
@@ -266,6 +255,18 @@ public class InfoFragment extends BaseFragment implements View.OnClickListener {
         mBnakShen = (ImageView) view.findViewById(R.id.iv_bank_shenhe);
         mBankShenhetongguo = (ImageView) view.findViewById(R.id.iv_bank_shenhetonghuo);
         mBankShenheJujue = (ImageView) view.findViewById(R.id.iv_bank_shenhejujue);
+
+        View status_bar = view.findViewById(R.id.status_bar);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) status_bar.getLayoutParams();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+            params.height = getResources().getDimensionPixelSize(resourceId);
+        } else {
+            params.height = 0;
+        }
+
+        status_bar.setLayoutParams(params);
+
     }
 
     @Override

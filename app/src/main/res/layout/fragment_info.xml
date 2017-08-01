@@ -5,6 +5,12 @@
     android:background="@color/colorBackground"
     android:orientation="vertical">
 
+    <View
+        android:id="@+id/status_bar"
+        android:background="@color/colorRed"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"/>
+
     <com.cheddd.view.TopNavigationBar xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/tnb_info"
         android:layout_width="match_parent"

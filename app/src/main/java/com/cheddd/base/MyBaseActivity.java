@@ -1,15 +1,9 @@
 package com.cheddd.base;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
-import android.os.Process;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
@@ -51,12 +45,12 @@ public abstract class MyBaseActivity extends AppCompatActivity {
 
 
 
-
+//
         StatusBarUtils.assistActivity(this);
-        status = new TextView(this);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.parseColor("#e83d2e"));
-        }
+//        status = new TextView(this);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            getWindow().setStatusBarColor(Color.parseColor("#e83d2e"));
+//        }
 
         synchronized (mActivity) {
             mActivity.add(this);

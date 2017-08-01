@@ -1,22 +1,23 @@
 package com.cheddd.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-
 import com.cheddd.R;
 import com.cheddd.adapter.GuideSlideAdapter;
 import com.cheddd.base.MyBaseActivity;
-import com.cheddd.utils.DensityUtils;
 import com.cheddd.utils.SharedPreferencesUtils;
 
 import java.util.ArrayList;
@@ -39,6 +40,15 @@ public class GuideActivity extends MyBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                    | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        }
         setContentView(R.layout.activity_guide);
         initView();
         initData();
@@ -93,14 +103,13 @@ public class GuideActivity extends MyBaseActivity {
             mData.add(image);
         }
         for (int i = 0; i < mImageView.length; i++) {
-            View image = new View(this);
-            image.setBackgroundResource(R.mipmap.icon01);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(DensityUtils.dpTwopsx(this,10), DensityUtils.dpTwopsx(this,10));
+            ImageView image = new ImageView(this);
+            image.setImageResource(R.mipmap.icon01);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             if (i > 0) {
                 params.leftMargin = 20;
             }
-            /*params.topMargin = 1;
-            params.leftMargin = 1;*/
+
             image.setLayoutParams(params);
             mLineRound.addView(image);
         }
