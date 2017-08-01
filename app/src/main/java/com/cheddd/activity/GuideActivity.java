@@ -99,8 +99,8 @@ public class GuideActivity extends MyBaseActivity {
             if (i > 0) {
                 params.leftMargin = 20;
             }
-            params.topMargin = 1;
-            params.leftMargin = 1;
+            /*params.topMargin = 1;
+            params.leftMargin = 1;*/
             image.setLayoutParams(params);
             mLineRound.addView(image);
         }

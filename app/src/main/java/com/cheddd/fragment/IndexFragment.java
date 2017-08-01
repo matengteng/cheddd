@@ -436,10 +436,6 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         } else if ("0017".equals(returnCode)) {
             mContent.startActivity(new Intent(getActivity(), LoginActivity.class));
             ToastUtil.show(mContent, returnMsg);
-        } else if ("0021".equals(returnCode)) {
-            ToastUtil.show(mContent, "极速抵押为通过，不能小额借贷");
-        } else {
-            return;
         }
     }
 

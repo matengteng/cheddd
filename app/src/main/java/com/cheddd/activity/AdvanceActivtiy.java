@@ -287,9 +287,8 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
         mImageViewDialog = (ImageView) view.findViewById(R.id.iv_dialog_bank);
         mLinearLayoutSet.setOnClickListener(this);
         mDialog.setCanceledOnTouchOutside(false);
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mDialog.show();
-       // mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        mDialog.getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.dialog_loan_notice_back));
         mDialog.getWindow().setContentView((LinearLayout) view);
         mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         mDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE |
