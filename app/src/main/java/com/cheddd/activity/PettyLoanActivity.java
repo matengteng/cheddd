@@ -70,11 +70,12 @@ public class PettyLoanActivity extends MyBaseActivity implements View.OnClickLis
         setContentView(R.layout.activity_petty_loan);
         initView();
         initData();
-        pettyloan();
         setListener();
     }
 
-    private void pettyloan() {
+
+
+    private void initData() {
         final String json = LoginTokenUtils.getJson();
         FormBody formbody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INDEX_PETTYLOAN_INFO, formbody, new OkhttpUtils.HttpCallBack() {
@@ -120,37 +121,6 @@ public class PettyLoanActivity extends MyBaseActivity implements View.OnClickLis
         });
     }
 
-
-    private void initData() {
-        String json = LoginTokenUtils.getJson();
-        FormBody formBody = new FormBody.Builder().add("content", json).build();
-        OkhttpUtils.getInstance(this).asyncPost(NetConfig.OAUTH_SETP, formBody, new OkhttpUtils.HttpCallBack() {
-            @Override
-            public void onError(Request request, IOException e) {
-
-            }
-
-            @Override
-            public void onSuccess(Request request, String result) {
-                if (result != null) {
-                    // Log.d(TAG, "进度" + result);
-                    try {
-                        JSONObject object = new JSONObject(result);
-                        String returnCode1 = object.getString("returnCode");
-                        String returnMsg1 = object.getString("returnMsg");
-                        if ("000000".equals(returnCode1)) {
-                            pettyloan();
-                        } else {
-                            mRelativeAdvance.setVisibility(View.GONE);
-                            mRelativeBorrowMoney.setVisibility(View.GONE);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-    }
 
     private void setListener() {
         mRelativeAdvance.setOnClickListener(this);

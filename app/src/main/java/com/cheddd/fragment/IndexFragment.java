@@ -228,7 +228,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         } else {
 
         }*/
-        indexPetty();
+       // indexPetty();
         extremeMoreage();
     }
 
@@ -431,9 +431,9 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
 
     //小额借款
     private void indexPetty1() {
-        if ("000000".equals(returnCode)) {
+        if ("000000".equals(returnCode1)) {
             mContent.startActivity(new Intent(getActivity(), PettyLoanActivity.class));
-        } else if ("0017".equals(returnCode)) {
+        } else if ("0017".equals(returnCode1)) {
             mContent.startActivity(new Intent(getActivity(), LoginActivity.class));
            // ToastUtil.show(mContent, returnMsg);
         }

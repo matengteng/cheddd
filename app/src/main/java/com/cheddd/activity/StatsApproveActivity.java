@@ -94,7 +94,7 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
 
     @Override
     protected void onRestart() {
-        super.onResume();
+        super.onRestart();
         initData();
     }
 
@@ -256,17 +256,17 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
                         int workInfoAuth = object.getInt("workInfoAuth");
                         int houseInfoAuth = object.getInt("houseInfoAuth");
                         int contactsInfoAuth = object.getInt("contactsInfoAuth");
-                        if (0 == houseInfoAuth) {
+                        if (3!= houseInfoAuth) {
                             mButtonLive.setEnabled(true);
                         } else {
                             mButtonLive.setEnabled(false);
                         }
-                        if (0 == workInfoAuth) {
+                        if (3!= workInfoAuth) {
                             mButtonWork.setEnabled(true);
                         } else {
                             mButtonWork.setEnabled(false);
                         }
-                        if (0 == contactsInfoAuth) {
+                        if (3!= contactsInfoAuth) {
                             mButtonRelation.setEnabled(true);
                         } else {
                             mButtonRelation.setEnabled(false);
