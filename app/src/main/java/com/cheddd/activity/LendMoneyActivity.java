@@ -230,6 +230,12 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
                 case R.id.bt_lendmoney_know:
                     know();
                     break;
+
+                case R.id.bt_petty_problem:
+                    Intent intent = new Intent(LendMoneyActivity.this, MotionActivity.class);
+                    intent.putExtra("url", "http://47.93.163.237:9080/agreement/4.html");
+                    startActivity(intent);
+                    break;
                 case R.id.rl_dialog_close:
                     mDialog.dismiss();
                     break;

@@ -213,6 +213,11 @@ public class LendBankActivity extends MyBaseActivity implements View.OnClickList
                 case R.id.bt_bank_know:
                     know();
                     break;
+                case R.id.bt_petty_problem:
+                    Intent intent1 = new Intent(LendBankActivity.this, MotionActivity.class);
+                    intent1.putExtra("url", "http://47.93.163.237:9080/agreement/4.html");
+                    startActivity(intent1);
+                    break;
                 case R.id.rl_dialog_close:
                     mDialog.dismiss();
                     break;

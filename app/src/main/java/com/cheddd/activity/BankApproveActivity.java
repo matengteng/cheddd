@@ -125,7 +125,7 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                        // Log.d(TAG, "银行卡请求" + result);
+                        Log.d(TAG, "银行卡请求" + result);
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
                         String returnMsg = object.getString("returnMsg");
@@ -312,7 +312,7 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
         bankBean.setKhBankName(mEditTextBank.getText().toString().trim());
         Gson gson = new Gson();
         String json = gson.toJson(bankBean);
-        Log.d(TAG, "json:" + json);
+        Log.d(TAG, "银行卡认证的提交" + json);
         FormBody formbody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_BANK, formbody, new OkhttpUtils.HttpCallBack() {
             @Override
@@ -369,10 +369,10 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
         //  解析json数据
         parseJson(province_data_json);
         //  设置三级联动效果
-        pvOptions.setPicker(provinceBeanList, cityList, districtList, true);
+        pvOptions.setPicker(provinceBeanList, cityList, true);
         pvOptions.setCyclic(false, false, false);
         // 设置默认选中的三级项目
-        pvOptions.setSelectOptions(0, 0, 0);
+        pvOptions.setSelectOptions(0, 0);
         //  监听确定选择按钮
         pvOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
             @Override
@@ -385,7 +385,7 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
                 if ("北京市".equals(city) || "上海市".equals(city) || "天津市".equals(city) || "重庆市".equals(city) || "澳门".equals(city) || "香港".equals(city)) {
                     address = provinceBeanList.get(options1).getPickerViewText();
                     //+ " " + districtList.get(options1).get(option2).get(options3);
-                    citys = districtList.get(options1).get(option2).get(options3);
+                    citys = districtList.get(options1).get(option2).get(0);
                 } else {
                     address = provinceBeanList.get(options1).getPickerViewText();
                     // + " " + cityList.get(options1).get(option2);

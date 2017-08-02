@@ -36,7 +36,7 @@ import okhttp3.Request;
 
 /**
  * Created by Administrator on 2017/6/5 0005.
- * 交易记录，还款记录的界面
+ * 交易记录，记录的界面
  */
 
 public class MineRecordFragment extends BaseFragment implements AdapterView.OnItemClickListener {
@@ -45,7 +45,7 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
     private List<MineRecord> mData;
     private Context mContent;
     private static final String TAG = MineRecordFragment.class.getSimpleName();
-    private String orderNo;
+
 
     @Nullable
     @Override
@@ -70,8 +70,6 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
 
     private void initData() {
         mData = new ArrayList<>();
-      /*  mData.add(new MineRecord());
-        mAdapter = new MineRecordAdapter(mData, getContext());*/
         final String json = LoginTokenUtils.getJson();
         FormBody formbody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(mContent).asyncPost(NetConfig.MINE_ACCOUNT_LIST, formbody, new OkhttpUtils.HttpCallBack() {
@@ -97,8 +95,7 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
                         for (int i = 0; i < rows.length(); i++) {
                             JSONObject jsonObject = rows.getJSONObject(i);
                             String bindBankCardNo = jsonObject.getString("bindBankCardNo");
-                            orderNo = jsonObject.getString("orderNo");
-                            MyApplications.setOrderNo(orderNo);
+                            String orderNo = jsonObject.getString("orderNo");
                             String bindBank = jsonObject.getString("bindBank");
                             String loanAudDate = jsonObject.getString("loanAudDate");
                             double loanAmt = jsonObject.getDouble("loanAmt");
@@ -108,6 +105,7 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
                             String substring = bindBankCardNo.substring(bindBankCardNo.length() - 4);
                             record.setBankID(substring);
                             record.setMoney(loanAmt / 100);
+                            record.setOrderNo(orderNo);
                             if (0 == loanStatus) {
                                 record.setMark("放款成功");
                             } else if (1 == loanStatus) {
@@ -136,11 +134,15 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String orderNo = mData.get(position).getOrderNo();
+        MyApplications.setOrderNo(orderNo);
         CharSequence charSequence = orderNo.subSequence(0, 1);
         if("M".equals(charSequence)){
             startActivity(new Intent(getActivity(), PledgeActivity.class));
         }else {
             startActivity(new Intent(getActivity(), LendDetailsActivity.class));
+
+
         }
 
     }

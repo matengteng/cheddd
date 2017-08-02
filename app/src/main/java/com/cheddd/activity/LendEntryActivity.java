@@ -178,7 +178,11 @@ public class LendEntryActivity extends MyBaseActivity implements View.OnClickLis
                     break;
                 case R.id.rl_lend_hetonh:
                     startActivity(new Intent(this,HetongActivity.class));
-                    
+                    break;
+                case R.id.bt_petty_problem:
+                    Intent intent = new Intent(LendEntryActivity.this, MotionActivity.class);
+                    intent.putExtra("url", "http://47.93.163.237:9080/agreement/4.html");
+                    startActivity(intent);
                     break;
                 default:
                     break;

@@ -392,7 +392,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     //极速抵押
     private void extremeMoreage1() {
         if ("0017".equals(returnCode1)) {
-            ToastUtil.show(mContent, returnMsg1);
+            //ToastUtil.show(mContent, returnMsg1);
             startActivity(new Intent(mContent, LoginActivity.class));
             return;
         }

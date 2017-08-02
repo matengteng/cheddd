@@ -274,7 +274,6 @@ public class PhoneApproveActivity extends MyBaseActivity implements View.OnClick
         Intent intent = new Intent(PhoneApproveActivity.this, MotionActivity.class);
         intent.putExtra("url", "http://baidu.com");
         startActivity(intent);
-        finish();
     }
 
     private void initView() {

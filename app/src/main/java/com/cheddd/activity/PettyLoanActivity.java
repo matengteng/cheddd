@@ -101,10 +101,15 @@ public class PettyLoanActivity extends MyBaseActivity implements View.OnClickLis
                             MyApplications.setOrderNo(orderNo);
                             String newRepaymentDate = entity.getString("newRepaymentDate");
                             double newRepayment = entity.getDouble("newRepayment");
-                            mProgressBar.setValue((int) (1.0 * loanLimit / smallLoanSum * 360));
                             mTextViewData.setText(newRepaymentDate + "应还");
                             mTextViewMoney.setText("￥" + newRepayment / 100 + "");
-                            mTextViewSmall.setText(loanLimit / 100 + "");
+                            if(loanLimit<0){
+                                mTextViewSmall.setText(0+"");
+                                mProgressBar.setValue((int) (0* 360));
+                            }else {
+                                mTextViewSmall.setText(loanLimit / 100 + "");
+                                mProgressBar.setValue((int) (1.0 * loanLimit / smallLoanSum * 360));
+                            }
                         }else  if("0017".equals(returnCode)){
                             startActivity(new Intent(PettyLoanActivity.this,LoginActivity.class));
                         }else if("0021".equals(returnCode)){
@@ -171,6 +176,9 @@ public class PettyLoanActivity extends MyBaseActivity implements View.OnClickLis
                     know();
                     break;
                 case R.id.bt_petty_problem:
+                    Intent intent = new Intent(PettyLoanActivity.this, MotionActivity.class);
+                    intent.putExtra("url", "http://47.93.163.237:9080/agreement/4.html");
+                    startActivity(intent);
                     break;
                 case R.id.rl_dialog_close:
                     mDialog.dismiss();

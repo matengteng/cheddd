@@ -244,7 +244,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_toRightOf="@id/bt_pledge_finsh"
                     android:enabled="false"
-                    android:text="付款成功"
+                    android:text="放款成功"
                     android:textColor="@color/text_tab" />
 
                 <TextView

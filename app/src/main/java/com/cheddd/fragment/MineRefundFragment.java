@@ -99,7 +99,7 @@ public class MineRefundFragment extends BaseFragment implements AdapterView.OnIt
                             String bindBank = jsonObject.getString("bindBank");
                             String orderNo = jsonObject.getString("orderNo");
                             String transactionId = jsonObject.getString("transactionId");
-                            String loanAudDate = jsonObject.getString("actualRepayTime");
+                           //String loanAudDate = jsonObject.getString("actualRepayTime");
                             double loanAmt = jsonObject.getDouble("actualRepayAmt");
                             int overdueStatus = jsonObject.getInt("overdueStatus");
                             String bindBankCardNo = jsonObject.getString("bindBankCardNo");
@@ -119,7 +119,7 @@ public class MineRefundFragment extends BaseFragment implements AdapterView.OnIt
                             } else {
                                 return;
                             }
-                            record.setTime(loanAudDate);
+                         // record.setTime(loanAudDate);
                             mData.add(record);
                         }
                         mAdapter.notifyDataSetChanged();
@@ -145,7 +145,5 @@ public class MineRefundFragment extends BaseFragment implements AdapterView.OnIt
         intent.putExtra("transactionId", transactionId);
         intent.putExtra("orderNo", orderNo);
         startActivity(intent);
-        getActivity().finish();
-
     }
 }
