@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -83,6 +84,7 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
     private ArrayList<List<String>> districts;
     private ArrayList<List<List<String>>> districtList = new ArrayList<>();
     private Dialog mDialog;
+    private String bankId;
 
 
     @Override
@@ -139,7 +141,7 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
                             String khBankCity = entity.getString("khBankCity");
                             String khBankName = entity.getString("khBankName");
                             String khBank = entity.getString("khBank");
-                            String bankId = entity.getString("bankId");
+                            bankId = entity.getString("bankId");
                             mEditTextName.setText(custName);
                             mEditTextCard.setText(cardNo);
                             mTextViewProvince.setText(khBankPro);
@@ -300,7 +302,11 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
         bankBean.setCardNo(mEditTextCard.getText().toString().trim());
         bankBean.setKhBankCity(mTextViewCity.getText().toString());
         bankBean.setKhBankPro(mTextViewProvince.getText().toString());
-
+        if(!TextUtils.isEmpty(bankId)){
+            bankBean.setBankId(bankId);
+        }else {
+            bankBean.setBankId("");
+        }
         for (Map.Entry<String, String> entry : map.entrySet()) {
             String key = entry.getKey();
             if (key.equals(mTextViewBank.getText().toString())) {
