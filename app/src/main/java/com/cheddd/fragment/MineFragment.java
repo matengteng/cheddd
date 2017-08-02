@@ -14,22 +14,18 @@ import android.widget.TextView;
 
 import com.cheddd.R;
 import com.cheddd.activity.LendDetailsActivity;
-import com.cheddd.activity.LendMoneyActivity;
-import com.cheddd.activity.LoanActivity;
-import com.cheddd.activity.MineLoanActivity;
-import com.cheddd.activity.PettyLoanActivity;
-import com.cheddd.activity.SafetyActivity;
 import com.cheddd.activity.LoginActivity;
+import com.cheddd.activity.MineLoanActivity;
 import com.cheddd.activity.MoreActivity;
+import com.cheddd.activity.PettyLoanActivity;
 import com.cheddd.activity.RecordActivity;
-import com.cheddd.adapter.RelationsAdapter;
+import com.cheddd.activity.SafetyActivity;
 import com.cheddd.application.MyApplications;
 import com.cheddd.base.BaseFragment;
 import com.cheddd.config.NetConfig;
 import com.cheddd.utils.LoginTokenUtils;
 import com.cheddd.utils.OkhttpUtils;
 import com.cheddd.utils.ToastUtil;
-import com.cheddd.view.TopNavigationBar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -131,7 +127,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                        Log.d(TAG,"借钱"+result);
+                        Log.d(TAG, "借钱" + result);
                         JSONObject object = new JSONObject(result);
                         returnCode1 = object.getString("returnCode");
                         returnMsg1 = object.getString("returnMsg");
@@ -144,11 +140,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                             String newRepaymentDate = entity.getString("newRepaymentDate");
                             double newRepayment = entity.getDouble("newRepayment");
                             DecimalFormat format = new DecimalFormat("#,###.00");
-                            if(loanLimit<0){
-                                mTextViewMoney.setText(0.00+"");
+                            if (loanLimit <= 0) {
+                                mTextViewMoney.setText("0.00");
                                 mButtonWithDraw.setVisibility(View.GONE);
-
-                            }else {
+                            } else {
+                                Log.d(TAG, "loanLimit:" + loanLimit / 100);
                                 mTextViewMoney.setText(format.format(loanLimit / 100));
                             }
 
@@ -235,7 +231,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                         startActivity(new Intent(getActivity(), MineLoanActivity.class));
                     } else if ("0017".equals(returnCode)) {
                         startActivity(new Intent(getActivity(), LoginActivity.class));
-                      //  ToastUtil.show(mContext, returnMsg);
+                        //  ToastUtil.show(mContext, returnMsg);
                     } else {
                         return;
                     }
@@ -253,7 +249,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                         startActivity(new Intent(getActivity(), RecordActivity.class));
                     } else if ("0017".equals(returnCode)) {
                         startActivity(new Intent(getActivity(), LoginActivity.class));
-                       // ToastUtil.show(mContext, returnMsg);
+                        // ToastUtil.show(mContext, returnMsg);
                     } else {
                         return;
                     }
@@ -264,7 +260,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                         startActivity(new Intent(getActivity(), SafetyActivity.class));
                     } else if ("0017".equals(returnCode)) {
                         startActivity(new Intent(getActivity(), LoginActivity.class));
-                       // ToastUtil.show(mContext, returnMsg);
+                        // ToastUtil.show(mContext, returnMsg);
                     } else {
                         return;
                     }
@@ -275,7 +271,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                         startActivity(new Intent(getActivity(), MoreActivity.class));
                     } else if ("0017".equals(returnCode)) {
                         startActivity(new Intent(getActivity(), LoginActivity.class));
-                       // ToastUtil.show(mContext, returnMsg);
+                        // ToastUtil.show(mContext, returnMsg);
                     } else {
                         return;
                     }

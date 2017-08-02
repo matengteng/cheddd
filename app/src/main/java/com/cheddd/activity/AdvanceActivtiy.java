@@ -2,19 +2,14 @@ package com.cheddd.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -45,9 +40,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import okhttp3.FormBody;
 import okhttp3.Request;
@@ -278,7 +271,7 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
 
     private void payoff() {
         mDialog = new AlertDialog.Builder(this).create();
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_refund_pwd,null);
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_refund_pwd, null);
         mEditTextPay = (PwdEditText) view.findViewById(R.id.pet_pwd);
         mEditTextPay.setOnClickListener(this);
         mLinearLayoutSet = (LinearLayout) view.findViewById(R.id.ll_refund_refund_setPassword);
@@ -348,7 +341,7 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
                 detalis.setPayPassWord(MD5Utils.encode(phone + mEditTextPay.getText().toString().trim()));
                 Gson gson = new Gson();
                 String json = gson.toJson(detalis);
-                Log.d(TAG,"提前还款的支付密码"+ json);
+                Log.d(TAG, "提前还款的支付密码" + json);
                 if (mEditTextPay.getSelectionEnd() == 6) {
                     FormBody formBody = new FormBody.Builder().add("content", json).build();
                     OkhttpUtils.getInstance(AdvanceActivtiy.this).asyncPost(NetConfig.INDEX_PETTY_PREREPAY, formBody, new OkhttpUtils.HttpCallBack() {
@@ -367,18 +360,17 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
                                     String returnMsg = object.getString("returnMsg");
                                     if ("000000".equals(returnCode)) {
                                         ToastUtil.show(AdvanceActivtiy.this, returnMsg);
-                                        startActivity(new Intent(AdvanceActivtiy.this,RecordActivity.class));
-
-                                        finish();
                                     } else if ("0023".equals(returnCode)) {
                                         ToastUtil.show(AdvanceActivtiy.this, returnMsg);
-                                    } else {
-                                        return;
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
+                            Intent intent = new Intent(AdvanceActivtiy.this, RecordActivity.class);
+                            intent.putExtra("result", 1001);
+                            startActivity(intent);
+                            finish();
                         }
                     });
                     mDialog.dismiss();

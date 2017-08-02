@@ -1,11 +1,9 @@
 package com.cheddd.activity;
 
-import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -13,8 +11,6 @@ import android.widget.RadioGroup;
 import com.cheddd.R;
 import com.cheddd.adapter.LoginSlideAdapter;
 import com.cheddd.base.MyBaseActivity;
-import com.cheddd.fragment.LoginPasswordFragment;
-import com.cheddd.fragment.LoginPhoneFragment;
 import com.cheddd.fragment.MineRecordFragment;
 import com.cheddd.fragment.MineRefundFragment;
 import com.cheddd.view.TopNavigationBar;
@@ -44,6 +40,9 @@ public class RecordActivity extends MyBaseActivity {
         setData();
         setlistener();
 
+        if (getIntent().getExtras() != null && getIntent().getExtras().getInt("result") == 1001) {
+            mViewPageSlide.setCurrentItem(1);
+        }
 
     }
 
