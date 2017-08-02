@@ -367,6 +367,8 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
                                     String returnMsg = object.getString("returnMsg");
                                     if ("000000".equals(returnCode)) {
                                         ToastUtil.show(AdvanceActivtiy.this, returnMsg);
+                                        startActivity(new Intent(AdvanceActivtiy.this,RecordActivity.class));
+
                                         finish();
                                     } else if ("0023".equals(returnCode)) {
                                         ToastUtil.show(AdvanceActivtiy.this, returnMsg);

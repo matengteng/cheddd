@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
             android:gravity="center"
-            android:text="请输入支付密码" />
+            android:text="请输入原支付密码" />
 
         <com.cheddd.view.PwdEditText
             android:id="@+id/et_amendpayment_former"

@@ -13,9 +13,9 @@
         android:layout_height="wrap_content"
         app:navigation_title="@string/app_morequestion" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <WebView
         android:layout_below="@id/tnb_morequestion"
-        android:text="加载\(^o^)/~" />
+        android:id="@+id/wv_motion_test"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </RelativeLayout>

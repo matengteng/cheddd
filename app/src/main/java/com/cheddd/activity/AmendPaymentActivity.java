@@ -133,12 +133,15 @@ public class AmendPaymentActivity extends MyBaseActivity implements View.OnClick
                                         e.printStackTrace();
                                     }
                                 }
-
                             }
                         });
-                        startActivity(new Intent(AmendPaymentActivity.this, SafetyActivity.class));
+                        startActivity(new Intent(AmendPaymentActivity.this, AmendPaymentActivity.class));
                         finish();
                     }
+                }else {
+                    startActivity(new Intent(AmendPaymentActivity.this, AmendPaymentActivity.class));
+                    ToastUtil.show(AmendPaymentActivity.this,"两次密码不一致，请重新输入");
+                    finish();
                 }
             }
         });

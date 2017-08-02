@@ -165,7 +165,7 @@ public class LendSucceedActivity extends MyBaseActivity implements View.OnClickL
                     mDialog.dismiss();
                     break;
                 case R.id.bt_petty_problem:
-                    Intent intent = new Intent(LendSucceedActivity.this, MotionActivity.class);
+                    Intent intent = new Intent(LendSucceedActivity.this, MoreQuestionActivity.class);
                     intent.putExtra("url", "http://47.93.163.237:9080/agreement/4.html");
                     startActivity(intent);
                     break;

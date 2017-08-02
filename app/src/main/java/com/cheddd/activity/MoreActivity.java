@@ -74,7 +74,9 @@ public class MoreActivity extends MyBaseActivity implements View.OnClickListener
                     startActivity(new Intent(this, MoreDotActivity.class));
                     break;
                 case R.id.rl_more_question:
-                    startActivity(new Intent(this, MoreQuestionActivity.class));
+                    Intent intent1 = new Intent(this, MoreQuestionActivity.class);
+                    intent1.putExtra("url", "http://47.93.163.237:9080/agreement/4.html");
+                    startActivity(intent1);
                     break;
                 case R.id.rl_more_idea:
                     startActivity(new Intent(this, MoreIdeaActivity.class));

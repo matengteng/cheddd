@@ -272,7 +272,7 @@ public class PhoneApproveActivity extends MyBaseActivity implements View.OnClick
 
     private void motain() {
         Intent intent = new Intent(PhoneApproveActivity.this, MotionActivity.class);
-        intent.putExtra("url", "http://baidu.com");
+        intent.putExtra("url", "http://47.93.163.237:9080/agreement/7.html");
         startActivity(intent);
     }
 

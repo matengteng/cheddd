@@ -27,6 +27,7 @@ public class HetongActivity extends MyBaseActivity implements View.OnClickListen
         mRelativeLayoutFuwu.setOnClickListener(this);
         mRelativeLayoutFuwuJiekuan.setOnClickListener(this);
         mRelativeLayoutShouquanshu.setOnClickListener(this);
+        mRelativeLayoutWeituoFuwuxieyi.setOnClickListener(this);
 
 
     }
@@ -45,22 +46,22 @@ public class HetongActivity extends MyBaseActivity implements View.OnClickListen
             switch (v.getId()) {
                 case R.id.rl_hetong_fuwu:
                     Intent intent1 = new Intent(HetongActivity.this, MotionActivity.class);
-                    intent1.putExtra("url", "http://47.93.163.237:9080/agreement/5.html");
+                    intent1.putExtra("url", "http://47.93.163.237:9080/agreement/6.html");
                     startActivity(intent1);
                     break;
                 case R.id.rl_hetong_shouquanshu:
                     Intent intent2 = new Intent(HetongActivity.this, MotionActivity.class);
-                    intent2.putExtra("url", "http://47.93.163.237:9080/agreement/6.html");
+                    intent2.putExtra("url", "http://47.93.163.237:9080/agreement/5.html");
                     startActivity(intent2);
                     break;
                 case R.id.rl_hetong_fuwuweituo:
                     Intent intent3 = new Intent(HetongActivity.this, MotionActivity.class);
-                    intent3.putExtra("url", "http://47.93.163.237:9080/agreement/2.html");
+                    intent3.putExtra("url", "http://47.93.163.237:9080/agreement/3.html");
                     startActivity(intent3);
                     break;
                 case R.id.rl_hetong_xieyi:
                     Intent intent4 = new Intent(HetongActivity.this, MotionActivity.class);
-                    intent4.putExtra("url", "http://47.93.163.237:9080/agreement/3.html");
+                    intent4.putExtra("url", "http://47.93.163.237:9080/agreement/2.html");
                     startActivity(intent4);
                     break;
                 default:
