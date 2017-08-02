@@ -138,8 +138,6 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
                             rows = object.getJSONArray("rows");
                             if (rows.length() > 0) {
                                 mLayout.removeAllViews();
-                                mButtonSubmit.setEnabled(false);
-                                mButtonAdd.setVisibility(View.GONE);
                             }
                             for (int i = 0; i < rows.length(); i++) {
                                 JSONObject jsonObject = rows.getJSONObject(i);
@@ -176,8 +174,40 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
                 }
             }
         });
+        loanInfo();
     }
 
+    private void loanInfo() {
+        String json = LoginTokenUtils.getJson();
+        final FormBody formbody = new FormBody.Builder().add("content", json).build();
+        OkhttpUtils.getInstance(this).asyncPost(NetConfig.INDEX_PLEDGE_INFO, formbody, new OkhttpUtils.HttpCallBack() {
+            @Override
+            public void onError(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onSuccess(Request request, String result) {
+                if (result != null) {
+                    try {
+                        JSONObject object = new JSONObject(result);
+                        JSONObject entity = object.getJSONObject("entity");
+                        int loanInitAud = entity.getInt("loanInitAud");
+                        if (loanInitAud == 0) {
+                            mButtonSubmit.setVisibility(View.GONE);
+                            mButtonAdd.setVisibility(View.GONE);
+
+                        } else {
+                            mButtonSubmit.setVisibility(View.VISIBLE);
+                            mButtonAdd.setVisibility(View.VISIBLE);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
     private void setData() {
 
     }

@@ -180,13 +180,13 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
                         JSONObject entity = object.getJSONObject("entity");
                         int loanInitAud = entity.getInt("loanInitAud");
                         if (loanInitAud == 0) {
-                            mButtonSubmit.setEnabled(false);
+                            mButtonSubmit.setVisibility(View.GONE);
                             mEditTextBank.setCursorVisible(false);
                             mEditTextPhone.setCursorVisible(false);
                             mEditTextCard.setCursorVisible(false);
                             mEditTextName.setCursorVisible(false);
                         } else {
-                            mButtonSubmit.setEnabled(true);
+                            mButtonSubmit.setVisibility(View.VISIBLE);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

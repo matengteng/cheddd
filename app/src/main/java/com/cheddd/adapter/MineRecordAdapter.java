@@ -44,13 +44,14 @@ public class MineRecordAdapter extends MyBaseAdapter {
         holder.bank.setText(mData.get(position).getBank() + "(" + mData.get(position).getBankID() + ")");
         holder.time.setText(mData.get(position).getTime());
         holder.mark.setText(mData.get(position).getMark());
-       /* if ("审核中".equals(holder.mark.getText().toString())) {
+        if ("审核中".equals(holder.mark.getText().toString())||"还款失败".equals(holder.mark.getText().toString())) {
             holder.mark.setTextColor(Color.parseColor("#E83D2E"));
-        } else if ("放款中".equals(holder.mark.getText().toString())) {
+        } else if("还款中".equals(holder.mark.getText().toString())||"还款成功".equals(holder.mark.getText().toString())
+                ||"提前还款".equals(holder.mark.getText().toString())||"放款中".equals(holder.mark.getText().toString())){
             holder.mark.setTextColor(Color.parseColor("#24CA86"));
-        } else {
+        }else if("放款成功".equals(holder.mark.getText().toString())){
             holder.mark.setTextColor(Color.parseColor("#999999"));
-        }*/
+        }
         return convertView;
     }
 

@@ -99,6 +99,7 @@ public class AmendPaymentActivity extends MyBaseActivity implements View.OnClick
                     paybean.setTelNo(phone);
                     Gson gson = new Gson();
                     String json = gson.toJson(paybean);
+                    Log.d(TAG,"修改支付密码"+json);
                     if (selectionEnd == 6) {
                         FormBody formBody = new FormBody.Builder().add("content", json).build();
                         OkhttpUtils.getInstance(AmendPaymentActivity.this).asyncPost(NetConfig.MINE_PAY_AMENDPAYMEMT, formBody, new OkhttpUtils.HttpCallBack() {

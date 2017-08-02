@@ -348,7 +348,7 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
                 detalis.setPayPassWord(MD5Utils.encode(phone + mEditTextPay.getText().toString().trim()));
                 Gson gson = new Gson();
                 String json = gson.toJson(detalis);
-                Log.d(TAG, json);
+                Log.d(TAG,"提前还款的支付密码"+ json);
                 if (mEditTextPay.getSelectionEnd() == 6) {
                     FormBody formBody = new FormBody.Builder().add("content", json).build();
                     OkhttpUtils.getInstance(AdvanceActivtiy.this).asyncPost(NetConfig.INDEX_PETTY_PREREPAY, formBody, new OkhttpUtils.HttpCallBack() {

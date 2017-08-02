@@ -4,6 +4,8 @@ package com.cheddd.fragment;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -361,6 +363,7 @@ public class RefundFragment extends BaseFragment implements View.OnClickListener
         mImageViewDialog = (ImageView) view.findViewById(R.id.iv_dialog_bank);
         mLinearLayoutSet.setOnClickListener(this);
         mDialog.setCanceledOnTouchOutside(false);
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mDialog.show();
         mDialog.getWindow().setContentView((LinearLayout) view);
         mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
@@ -414,7 +417,7 @@ public class RefundFragment extends BaseFragment implements View.OnClickListener
                 detalis.setPayPassWord(MD5Utils.encode(phone + mEditTextPay.getText().toString().trim()));
                 Gson gson = new Gson();
                 String json = gson.toJson(detalis);
-                Log.d(TAG, json);
+                Log.d(TAG, "单个订单支付密码"+json);
                 if (mEditTextPay.getSelectionEnd() == 6) {
                     FormBody formBody = new FormBody.Builder().add("content", json).build();
                     OkhttpUtils.getInstance(mContext).asyncPost(NetConfig.INDEX_PETTY_SINGLE_PAY, formBody, new OkhttpUtils.HttpCallBack() {

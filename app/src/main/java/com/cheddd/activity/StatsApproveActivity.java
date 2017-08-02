@@ -139,13 +139,13 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
                         JSONObject entity = object.getJSONObject("entity");
                         int loanInitAud = entity.getInt("loanInitAud");
                         if (loanInitAud == 0) {
-                            mButtonSubmit.setEnabled(false);
+                            mButtonSubmit.setVisibility(View.GONE);
                             mEditTextDetalis.setCursorVisible(false);
                             mEditTextIDCard.setCursorVisible(false);
                             mEditTextName.setCursorVisible(false);
                             mEditTextPhone.setCursorVisible(false);
                         } else {
-                            mButtonSubmit.setEnabled(true);
+                            mButtonSubmit.setVisibility(View.VISIBLE);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

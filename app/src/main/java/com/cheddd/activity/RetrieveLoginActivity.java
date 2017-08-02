@@ -108,6 +108,7 @@ public class RetrieveLoginActivity extends MyBaseActivity implements View.OnClic
         bean.setPassWord(MD5Utils.encode(phone + mEditTextformer.getText().toString().trim()));
         Gson gson = new Gson();
         String json = gson.toJson(bean);
+       // Log.d(TAG,"修改密码"+json);
         FormBody formbody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.ACCOUNT_PASSWORD, formbody, new OkhttpUtils.HttpCallBack() {
             @Override

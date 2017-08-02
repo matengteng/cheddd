@@ -403,7 +403,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                         if (loanInitAud == 1) {
                             getActivity().startActivity(new Intent(mContent, ExtremeMortageActivity.class));
                         } else if (loanInitAud == 0) {
-                            getActivity().startActivity(new Intent(mContent, PledgeActivity.class));
+                            getActivity().startActivity(new Intent(mContent, PledgeActivity.class).putExtra("che","11"));
                         } else {
                             getActivity().startActivity(new Intent(mContent, ExtremeMortageActivity.class));
                         }

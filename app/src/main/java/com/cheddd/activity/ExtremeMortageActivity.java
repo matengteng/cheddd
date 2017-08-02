@@ -288,7 +288,7 @@ public class ExtremeMortageActivity extends MyBaseActivity implements View.OnCli
                         String returnMsg = object.getString("returnMsg");
                         if ("000000".equals(returnCode)) {
                             ToastUtil.show(ExtremeMortageActivity.this, returnMsg);
-                            startActivity(new Intent(ExtremeMortageActivity.this, PledgeActivity.class));
+                           startActivity(new Intent(ExtremeMortageActivity.this, PledgeActivity.class).putExtra("che","11"));
                             finish();
                         } else {
                             ToastUtil.show(ExtremeMortageActivity.this, "网络异常");

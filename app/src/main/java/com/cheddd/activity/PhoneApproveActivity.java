@@ -181,11 +181,11 @@ public class PhoneApproveActivity extends MyBaseActivity implements View.OnClick
                         JSONObject entity = object.getJSONObject("entity");
                         int loanInitAud = entity.getInt("loanInitAud");
                         if (loanInitAud == 0) {
-                            mButtonSubmit.setEnabled(false);
+                            mButtonSubmit.setVisibility(View.GONE);
                             mEditTextPhone.setCursorVisible(false);
                             mEditTextPassword.setCursorVisible(false);
                         } else {
-                            mButtonSubmit.setEnabled(true);
+                            mButtonSubmit.setVisibility(View.VISIBLE);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -483,7 +483,7 @@ public class PhoneApproveActivity extends MyBaseActivity implements View.OnClick
         if (requestCode == 113 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             initLocation();
         } else {
-            Toast.makeText(getApplicationContext(), "获取位置权限失败，请手动开启", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "获取位置权限失败，请手动开启", Toast.LENGTH_SHORT).show();
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }

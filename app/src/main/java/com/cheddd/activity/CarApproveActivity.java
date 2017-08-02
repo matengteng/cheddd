@@ -201,12 +201,12 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
                         JSONObject entity = object.getJSONObject("entity");
                         int loanInitAud = entity.getInt("loanInitAud");
                         if (loanInitAud == 0) {
-                            mButtonSubmit.setEnabled(false);
+                            mButtonSubmit.setVisibility(View.GONE);
                             mEditTextKm.setCursorVisible(false);
                             mEditTextType.setCursorVisible(false);
                             mEditTextMark.setCursorVisible(false);
                         } else {
-                            mButtonSubmit.setEnabled(true);
+                            mButtonSubmit.setVisibility(View.VISIBLE);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -300,7 +300,8 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
         car.setRegistrationDate(mTextViewTime.getText().toString());
         Gson gson = new Gson();
         String json = gson.toJson(car);
-        FormBody formBody = new FormBody.Builder().add("content", json).build();
+        Log.d(TAG,"车辆车辆提交"+json);
+    FormBody formBody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_CAR, formBody, new OkhttpUtils.HttpCallBack() {
             @Override
             public void onError(Request request, IOException e) {

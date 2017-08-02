@@ -166,13 +166,13 @@ public class WorkActivity extends MyBaseActivity implements View.OnClickListener
                         JSONObject entity = object.getJSONObject("entity");
                         int loanInitAud = entity.getInt("loanInitAud");
                         if (loanInitAud == 0) {
-                            mButtonfinsh.setEnabled(false);
+                            mButtonfinsh.setVisibility(View.GONE);
                             mEditTextPosition.setCursorVisible(false);
                             mEditTextComTelno.setCursorVisible(false);
                             mEditTextCompany.setCursorVisible(false);
                             mEditTextAddress.setCursorVisible(false);
                         } else {
-                            mButtonfinsh.setEnabled(true);
+                            mButtonfinsh.setVisibility(View.VISIBLE);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

@@ -64,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:tag="CONTACT_PHONE_NUM"
+            android:maxLength="11"
             android:layout_toRightOf="@id/tv_relation_phone"
             android:hint="@string/app_cellphone" />
 

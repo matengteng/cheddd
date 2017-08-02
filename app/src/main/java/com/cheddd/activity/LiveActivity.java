@@ -137,12 +137,12 @@ public class LiveActivity extends MyBaseActivity implements View.OnClickListener
                         JSONObject entity = object.getJSONObject("entity");
                         int loanInitAud = entity.getInt("loanInitAud");
                         if (loanInitAud == 0) {
-                            mButtonSubmit.setEnabled(false);
+                            mButtonSubmit.setVisibility(View.GONE);
                             mEditTextUnit.setCursorVisible(false);
                             mEditTextMonth.setCursorVisible(false);
 
                         } else {
-                            mButtonSubmit.setEnabled(true);
+                            mButtonSubmit.setVisibility(View.VISIBLE);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -291,9 +291,9 @@ public class LiveActivity extends MyBaseActivity implements View.OnClickListener
     @Override
     public void afterTextChanged(Editable s) {
         if (mTextViewHouse.getText().toString().length() > 0) {
-            if (mEditTextMonth.getText().toString().trim().length() > 2) {
+            if (mEditTextMonth.getText().toString().trim().length() > 0) {
                 if (mTextViewProduct.getText().toString().length() > 0) {
-                    if (mEditTextUnit.getText().toString().trim().length() > 3) {
+                    if (mEditTextUnit.getText().toString().trim().length() > 2) {
                         mButtonSubmit.setEnabled(true);
                     } else {
                         mButtonSubmit.setEnabled(false);

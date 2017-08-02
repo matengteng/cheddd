@@ -137,7 +137,7 @@ public class ForgetPasswordActivity extends MyBaseActivity implements TextWatche
         register.setClientType("2");
         register.setTelNo(phone);
         register.setSms(auth);
-        register.setPassWord(MD5Utils.encode(mEditTextPhone.getText().toString().trim() + password));
+        register.setPassWord(MD5Utils.encode(mEditTextPhone.getText().toString().trim() + mEditTextPassword.getText().toString().trim()));
         Gson gson = new Gson();
         String json = gson.toJson(register);
         Log.d(TAG, json);

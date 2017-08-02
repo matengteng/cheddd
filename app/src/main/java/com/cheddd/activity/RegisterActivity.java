@@ -301,6 +301,7 @@ public class RegisterActivity extends MyBaseActivity implements View.OnClickList
         login.setTelNo(phone);
         Gson gson = new Gson();
         final String json = gson.toJson(login);
+        //Log.d(TAG,"注册"+json);
         FormBody forbody = new FormBody.Builder().add("content", json).build();
         final Request request = new Request.Builder().post(forbody).url(NetConfig.LOGIN_PASSWORD).build();
         client.newCall(request).enqueue(new Callback() {

@@ -1,6 +1,7 @@
 package com.cheddd.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
@@ -16,11 +17,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cheddd.R;
+import com.cheddd.application.MyApplications;
 import com.cheddd.base.MyBaseActivity;
+import com.cheddd.bean.MineRecord;
 import com.cheddd.config.NetConfig;
 import com.cheddd.utils.LoginTokenUtils;
 import com.cheddd.utils.OkhttpUtils;
 import com.cheddd.view.TopNavigationBar;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,18 +50,33 @@ public class PledgeActivity extends MyBaseActivity implements View.OnClickListen
     private TextView mTextViewRisk, mTextViewSucceed, mTextViewFinance, mTextViewApplyfor;
     private Button mButtonRisk, mButtonSucceed, mBuutonFinance, mButtonApplyfor;
     private TextView mTvFinsh, mTvStatRisk, mTvFinance;
+    private String extra;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pledge);
+        Intent intent = getIntent();
+        if(intent!=null){
+            extra = intent.getStringExtra("che");
+        }
         initView();
         initData();
         setListener();
     }
 
     private void initData() {
-        String json = LoginTokenUtils.getJson();
+        MineRecord record=new MineRecord();
+        record.setOrderNo(MyApplications.getOrderNo());
+        record.setClientType("2");
+        if(extra.equals("11")){
+            record.setToken("");
+        }else if(extra.equals("12")){
+            record.setToken(MyApplications.getToken());
+        }
+        record.setToken(MyApplications.getToken());
+        Gson gson=new Gson();
+        String json = gson.toJson(record);
         FormBody formbody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INDEX_PLEDGE_INFO, formbody, new OkhttpUtils.HttpCallBack() {
             @Override

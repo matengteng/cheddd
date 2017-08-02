@@ -55,7 +55,7 @@
                     style="@style/InfoTextView"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
-                    android:text="cheddd" />
+                    android:text="chedddyunying" />
             </RelativeLayout>
             <View style="@style/View" />
             <RelativeLayout style="@style/InfoRelativeLayout">

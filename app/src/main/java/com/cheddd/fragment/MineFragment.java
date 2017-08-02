@@ -145,7 +145,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                             double newRepayment = entity.getDouble("newRepayment");
                             DecimalFormat format = new DecimalFormat("#,###.00");
                             if(loanLimit<0){
-                                mTextViewMoney.setText(0+"");
+                                mTextViewMoney.setText(0.00+"");
                                 mButtonWithDraw.setVisibility(View.GONE);
 
                             }else {

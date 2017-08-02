@@ -157,6 +157,7 @@ public class LoginPasswordFragment extends BaseFragment implements View.OnClickL
         login.setTelNo(phone);
         Gson gson = new Gson();
         final String json = gson.toJson(login);
+        //Log.d(TAG,"密码登陆"+json);
         FormBody forbody = new FormBody.Builder().add("content", json).build();
         final Request request = new Request.Builder().post(forbody).url(NetConfig.LOGIN_PASSWORD).build();
         client.newCall(request).enqueue(new Callback() {

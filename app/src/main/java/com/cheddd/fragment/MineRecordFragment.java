@@ -138,7 +138,7 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
         MyApplications.setOrderNo(orderNo);
         CharSequence charSequence = orderNo.subSequence(0, 1);
         if("M".equals(charSequence)){
-            startActivity(new Intent(getActivity(), PledgeActivity.class));
+            startActivity(new Intent(getActivity(), PledgeActivity.class).putExtra("che","12"));
         }else {
             startActivity(new Intent(getActivity(), LendDetailsActivity.class));
 
