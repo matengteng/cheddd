@@ -23,7 +23,7 @@
             android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/more_dot" />
 
         <TextView
             android:id="@+id/tv_moreDot_storeName"

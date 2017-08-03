@@ -251,7 +251,7 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "判断支付密码是否设置" + result);
+                   // Log.d(TAG, "判断支付密码是否设置" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -341,7 +341,7 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
                 detalis.setPayPassWord(MD5Utils.encode(phone + mEditTextPay.getText().toString().trim()));
                 Gson gson = new Gson();
                 String json = gson.toJson(detalis);
-                Log.d(TAG, "提前还款的支付密码" + json);
+             //   Log.d(TAG, "提前还款的支付密码" + json);
                 if (mEditTextPay.getSelectionEnd() == 6) {
                     FormBody formBody = new FormBody.Builder().add("content", json).build();
                     OkhttpUtils.getInstance(AdvanceActivtiy.this).asyncPost(NetConfig.INDEX_PETTY_PREREPAY, formBody, new OkhttpUtils.HttpCallBack() {
@@ -353,7 +353,7 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
                         @Override
                         public void onSuccess(Request request, String result) {
                             if (result != null) {
-                                Log.d(TAG, "提前还款提交" + result);
+                            //    Log.d(TAG, "提前还款提交" + result);
                                 try {
                                     JSONObject object = new JSONObject(result);
                                     String returnCode = object.getString("returnCode");
@@ -365,6 +365,10 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
                                         finish();
                                     } else if ("0023".equals(returnCode)) {
                                         ToastUtil.show(AdvanceActivtiy.this, returnMsg);
+                                    }else if("0045".equals(returnCode)){
+                                        ToastUtil.show(AdvanceActivtiy.this, returnMsg);
+                                    }else {
+                                        return;
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();

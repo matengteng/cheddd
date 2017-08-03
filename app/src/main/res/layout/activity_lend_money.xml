@@ -51,6 +51,7 @@
                         android:textSize="36sp" />
 
                     <EditText
+                        android:inputType="number"
                         android:id="@+id/et_lendmoney_money"
                         style="@style/EditText"
                         android:layout_marginLeft="1dp"

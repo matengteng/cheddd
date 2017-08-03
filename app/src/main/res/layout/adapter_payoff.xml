@@ -122,6 +122,7 @@
             android:text="现金分期" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_payoff_list"
             style="@style/InfoTextView"
             android:layout_alignParentRight="true"

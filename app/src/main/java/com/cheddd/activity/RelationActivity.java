@@ -91,7 +91,7 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
         setData();
         setListener();
         findViewAllValidateEmpty(findViewById(android.R.id.content));
-        Log.d(TAG, "findViewAllValidateEmpty():" + textIsEmpty);
+       // Log.d(TAG, "findViewAllValidateEmpty():" + textIsEmpty);
         mLayout.addView(addView());
     }
 

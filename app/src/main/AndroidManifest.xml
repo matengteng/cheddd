@@ -70,6 +70,7 @@
         <activity android:name=".activity.ExtremeMortageActivity"
             android:launchMode="singleTask"/>
         <activity android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="stateHidden"
             android:launchMode="singleTask"/>
         <activity android:name=".activity.ForgetPasswordActivity"
             android:launchMode="singleTask"/>

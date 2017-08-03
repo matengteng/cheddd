@@ -70,11 +70,13 @@ public class LoginPhoneFragment extends BaseFragment implements TextWatcher, Vie
                     ToastUtil.show(getActivity(), returnMsg);
                     getActivity().finish();
                     break;
-                case 2:
-                    ToastUtil.show(getActivity(), returnMsg);
                 case 3:
+                    ToastUtil.show(getActivity(), returnMsg);
+                    break;
+                case 2:
                     getActivity().startActivity(new Intent(getActivity(), RegisterActivity.class));
                     getActivity().finish();
+                    break;
                 default:
                     break;
             }
@@ -198,14 +200,11 @@ public class LoginPhoneFragment extends BaseFragment implements TextWatcher, Vie
                             if ("000000".equals(returnCode)) {
                                 MyApplications.setToken(token);
                                 msg.what = 1;
-                            } else if ("0026".equals(returnCode)) {
-                                msg.what = 2;
                             } else if ("0025".equals(returnCode)) {
+                                msg.what = 2;
+                            } else if ("0026".equals(returnCode)) {
                                 msg.what = 3;
-                            } else {
-                                return;
                             }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

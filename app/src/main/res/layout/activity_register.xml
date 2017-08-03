@@ -22,7 +22,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/v">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,8 +36,8 @@
 
                 <ImageView
                     android:id="@+id/iv_register_phone"
-                    android:layout_width="14dp"
-                    android:layout_height="22dp"
+                    android:layout_width="16dp"
+                    android:layout_height="26dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:src="@mipmap/login_phone" />

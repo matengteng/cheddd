@@ -444,7 +444,9 @@ public class RefundFragment extends BaseFragment implements View.OnClickListener
                                         getActivity().finish();
                                     } else if ("0023".equals(returnCode)) {
                                         ToastUtil.show(mContext, returnMsg);
-                                    } else {
+                                    } else if("0046".equals(returnCode)){
+                                        ToastUtil.show(mContext, returnMsg);
+                                    }else {
                                         return;
                                     }
                                 } catch (JSONException e) {

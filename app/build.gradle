@@ -24,17 +24,26 @@ android {
         wandoujia {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "wandoujia"]
         }
-
+        huawei {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "huawei"]
+        }
         baidu {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "baidu"]
         }
-
         c360 {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "c360"]
         }
-
-        uc {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "uc"]
+        anzhi {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "anzhi"]
+        }
+        sanxing {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "sanxing"]
+        }
+        yingyongbao {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "yingyongbao"]
+        }
+        oppo {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "oppo"]
         }
     }
     sourceSets {

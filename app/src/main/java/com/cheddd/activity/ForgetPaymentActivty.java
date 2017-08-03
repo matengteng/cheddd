@@ -144,7 +144,7 @@ public class ForgetPaymentActivty extends MyBaseActivity implements View.OnClick
             return;
         }
         if ("获取验证码".equals(mTextViewAuth.getText().toString().trim())) {
-            CountDownTimer time = new CountDownTimer(30 * 1000, 1000) {
+            CountDownTimer time = new CountDownTimer(60 * 1000, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     mTextViewAuth.setText(ForgetPaymentActivty.this.getString(R.string.phone_captcha_time_remain, millisUntilFinished / 1000));
@@ -176,7 +176,7 @@ public class ForgetPaymentActivty extends MyBaseActivity implements View.OnClick
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "获取设置支付密码的验证码" + result);
+                  //  Log.d(TAG, "获取设置支付密码的验证码" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");

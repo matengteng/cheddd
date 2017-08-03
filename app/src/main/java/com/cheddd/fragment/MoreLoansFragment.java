@@ -333,7 +333,7 @@ public class MoreLoansFragment extends BaseFragment implements View.OnClickListe
                         @Override
                         public void onSuccess(Request request, String result) {
                             if (result != null) {
-                                Log.d(TAG, "单个订单单期还款提交" + result);
+                                Log.d(TAG, "多个订单的提交" + result);
                                 //{"token":null,"returnCode":"0023","returnMsg":"支付密码不正确","entity":null,"rows":[],"flag":"false"}
                                 try {
                                     JSONObject object = new JSONObject(result);
@@ -346,8 +346,8 @@ public class MoreLoansFragment extends BaseFragment implements View.OnClickListe
                                         getActivity().finish();
                                     } else if ("0023".equals(returnCode)) {
                                         ToastUtil.show(mContext, returnMsg);
-                                    } else {
-                                        return;
+                                    } else if("0046".equals(returnCode)){
+                                        ToastUtil.show(mContext, returnMsg);
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();

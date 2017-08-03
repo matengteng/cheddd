@@ -187,7 +187,7 @@ public class ForgetPasswordActivity extends MyBaseActivity implements TextWatche
             return;
         }
         if ("获取验证码".equals(mTextViewAuthCode.getText().toString().trim())) {
-            CountDownTimer time = new CountDownTimer(30 * 1000, 1000) {
+            CountDownTimer time = new CountDownTimer(60 * 1000, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     mTextViewAuthCode.setText(ForgetPasswordActivity.this.getString(R.string.phone_captcha_time_remain, millisUntilFinished / 1000));

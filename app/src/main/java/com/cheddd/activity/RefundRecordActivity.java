@@ -104,6 +104,11 @@ public class RefundRecordActivity extends MyBaseActivity {
                                 JSONObject jsonObject = rows.getJSONObject(i);
                                 String repayTime = jsonObject.getString("repayTime");
                                 String actualRepayTime = jsonObject.getString("actualRepayTime");
+                                try{
+
+                                }catch (Exception e){
+
+                                }
                                 double actualRepayAmt = jsonObject.getDouble("actualRepayAmt");
                                 int overdueStatus = jsonObject.getInt("overdueStatus");
                                 RefundRecordBean bean = new RefundRecordBean(repayTime, overdueStatus, actualRepayAmt/100, actualRepayTime);
