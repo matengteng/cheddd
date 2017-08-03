@@ -196,7 +196,6 @@
                     android:text="@string/app_detalis" />
 
                 <EditText
-                    android:maxLength=""
                     android:id="@+id/et_stats_details"
                     style="@style/EditText"
                     android:layout_marginLeft="38dp"

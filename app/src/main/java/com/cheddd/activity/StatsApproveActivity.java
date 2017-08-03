@@ -2,11 +2,9 @@ package com.cheddd.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -14,20 +12,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.cheddd.R;
 import com.cheddd.application.MyApplications;
 import com.cheddd.base.MyBaseActivity;
 import com.cheddd.bean.InfoStatBean;
-import com.cheddd.bean.LoginTokenBean;
 import com.cheddd.bean.ProvinceBean;
 import com.cheddd.config.NetConfig;
 import com.cheddd.utils.JsonFileReader;
 import com.cheddd.utils.LoginTokenUtils;
 import com.cheddd.utils.OkhttpUtils;
-import com.cheddd.utils.SdCardUtils;
 import com.cheddd.utils.SharedPreferencesUtils;
 import com.cheddd.utils.ToastUtil;
 import com.cheddd.view.TopNavigationBar;
@@ -42,12 +37,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import okhttp3.FormBody;
 import okhttp3.Request;
-
-import static android.R.attr.value;
 
 /**
  * 信息认证
@@ -95,7 +87,8 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
     @Override
     protected void onRestart() {
         super.onRestart();
-        initData();
+
+        lookState();
     }
 
     private void initData() {
@@ -186,11 +179,11 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
                             String registerCity = entity.getString("registerCity");
                             String id = entity.getString("id");
                             String phone = SharedPreferencesUtils.getString(StatsApproveActivity.this, "phone", "");
-                           if(phone.equals(custName)){
-                               mEditTextName.setText("");
-                           }else {
-                               mEditTextName.setText(custName);
-                           }
+                            if (phone.equals(custName)) {
+                                mEditTextName.setText("");
+                            } else {
+                                mEditTextName.setText(custName);
+                            }
 
                             mEditTextIDCard.setText(identityCode);
                             mEditTextPhone.setText(telNo);
@@ -256,17 +249,17 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
                         int workInfoAuth = object.getInt("workInfoAuth");
                         int houseInfoAuth = object.getInt("houseInfoAuth");
                         int contactsInfoAuth = object.getInt("contactsInfoAuth");
-                        if (3!= houseInfoAuth) {
+                        if (3 != houseInfoAuth) {
                             mButtonLive.setEnabled(true);
                         } else {
                             mButtonLive.setEnabled(false);
                         }
-                        if (3!= workInfoAuth) {
+                        if (3 != workInfoAuth) {
                             mButtonWork.setEnabled(true);
                         } else {
                             mButtonWork.setEnabled(false);
                         }
-                        if (3!= contactsInfoAuth) {
+                        if (3 != contactsInfoAuth) {
                             mButtonRelation.setEnabled(true);
                         } else {
                             mButtonRelation.setEnabled(false);
