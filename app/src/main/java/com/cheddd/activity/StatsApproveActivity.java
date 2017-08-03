@@ -512,11 +512,11 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
     private void submit() {
         //用户名
         String name = mEditTextName.getText().toString().trim();
-        String nameRegular = "[\u4E00-\u9FA5]{2,5}(?:·[\u4E00-\u9FA5]{2,5})*";
+       /* String nameRegular = "[\u4E00-\u9FA5]{2,5}(?:·[\u4E00-\u9FA5]{2,5})*";
         if (!name.matches(nameRegular)) {
             ToastUtil.show(this, "姓名格式错误");
             return;
-        }
+        }*/
         //身份证号码的判断
         String IdCard = mEditTextIDCard.getText().toString().trim();
 
@@ -531,10 +531,10 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
             return;
         }
         String details = mEditTextDetalis.getText().toString().trim();
-        if (!details.matches("^[\\u4e00-\\u9fa5_a-zA-Z0-9]+$")) {
+      /*  if (!details.matches("^[\\u4e00-\\u9fa5_a-zA-Z0-9]+$")) {
             ToastUtil.show(this, "详细地址输入有误");
             return;
-        }
+        }*/
         //客户端来源、用户手机号、用户令牌、客户姓名、身份证、婚姻状况、性别、学历、详细地址、省、市
         InfoStatBean stat = new InfoStatBean();
         stat.setClientType("2");
@@ -605,10 +605,10 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
 
     @Override
     public void afterTextChanged(Editable s) {
-        if (mEditTextName.getText().toString().trim().length() > 1) {
+        if (mEditTextName.getText().toString().trim().length() > 0) {
             if (mEditTextPhone.getText().toString().trim().length() == 11) {
                 if (mEditTextIDCard.getText().toString().trim().length() == 18) {
-                    if (mEditTextDetalis.getText().toString().trim().length() > 3) {
+                    if (mEditTextDetalis.getText().toString().trim().length() > 0) {
                         if (mTextViewSex.getText().toString().length() > 0) {
                             if (mTextViewMarriage.getText().toString().length() > 0) {
                                 if (mTextViewProvince.getText().toString().length() > 0) {

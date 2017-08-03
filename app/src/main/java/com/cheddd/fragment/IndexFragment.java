@@ -397,8 +397,8 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
             return;
         }
         if (phoneAuth != 3) {
-            if (personalAuth != 3) {
-                if (carInfoAuth != 3) {
+            if (carInfoAuth != 3) {
+                if (personalAuth != 3) {
                     if (bankInfoAuth != 3) {
                         if (loanInitAud == 1) {
                             getActivity().startActivity(new Intent(mContent, ExtremeMortageActivity.class));
@@ -413,14 +413,12 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
 
                     }
                 } else {
-                    ToastUtil.show(mContent, "车辆认证未通过");
-                    mContent.startActivity(new Intent(mContent, CarApproveActivity.class));
-
+                    ToastUtil.show(mContent, "个人信息未通过");
+                    mContent.startActivity(new Intent(mContent, StatsApproveActivity.class));
                 }
             } else {
-                ToastUtil.show(mContent, "个人信息未通过");
-                mContent.startActivity(new Intent(mContent, StatsApproveActivity.class));
-
+                ToastUtil.show(mContent, "车辆认证未通过");
+                mContent.startActivity(new Intent(mContent, CarApproveActivity.class));
             }
         } else {
             ToastUtil.show(mContent, "手机认证未通过");

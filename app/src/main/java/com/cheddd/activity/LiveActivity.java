@@ -293,7 +293,7 @@ public class LiveActivity extends MyBaseActivity implements View.OnClickListener
         if (mTextViewHouse.getText().toString().length() > 0) {
             if (mEditTextMonth.getText().toString().trim().length() > 0) {
                 if (mTextViewProduct.getText().toString().length() > 0) {
-                    if (mEditTextUnit.getText().toString().trim().length() > 2) {
+                    if (mEditTextUnit.getText().toString().trim().length() > 0) {
                         mButtonSubmit.setEnabled(true);
                     } else {
                         mButtonSubmit.setEnabled(false);

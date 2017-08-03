@@ -145,7 +145,7 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                        Log.d("TAG", "车辆信息：" + result);
+                      //  Log.d("TAG", "车辆信息：" + result);
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
                         String returnMsg = object.getString("returnMsg");
@@ -270,10 +270,10 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
             return;
         }
         String mark = mEditTextMark.getText().toString().trim();
-        if (!mark.matches("^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$")) {
+       /* if (!mark.matches("^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$")) {
             ToastUtil.show(this, "车牌号输入有误");
             return;
-        }
+        }*/
         String km = mEditTextKm.getText().toString().trim();
         if (!km.matches("[a-zA-Z0-9]+")) {
             ToastUtil.show(this, "公里数有误");
@@ -300,7 +300,7 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
         car.setRegistrationDate(mTextViewTime.getText().toString());
         Gson gson = new Gson();
         String json = gson.toJson(car);
-        Log.d(TAG,"车辆车辆提交"+json);
+      //  Log.d(TAG,"车辆车辆提交"+json);
     FormBody formBody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_CAR, formBody, new OkhttpUtils.HttpCallBack() {
             @Override
@@ -372,8 +372,8 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
 
     @Override
     public void afterTextChanged(Editable s) {
-        if (mEditTextMark.getText().toString().toString().trim().length() > 6) {
-            if (mEditTextKm.getText().toString().trim().length() > 2) {
+        if (mEditTextMark.getText().toString().toString().trim().length() > 1) {
+            if (mEditTextKm.getText().toString().trim().length() > 1) {
                 if (mTextViewIf.getText().toString().length() > 0) {
                     if (mTextViewTime.getText().toString().length() > 0) {
                         if (mEditTextType.getText().toString().length() > 1) {

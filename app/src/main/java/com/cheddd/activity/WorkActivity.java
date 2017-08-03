@@ -442,10 +442,10 @@ public class WorkActivity extends MyBaseActivity implements View.OnClickListener
     //EditTextView的点击事件
     @Override
     public void afterTextChanged(Editable s) {
-        if (mEditTextCompany.getText().toString().trim().length() > 1) {
-            if (mEditTextAddress.getText().toString().trim().length() > 2) {
-                if (mEditTextComTelno.getText().toString().trim().length() > 2) {
-                    if (mEditTextPosition.getText().toString().trim().length() > 1) {
+        if (mEditTextCompany.getText().toString().trim().length() > 0) {
+            if (mEditTextAddress.getText().toString().trim().length() > 0) {
+                if (mEditTextComTelno.getText().toString().trim().length() > 0) {
+                    if (mEditTextPosition.getText().toString().trim().length() > 0) {
                         if (mTextViewExperience.getText().toString().length() > 0) {
                             if (mTextViewMonthIncome.getText().toString().length() > 0) {
                                 mButtonfinsh.setEnabled(true);

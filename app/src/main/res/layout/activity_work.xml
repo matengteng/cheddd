@@ -37,6 +37,7 @@
                     android:text="@string/app_unit" />
 
                 <EditText
+                    android:maxLength="20"
                     android:id="@+id/et_work_company"
                     style="@style/EditText"
                     android:layout_marginLeft="35dp"
@@ -80,6 +81,7 @@
                     android:text="@string/app_unit_address" />
 
                 <EditText
+                    android:maxLength="30"
                     android:id="@+id/et_work_comAddress_detail"
                     style="@style/EditText"
                     android:layout_marginLeft="35dp"
@@ -141,6 +143,7 @@
                     android:text="@string/app_position" />
 
                 <EditText
+                    android:maxLength="15"
                     android:id="@+id/et_work_position"
                     style="@style/EditText"
                     android:layout_marginLeft="65dp"
