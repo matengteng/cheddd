@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.cheddd.R;
 import com.cheddd.activity.AdvanceActivtiy;
 import com.cheddd.activity.LoginActivity;
+import com.cheddd.activity.RecordActivity;
 import com.cheddd.activity.SetPaymentActivity;
 import com.cheddd.adapter.BorrowMoneyAdapter;
 import com.cheddd.adapter.MoreLoanAdapter;
@@ -339,7 +340,9 @@ public class MoreLoansFragment extends BaseFragment implements View.OnClickListe
                                     String returnCode = object.getString("returnCode");
                                     String returnMsg = object.getString("returnMsg");
                                     if ("000000".equals(returnCode)) {
-                                        ToastUtil.show(mContext, returnMsg);
+                                        Intent intent = new Intent(mContext, RecordActivity.class);
+                                        intent.putExtra("result", 1001);
+                                        startActivity(intent);
                                         getActivity().finish();
                                     } else if ("0023".equals(returnCode)) {
                                         ToastUtil.show(mContext, returnMsg);

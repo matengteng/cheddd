@@ -88,6 +88,8 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
     private double monthPrincipalAmt;
     private double monthInterestAmt;
     private String loanCycle;
+    private ArrayList<String> list1;
+    private ArrayList<String> list2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,34 +117,30 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
         mMapStyle.put("现金分期", 0);
         mMapStyle.put("单期借款", 1);
         mMapMonth = new LinkedHashMap<>();
-        mMapMonth.put("3月", 0);
+      /*  mMapMonth.put("3月", 0);
         mMapMonth.put("6月", 1);
         mMapMonth.put("9月", 2);
-        mMapMonth.put("12月", 3);
+        mMapMonth.put("12月", 3);*/
         mMapDay = new LinkedHashMap<>();
-        mMapDay.put("7天", 0);
+       /* mMapDay.put("7天", 0);
         mMapDay.put("10天", 1);
         mMapDay.put("15天", 2);
-        mMapDay.put("30天", 3);
+        mMapDay.put("30天", 3);*/
         mMap = new LinkedHashMap<>();
-        ArrayList<String> list1 = new ArrayList<>();
-        list1.add("7天");
+        list1 = new ArrayList<>();
+       /* list1.add("7天");
         list1.add("10天");
         list1.add("15天");
         list1.add("30天");
-        mMap.put("单期借款", list1);
-        ArrayList<String> list2 = new ArrayList<>();
-        list2.add("3月");
+        mMap.put("单期借款", list1);*/
+        list2 = new ArrayList<>();
+       /* list2.add("3月");
         list2.add("6月");
         list2.add("9月");
         list2.add("12月");
-        mMap.put("现金分期", list2);
+        mMap.put("现金分期", list2);*/
         mListStyle = new ArrayList<>();
-        for (Map.Entry<String, List<String>> entry : mMap.entrySet()) {
-            String key = entry.getKey();
-            mListStyle.add(key);
-        }
-        mAdapterStyle = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mListStyle);
+
 
     }
 
@@ -167,6 +165,36 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
                             JSONObject entity = object.getJSONObject("entity");
                             monthly = entity.getString("monthly");
                             dailyinterest = entity.getString("dailyinterest");
+                            JSONArray singleCycleList = entity.getJSONArray("singleCycleList");
+                            for (int i = 0; i < singleCycleList.length(); i++) {
+                                JSONObject jsonObject = singleCycleList.getJSONObject(i);
+                                String name = jsonObject.getString("name");
+                                String value = jsonObject.getString("value");
+                                //添加到map集合
+                                mMapDay.put(name, Integer.parseInt(value));
+                                list1.add(name);
+                                mMap.put("单期借款", list1);
+                            }
+                           // Log.d(TAG,mMapDay.toString()+);
+                            JSONArray cashCycleList = entity.getJSONArray("cashCycleList");
+                            for (int i = 0; i <cashCycleList.length() ; i++) {
+                                JSONObject jsonObject = cashCycleList.getJSONObject(i);
+                                String name = jsonObject.getString("name");
+                                String value = jsonObject.getString("value");
+                                mMapMonth.put(name,Integer.parseInt(value));
+                                list2.add(name);
+                                mMap.put("现金分期", list2);
+                            }
+
+                        }
+                        for (Map.Entry<String, List<String>> entry : mMap.entrySet()) {
+                            String key = entry.getKey();
+                            mListStyle.add(key);
+                        }
+                        if(mAdapterStyle==null){
+                            mAdapterStyle = new ArrayAdapter<String>(LendMoneyActivity.this, android.R.layout.simple_list_item_1, mListStyle);
+                        }else {
+                            mAdapterStyle.notifyDataSetChanged();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -174,6 +202,7 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
                 }
             }
         });
+
     }
 
     private void setListener() {
@@ -415,7 +444,7 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
             mListViewStyle.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                mTextViewRefund.setText(null);
                     String s = mListStyle.get(position);
                     mTextViewStyle.setText(s.toString());
                     String style = (String) parent.getItemAtPosition(position);

@@ -160,8 +160,8 @@ public class PettyLoanActivity extends MyBaseActivity implements View.OnClickLis
                     break;*/
                 //借钱
                 case R.id.tv_petty_lendmoney:
-                    // startActivity(new Intent(this, LendMoneyActivity.class));
-                    lendMoney();
+                    startActivity(new Intent(this, LendMoneyActivity.class));
+                   // lendMoney();
                     break;
                 //我的借款
                 case R.id.rl_petty_borrowMoney:

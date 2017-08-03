@@ -8,12 +8,14 @@ import android.widget.RelativeLayout;
 
 import com.cheddd.R;
 import com.cheddd.base.MyBaseActivity;
+import com.cheddd.view.TopNavigationBar;
 
 public class HetongActivity extends MyBaseActivity implements View.OnClickListener {
 
     private RelativeLayout mRelativeLayoutFuwu, mRelativeLayoutFuwuJiekuan, mRelativeLayoutWeituo, mRelativeLayoutWeituoFuwuxieyi,
             mRelativeLayoutShouquanshu;
 
+    private TopNavigationBar mTnb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +25,12 @@ public class HetongActivity extends MyBaseActivity implements View.OnClickListen
     }
 
     private void setListener() {
+        mTnb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         mRelativeLayoutWeituo.setOnClickListener(this);
         mRelativeLayoutFuwu.setOnClickListener(this);
         mRelativeLayoutFuwuJiekuan.setOnClickListener(this);
@@ -33,6 +41,7 @@ public class HetongActivity extends MyBaseActivity implements View.OnClickListen
     }
 
     private void initView() {
+        mTnb= (TopNavigationBar) findViewById(R.id.tnb_hetong);
         mRelativeLayoutFuwu = (RelativeLayout) findViewById(R.id.rl_hetong_fuwu);
         mRelativeLayoutFuwuJiekuan = (RelativeLayout) findViewById(R.id.rl_hetong_xieyi);
         mRelativeLayoutWeituo = (RelativeLayout) findViewById(R.id.rl_hetong_koukuan);

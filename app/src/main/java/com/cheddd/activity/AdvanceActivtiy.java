@@ -359,7 +359,10 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
                                     String returnCode = object.getString("returnCode");
                                     String returnMsg = object.getString("returnMsg");
                                     if ("000000".equals(returnCode)) {
-                                        ToastUtil.show(AdvanceActivtiy.this, returnMsg);
+                                        Intent intent = new Intent(AdvanceActivtiy.this, RecordActivity.class);
+                                        intent.putExtra("result", 1001);
+                                        startActivity(intent);
+                                        finish();
                                     } else if ("0023".equals(returnCode)) {
                                         ToastUtil.show(AdvanceActivtiy.this, returnMsg);
                                     }
@@ -367,10 +370,6 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
                                     e.printStackTrace();
                                 }
                             }
-                            Intent intent = new Intent(AdvanceActivtiy.this, RecordActivity.class);
-                            intent.putExtra("result", 1001);
-                            startActivity(intent);
-                            finish();
                         }
                     });
                     mDialog.dismiss();

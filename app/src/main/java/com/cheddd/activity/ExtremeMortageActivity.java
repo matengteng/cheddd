@@ -231,6 +231,7 @@ public class ExtremeMortageActivity extends MyBaseActivity implements View.OnCli
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mStoreList.clear();
+                mTextViewDot.setText(null);
                 provincesData = mCityList.get(position);
                 mTextViewProvince.setText(provincesData.toString());
                 String string = (String) parent.getItemAtPosition(position);
