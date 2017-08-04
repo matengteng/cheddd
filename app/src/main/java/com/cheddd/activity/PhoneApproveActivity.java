@@ -535,6 +535,7 @@ public class PhoneApproveActivity extends MyBaseActivity implements View.OnClick
         }
         Gson gson = new Gson();
         String json = gson.toJson(phoneBean);
+        new NetProgressDialog().show(getSupportFragmentManager(),"11");
         FormBody formBody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_PHONE, formBody, new OkhttpUtils.HttpCallBack() {
             @Override
@@ -545,7 +546,7 @@ public class PhoneApproveActivity extends MyBaseActivity implements View.OnClick
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "result:" + result);
+                   // Log.d(TAG, "result:" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -619,12 +620,12 @@ public class PhoneApproveActivity extends MyBaseActivity implements View.OnClick
         @Override
         public void onReceiveLocation(BDLocation location) {
 
-            Log.d(TAG, "===================" + location.getLocType());
+          //  Log.d(TAG, "===================" + location.getLocType());
             if (location.getLocType() == BDLocation.TypeNetWorkLocation) {
                 // Log.d(TAG, "==================="+location.getLocType());
                 //获取地址信息
                 addr = location.getAddrStr();
-                Log.d(TAG, "获取地址信息" + addr);
+              //  Log.d(TAG, "获取地址信息" + addr);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

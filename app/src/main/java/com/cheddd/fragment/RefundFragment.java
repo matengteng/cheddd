@@ -188,7 +188,7 @@ public class RefundFragment extends BaseFragment implements View.OnClickListener
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "" + result);
+                   // Log.d(TAG, "" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -335,7 +335,7 @@ public class RefundFragment extends BaseFragment implements View.OnClickListener
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "判断支付密码是否设置" + result);
+                   // Log.d(TAG, "判断支付密码是否设置" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -419,7 +419,7 @@ public class RefundFragment extends BaseFragment implements View.OnClickListener
                 detalis.setPayPassWord(MD5Utils.encode(phone + mEditTextPay.getText().toString().trim()));
                 Gson gson = new Gson();
                 String json = gson.toJson(detalis);
-                Log.d(TAG, "单个订单支付密码"+json);
+              //  Log.d(TAG, "单个订单支付密码"+json);
                 if (mEditTextPay.getSelectionEnd() == 6) {
                     FormBody formBody = new FormBody.Builder().add("content", json).build();
                     OkhttpUtils.getInstance(mContext).asyncPost(NetConfig.INDEX_PETTY_SINGLE_PAY, formBody, new OkhttpUtils.HttpCallBack() {
@@ -431,7 +431,7 @@ public class RefundFragment extends BaseFragment implements View.OnClickListener
                         @Override
                         public void onSuccess(Request request, String result) {
                             if (result != null) {
-                                Log.d(TAG, "单个订单单期还款提交" + result);
+                               // Log.d(TAG, "单个订单单期还款提交" + result);
                                 //{"token":null,"returnCode":"0023","returnMsg":"支付密码不正确","entity":null,"rows":[],"flag":"false"}
                                 try {
                                     JSONObject object = new JSONObject(result);

@@ -87,8 +87,8 @@ public class PettyLoanActivity extends MyBaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "获取可借额度和总额度，还款试算" + result);
-                    Log.d(TAG, "onSuccess:" + NetConfig.INDEX_PETTYLOAN_INFO + "content" + "=" + json);
+                   // Log.d(TAG, "获取可借额度和总额度，还款试算" + result);
+                   // Log.d(TAG, "onSuccess:" + NetConfig.INDEX_PETTYLOAN_INFO + "content" + "=" + json);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -202,7 +202,7 @@ public class PettyLoanActivity extends MyBaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "判断借钱的状态" + result);
+                 //   Log.d(TAG, "判断借钱的状态" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");

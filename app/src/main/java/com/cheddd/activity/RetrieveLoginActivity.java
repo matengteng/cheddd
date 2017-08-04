@@ -118,7 +118,7 @@ public class RetrieveLoginActivity extends MyBaseActivity implements View.OnClic
 
             @Override
             public void onSuccess(Request request, String result) {
-                Log.d(TAG, "登录密码修改" + result);
+               // Log.d(TAG, "登录密码修改" + result);
                 if (result != null) {
                     try {
                         JSONObject object = new JSONObject(result);

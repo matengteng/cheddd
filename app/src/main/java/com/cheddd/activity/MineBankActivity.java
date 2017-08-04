@@ -66,7 +66,7 @@ public class MineBankActivity extends MyBaseActivity implements AdapterView.OnIt
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "借款银行卡" + result);
+                   Log.d(TAG, "借款银行卡" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         JSONObject entity = object.getJSONObject("entity");

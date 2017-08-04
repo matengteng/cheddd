@@ -63,7 +63,7 @@ public class SetPaymentActivity extends MyBaseActivity {
                     setBeabn.setPayPassWord(MD5Utils.encode(phone + mEditTexgtTwo.getText().toString().trim()));
                     Gson gson = new Gson();
                     String json = gson.toJson(setBeabn);
-                    Log.d(TAG,"设置支付密码"+json);
+                 //   Log.d(TAG,"设置支付密码"+json);
                     int selectionEnd = mEditTexgtTwo.getSelectionEnd();
                     if (selectionEnd == 6) {
                         FormBody formBody = new FormBody.Builder().add("content", json).build();
@@ -75,7 +75,7 @@ public class SetPaymentActivity extends MyBaseActivity {
 
                             @Override
                             public void onSuccess(Request request, String result) {
-                                Log.d(TAG, "新增支付密码" + result);
+                             //   Log.d(TAG, "新增支付密码" + result);
                                 if (result != null) {
                                     try {
                                         JSONObject object = new JSONObject(result);

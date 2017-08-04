@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -73,13 +74,13 @@ public class LoginPasswordFragment extends BaseFragment implements View.OnClickL
                     ToastUtil.show(getActivity(), returnMsg);
                     getActivity().finish();
                     break;
-                case 2:
-                    ToastUtil.show(getActivity(), returnMsg);
                 case 3:
                     getActivity().startActivity(new Intent(getActivity(), RegisterActivity.class));
                     getActivity().finish();
+                    break;
                 case 4:
                     ToastUtil.show(getActivity(), returnMsg);
+                    break;
                 default:
                     break;
             }
@@ -108,6 +109,14 @@ public class LoginPasswordFragment extends BaseFragment implements View.OnClickL
 
     private void initData() {
         client = new OkHttpClient();
+        String phone = SharedPreferencesUtils.getString(mContext, "phone", "");
+        if(!TextUtils.isEmpty(phone)){
+            mEditTextPhone.setText(phone);
+            mEditTextPhone.setSelection(11);
+        }else {
+            mEditTextPhone.setText("");
+
+        }
     }
 
     private void initView(View view) {
@@ -188,8 +197,6 @@ public class LoginPasswordFragment extends BaseFragment implements View.OnClickL
                             if ("000000".equals(returnCode)) {
                                 MyApplications.setToken(token);
                                 msg.what = 1;
-                            } else if ("0026".equals(returnCode)) {
-                                msg.what = 2;
                             } else if ("0025".equals(returnCode)) {
                                 msg.what = 3;
                             } else if ("0027".equals(returnCode)) {

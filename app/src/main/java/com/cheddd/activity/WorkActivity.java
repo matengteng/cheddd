@@ -280,7 +280,7 @@ public class WorkActivity extends MyBaseActivity implements View.OnClickListener
         }
         Gson gson = new Gson();
         final String json = gson.toJson(work);
-        Log.d(TAG, json);
+     //   Log.d(TAG, json);
         FormBody formBody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_WORK, formBody, new OkhttpUtils.HttpCallBack() {
             @Override
@@ -290,7 +290,7 @@ public class WorkActivity extends MyBaseActivity implements View.OnClickListener
 
             @Override
             public void onSuccess(Request request, String result) {
-                Log.d(TAG, "工作信息" + result);
+               // Log.d(TAG, "工作信息" + result);
                 try {
                     Log.d(TAG, NetConfig.INFO_WORK + "content" + "=" + json);
                     JSONObject object = new JSONObject(result);
@@ -302,6 +302,8 @@ public class WorkActivity extends MyBaseActivity implements View.OnClickListener
                     } else if ("0017".equals(returnCode)) {
                         ToastUtil.show(WorkActivity.this, returnMsg);
                         startActivity(new Intent(WorkActivity.this, LoginActivity.class));
+                    }else if("0002".equals(returnCode)){
+                        ToastUtil.show(WorkActivity.this, returnMsg);
                     } else {
                         return;
                     }

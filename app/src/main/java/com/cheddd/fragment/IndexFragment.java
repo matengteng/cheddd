@@ -349,7 +349,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
 
             @Override
             public void onSuccess(Request request, String result) {
-                Log.d("TAG", "消息滚动条的接口" + result);
+              //  Log.d("TAG", "消息滚动条的接口" + result);
                 if (result != null) {
                     SdCardUtils.saveJsonToSD(result, NetConfig.NOTICE, mContent);
                     List<ContentBean> notice = IndexParse.getNotice(result);
@@ -450,8 +450,8 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "获取可借额度和总额度，还款试算" + result);
-                    Log.d(TAG, "onSuccess:" + NetConfig.INDEX_PETTYLOAN_INFO + "content" + "=" + json);
+                    //Log.d(TAG, "获取可借额度和总额度，还款试算" + result);
+                   // Log.d(TAG, "onSuccess:" + NetConfig.INDEX_PETTYLOAN_INFO + "content" + "=" + json);
                     try {
                         JSONObject object = new JSONObject(result);
                         returnCode = object.getString("returnCode");

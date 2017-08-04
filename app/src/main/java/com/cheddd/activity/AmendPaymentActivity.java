@@ -99,7 +99,7 @@ public class AmendPaymentActivity extends MyBaseActivity implements View.OnClick
                     paybean.setTelNo(phone);
                     Gson gson = new Gson();
                     String json = gson.toJson(paybean);
-                    Log.d(TAG,"修改支付密码"+json);
+                   // Log.d(TAG,"修改支付密码"+json);
                     if (selectionEnd == 6) {
                         FormBody formBody = new FormBody.Builder().add("content", json).build();
                         OkhttpUtils.getInstance(AmendPaymentActivity.this).asyncPost(NetConfig.MINE_PAY_AMENDPAYMEMT, formBody, new OkhttpUtils.HttpCallBack() {
@@ -111,7 +111,7 @@ public class AmendPaymentActivity extends MyBaseActivity implements View.OnClick
                             @Override
                             public void onSuccess(Request request, String result) {
                                 if (result != null) {
-                                    Log.d(TAG, "变更支付密码" + result);
+                                  //  Log.d(TAG, "变更支付密码" + result);
                                     //{"token":null,"returnCode":"0030",
                                     // "returnMsg":"此用户支付密码已设置","entity":null,"rows":[],"flag":"false"}
                                     try {

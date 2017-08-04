@@ -136,7 +136,7 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "提前还请借款" + result);
+                    //Log.d(TAG, "提前还请借款" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");

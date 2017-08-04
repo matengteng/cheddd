@@ -76,7 +76,7 @@ public class LendEntryActivity extends MyBaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "确认借钱" + result);
+                  //  Log.d(TAG, "确认借钱" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -203,7 +203,7 @@ public class LendEntryActivity extends MyBaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "cvbnkml,;.==============" + result);
+                //    Log.d(TAG, "cvbnkml,;.==============" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");

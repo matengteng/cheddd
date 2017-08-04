@@ -70,7 +70,7 @@ public class LendDetailsActivity extends MyBaseActivity {
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "完成" + result);
+                  //  Log.d(TAG, "完成" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         JSONObject entity = object.getJSONObject("entity");
@@ -142,9 +142,11 @@ public class LendDetailsActivity extends MyBaseActivity {
                         if (0 == auditing) {
                             mButtonAuditing.setEnabled(true);
                             mTextViewLoanAud.setEnabled(true);
+                            mTvAuditingTime.setEnabled(true);
                         } else {
                             mButtonAuditing.setEnabled(false);
                             mTextViewLoanAud.setEnabled(false);
+                            mTvAuditingTime.setEnabled(false);
                         }
                         //借款成功
                         if (0 == payAud) {

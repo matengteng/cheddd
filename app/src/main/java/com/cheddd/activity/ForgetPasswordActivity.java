@@ -21,6 +21,7 @@ import com.cheddd.bean.RegisterBean;
 import com.cheddd.config.NetConfig;
 import com.cheddd.utils.MD5Utils;
 import com.cheddd.utils.OkhttpUtils;
+import com.cheddd.utils.SharedPreferencesUtils;
 import com.cheddd.utils.ToastUtil;
 import com.cheddd.view.TopNavigationBar;
 import com.google.gson.Gson;
@@ -49,7 +50,18 @@ public class ForgetPasswordActivity extends MyBaseActivity implements TextWatche
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
         initView();
+        initData();
         setListener();
+    }
+
+    private void initData() {
+        String phone = SharedPreferencesUtils.getString(ForgetPasswordActivity.this, "phone", "");
+        if(!TextUtils.isEmpty(phone)){
+            mEditTextPhone.setText(phone);
+            mEditTextPhone.setSelection(11);
+        }else {
+            mEditTextPhone.setText("");
+        }
     }
 
     private void setListener() {
@@ -140,7 +152,7 @@ public class ForgetPasswordActivity extends MyBaseActivity implements TextWatche
         register.setPassWord(MD5Utils.encode(mEditTextPhone.getText().toString().trim() + mEditTextPassword.getText().toString().trim()));
         Gson gson = new Gson();
         String json = gson.toJson(register);
-        Log.d(TAG, json);
+       // Log.d(TAG, json);
         FormBody formBody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.FORGETPASSWORD, formBody, new OkhttpUtils.HttpCallBack() {
             @Override
@@ -150,7 +162,7 @@ public class ForgetPasswordActivity extends MyBaseActivity implements TextWatche
 
             @Override
             public void onSuccess(Request request, String result) {
-                Log.d(TAG, "忘记密码" + result);
+              //  Log.d(TAG, "忘记密码" + result);
                 if (result != null) {
                     try {
                         JSONObject json = new JSONObject(result);
@@ -158,6 +170,7 @@ public class ForgetPasswordActivity extends MyBaseActivity implements TextWatche
                         String returnMsg = json.getString("returnMsg");
                         if ("000000".equals(returnCode)) {
                             Toast.makeText(ForgetPasswordActivity.this, returnMsg, Toast.LENGTH_SHORT).show();
+                            ToastUtil.show(ForgetPasswordActivity.this, returnMsg);
                             finish();
                         } else if ("0025".equals(returnCode)) {
                             startActivity(new Intent(ForgetPasswordActivity.this, RegisterActivity.class));
@@ -217,7 +230,7 @@ public class ForgetPasswordActivity extends MyBaseActivity implements TextWatche
 
             @Override
             public void onSuccess(Request request, String result) {
-                Log.d(TAG, "获取验证码" + result);
+            //    Log.d(TAG, "获取验证码" + result);
                 if (result != null) {
                     try {
                         JSONObject object = new JSONObject(result);

@@ -21,6 +21,7 @@ import com.cheddd.bean.PhoneTrend;
 import com.cheddd.config.NetConfig;
 import com.cheddd.utils.LoginTokenUtils;
 import com.cheddd.utils.OkhttpUtils;
+import com.cheddd.utils.SharedPreferencesUtils;
 import com.cheddd.utils.ToastUtil;
 import com.cheddd.view.TopNavigationBar;
 import com.google.gson.Gson;
@@ -55,7 +56,14 @@ public class ForgetPaymentActivty extends MyBaseActivity implements View.OnClick
     }
 
     private void initData() {
+        String phone = SharedPreferencesUtils.getString(ForgetPaymentActivty.this, "phone", "");
+        if (!TextUtils.isEmpty(phone)) {
+            mEditTextPhone.setText(phone);
+            mEditTextPhone.setSelection(11);
+        } else {
+            mEditTextPhone.setText("");
 
+        }
     }
 
     private void setListener() {
@@ -176,7 +184,7 @@ public class ForgetPaymentActivty extends MyBaseActivity implements View.OnClick
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                  //  Log.d(TAG, "获取设置支付密码的验证码" + result);
+                    //  Log.d(TAG, "获取设置支付密码的验证码" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");

@@ -86,7 +86,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
             @Override
             public void onSuccess(Request request, String result) {
-                Log.d(TAG, "操作成功" + result);
+             //   Log.d(TAG, "操作成功" + result);
                 if (result != null) {
                     try {
                         JSONObject object = new JSONObject(result);
@@ -127,7 +127,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                        Log.d(TAG, "借钱" + result);
+                    //    Log.d(TAG, "借钱" + result);
                         JSONObject object = new JSONObject(result);
                         returnCode1 = object.getString("returnCode");
                         returnMsg1 = object.getString("returnMsg");
@@ -144,7 +144,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                                 mTextViewMoney.setText("0.00");
                                 mButtonWithDraw.setVisibility(View.GONE);
                             } else {
-                                Log.d(TAG, "loanLimit:" + loanLimit / 100);
+                               // Log.d(TAG, "loanLimit:" + loanLimit / 100);
                                 mTextViewMoney.setText(format.format(loanLimit / 100));
                             }
 

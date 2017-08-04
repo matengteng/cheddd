@@ -127,7 +127,7 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                        Log.d(TAG, "银行卡请求" + result);
+                      //  Log.d(TAG, "银行卡请求" + result);
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
                         String returnMsg = object.getString("returnMsg");
@@ -318,7 +318,7 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
         bankBean.setKhBankName(mEditTextBank.getText().toString().trim());
         Gson gson = new Gson();
         String json = gson.toJson(bankBean);
-        Log.d(TAG, "银行卡认证的提交" + json);
+       // Log.d(TAG, "银行卡认证的提交" + json);
         FormBody formbody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_BANK, formbody, new OkhttpUtils.HttpCallBack() {
             @Override
@@ -469,11 +469,11 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
     @Override
     public void afterTextChanged(Editable s) {
 
-        if (mEditTextName.getText().toString().trim().length() > 1) {
+        if (mEditTextName.getText().toString().trim().length() > 0) {
             if (mTextViewBank.getText().toString().length() > 0) {
                 if (mEditTextCard.getText().toString().trim().length() > 15) {
                     if (mTextViewProvince.getText().toString().length() > 0) {
-                        if (mEditTextBank.getText().toString().trim().length() > 3) {
+                        if (mEditTextBank.getText().toString().trim().length() > 0) {
                             if (mEditTextPhone.getText().toString().trim().length() == 11) {
                                 mButtonSubmit.setEnabled(true);
                             } else {
@@ -502,7 +502,7 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
             if (mTextViewBank.getText().toString().length() > 0) {
                 if (mEditTextCard.getText().toString().trim().length() > 15) {
                     if (mTextViewProvince.getText().toString().length() > 0) {
-                        if (mEditTextBank.getText().toString().trim().length() > 3) {
+                        if (mEditTextBank.getText().toString().trim().length() > 0) {
                             if (mEditTextPhone.getText().toString().trim().length() == 11) {
                                 mButtonSubmit.setEnabled(true);
                                 mButtonSubmit.setEnabled(isChecked);

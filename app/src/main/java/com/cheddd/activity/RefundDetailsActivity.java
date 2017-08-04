@@ -58,7 +58,7 @@ public class RefundDetailsActivity extends MyBaseActivity {
         record.setToken(MyApplications.getToken());
         Gson gson = new Gson();
         String json = gson.toJson(record);
-        Log.d(TAG, "还款详情" + json);
+       // Log.d(TAG, "还款详情" + json);
         final FormBody formBody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INDEX_PETTLYLOAN_DETALIS, formBody, new OkhttpUtils.HttpCallBack() {
 
@@ -72,7 +72,7 @@ public class RefundDetailsActivity extends MyBaseActivity {
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "完成" + result);
+                 //   Log.d(TAG, "完成" + result);
                     try {
                         //{"token":null,"returnCode":"000000","returnMsg":"操作成功","
                         // entity":{"bindBankCardNo":"11111111111111111","submitRepayStatus":1,
@@ -98,20 +98,6 @@ public class RefundDetailsActivity extends MyBaseActivity {
                             if (bindBankCardNo.length() > 4) {
                                 substring = bindBankCardNo.substring(bindBankCardNo.length() - 4);
                             }
-                            /*
-                            * map.put("bindBank", "");// 绑定的银行
-		map.put("bindBankCardNo", "");// 绑定的银行卡号
-		map.put("bindBankTag", "");// 绑定的银行卡标记
-		map.put("orderNo", "");// 订单编号
-		map.put("transactionId", 0);// 交易编号
-		map.put("actualRepayAmt", 0);// 还款金额
-
-		map.put("submitRepayStatus", 1);// 提交还款状态 0 已通过 1 未通过
-		map.put("submitRepayTime", "");// 提交还款状态时间
-		map.put("bankHandleStatus", 1);// 银行处理状态 0 已通过 1 未通过
-		map.put("bankHandleTime", "");// 银行处理状态时间
-		map.put("RepayStatus", 1);// 还款成功 0 已通过 1 未通过
-		map.put("RepayTime", "");// 还款成功时间*/
                             mTextViewOrder.setText(orderNo);
                             mTextViewMoney.setText(actualRepayAmt / 100 + "元");
                             mTextViewMark.setText(bindBank);

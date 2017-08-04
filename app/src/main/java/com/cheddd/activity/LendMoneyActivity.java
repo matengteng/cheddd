@@ -158,7 +158,7 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                        Log.d(TAG, "获取小额借款月利率、日利率" + result);
+                       // Log.d(TAG, "获取小额借款月利率、日利率" + result);
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
                         if ("000000".equals(returnCode)) {
@@ -361,7 +361,7 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "0现金分期；1单期借款" + result);
+                  //  Log.d(TAG, "0现金分期；1单期借款" + result);
                     try {
                         JSONObject objece = new JSONObject(result);
                         String returnCode = objece.getString("returnCode");
@@ -415,7 +415,7 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "获取小额借贷试算结果" + result);
+                  //  Log.d(TAG, "获取小额借贷试算结果" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");

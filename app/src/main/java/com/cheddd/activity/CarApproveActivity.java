@@ -92,7 +92,7 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                        Log.d("TAG", "车辆信息：" + result);
+                      //  Log.d("TAG", "车辆信息：" + result);
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
                         String returnMsg = object.getString("returnMsg");
@@ -321,6 +321,9 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
                         } else if ("000000".equals(returnCode)) {
                             ToastUtil.show(CarApproveActivity.this, returnMsg);
                             finish();
+                        }else if("0002".equals(returnCode)){
+                            ToastUtil.show(CarApproveActivity.this, returnMsg);
+                            return;
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

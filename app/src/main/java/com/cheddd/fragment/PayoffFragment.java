@@ -69,7 +69,7 @@ public class PayoffFragment extends BaseFragment {
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "获取已还清列表" + result);
+                   // Log.d(TAG, "获取已还清列表" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");

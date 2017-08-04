@@ -147,7 +147,7 @@ public class SafetyActivity extends MyBaseActivity implements View.OnClickListen
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "判断支付密码是否设置" + result);
+                 //   Log.d(TAG, "判断支付密码是否设置" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         returnCode = object.getString("returnCode");

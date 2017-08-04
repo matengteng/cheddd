@@ -162,7 +162,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_toRightOf="@id/bt_lendDetails_finance"
                     android:text=""
-                    android:textColor="#24CA86"
+                    android:enabled="false"
+                    android:textColor="@color/text_tab"
                     android:textSize="12sp" />
             </RelativeLayout>
 

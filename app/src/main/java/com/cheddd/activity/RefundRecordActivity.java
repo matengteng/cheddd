@@ -90,10 +90,8 @@ public class RefundRecordActivity extends MyBaseActivity {
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d("TAG", "+++++++++++++++++" + result);
-                    //{"entity":null,"flag":"true","returnCode":"000000","returnMsg":"操作成功",
-                    // "rows":[{"overdueStatus":2,"orderNo":"EM000015E1",
-                    // "actualRepayAmt":40559,"repayTime":"2017/08/20","actualRepayTime":"2017/07/20"},
+                    //Log.d("TAG", "+++++++++++++++++" + result);
+
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");

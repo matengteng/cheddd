@@ -160,7 +160,7 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "个人信息请求" + result);
+                  //  Log.d(TAG, "个人信息请求" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -555,7 +555,7 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
         stat.setCity(mTextViewCity.getText().toString());
         Gson gson = new Gson();
         String json = gson.toJson(stat);
-        Log.d(TAG, "fghjkl;'" + json);
+     //   Log.d(TAG, "fghjkl;'" + json);
         FormBody formBody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO, formBody, new OkhttpUtils.HttpCallBack() {
             @Override
@@ -566,7 +566,7 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "个人信息" + result);
+                 //   Log.d(TAG, "个人信息" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -578,6 +578,9 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
                         } else if ("000000".equals(returnCode)) {
                             ToastUtil.show(StatsApproveActivity.this, returnMsg);
                             finish();
+                        }else if("0002".equals(returnCode)){
+                            ToastUtil.show(StatsApproveActivity.this, returnMsg);
+                            return;
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

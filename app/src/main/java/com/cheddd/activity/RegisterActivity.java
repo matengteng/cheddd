@@ -92,6 +92,14 @@ public class RegisterActivity extends MyBaseActivity implements View.OnClickList
 
     private void initData() {
         client = new OkHttpClient();
+        String phone = SharedPreferencesUtils.getString(RegisterActivity.this, "phone", "");
+        if(!TextUtils.isEmpty(phone)){
+           mEditTextPhone.setText(phone);
+            mEditTextPhone.setFocusable(false);
+        }else {
+            mEditTextPhone.setText("");
+            mEditTextPhone.setFocusable(true);
+        }
     }
 
 
@@ -159,7 +167,7 @@ public class RegisterActivity extends MyBaseActivity implements View.OnClickList
         register.setPassWord(MD5Utils.encode(phone + password));
         Gson gson = new Gson();
         String json = gson.toJson(register);
-        Log.d(TAG, "注册" + json);
+       // Log.d(TAG, "注册" + json);
         FormBody formBody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.REGISTER, formBody, new OkhttpUtils.HttpCallBack() {
             @Override

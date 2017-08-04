@@ -87,7 +87,7 @@ public class LiveActivity extends MyBaseActivity implements View.OnClickListener
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "请求居住信息" + result);
+                  //  Log.d(TAG, "请求居住信息" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         JSONObject entity = object.getJSONObject("entity");
@@ -109,7 +109,7 @@ public class LiveActivity extends MyBaseActivity implements View.OnClickListener
                                 mTextViewProduct.setText(key);
                             }
                         }
-                        mEditTextMonth.setText(monthRent/100 + "");
+                        mEditTextMonth.setText(monthRent / 100 + "");
                         mEditTextUnit.setText(address);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -120,6 +120,7 @@ public class LiveActivity extends MyBaseActivity implements View.OnClickListener
         });
         loanInfo();
     }
+
     private void loanInfo() {
         String json = LoginTokenUtils.getJson();
         final FormBody formbody = new FormBody.Builder().add("content", json).build();
@@ -151,6 +152,7 @@ public class LiveActivity extends MyBaseActivity implements View.OnClickListener
             }
         });
     }
+
     private void setListener() {
         mEditTextMonth.addTextChangedListener(this);
         mEditTextUnit.addTextChangedListener(this);
@@ -208,7 +210,7 @@ public class LiveActivity extends MyBaseActivity implements View.OnClickListener
         live.setClientType("2");
         live.setToken(MyApplications.getToken());
         live.setAddress(mEditTextUnit.getText().toString().trim());
-        live.setMonthRent(Integer.parseInt(month)*100);
+        live.setMonthRent(Integer.parseInt(month) * 100);
         for (Integer key : mapHouse.values()) {
             if (mapHouse.get(mTextViewProduct.getText().toString()).equals(key)) {
                 live.setPropertyStatus(new Integer(key).intValue());
@@ -230,7 +232,7 @@ public class LiveActivity extends MyBaseActivity implements View.OnClickListener
 
             @Override
             public void onSuccess(Request request, String result) {
-                Log.d(TAG, result);
+             //   Log.d(TAG, result);
                 if (request != null) {
                     try {
                         JSONObject object = new JSONObject(result);
@@ -239,6 +241,8 @@ public class LiveActivity extends MyBaseActivity implements View.OnClickListener
                         if ("000000".equals(returnCode)) {
                             ToastUtil.show(LiveActivity.this, returnMsg);
                             finish();
+                        } else if ("0002".equals(returnCode)) {
+                            ToastUtil.show(LiveActivity.this, returnMsg);
                         } else {
                             return;
                         }

@@ -66,8 +66,8 @@ public class MoreDotActivity extends MyBaseActivity {
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, NetConfig.INDEX_EXTREME_GAIN + "content" + "=" + json);
-                    Log.d(TAG, "dcfvgbhnjmk,l.;/'" + result);
+                   // Log.d(TAG, NetConfig.INDEX_EXTREME_GAIN + "content" + "=" + json);
+                   // Log.d(TAG, "dcfvgbhnjmk,l.;/'" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         JSONArray rows = object.getJSONArray("rows");

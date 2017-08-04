@@ -67,7 +67,7 @@ public class RetrievePaymentActivity extends MyBaseActivity {
                     setbean.setToken(MyApplications.getToken());
                     Gson gson = new Gson();
                     String json = gson.toJson(setbean);
-                    Log.d(TAG, "找回支付密码" + json);
+                   // Log.d(TAG, "找回支付密码" + json);
                     int selectionEnd = mEditTextTwo.getSelectionEnd();
                     if (selectionEnd == 6) {
                         FormBody formBody = new FormBody.Builder().add("content", json).build();
@@ -80,7 +80,7 @@ public class RetrievePaymentActivity extends MyBaseActivity {
                             @Override
                             public void onSuccess(Request request, String result) {
                                 if (result != null) {
-                                    Log.d(TAG, "找回支付密码" + result);
+                                  //  Log.d(TAG, "找回支付密码" + result);
                                     try {
                                         JSONObject object = new JSONObject(result);
                                         String returnCode = object.getString("returnCode");

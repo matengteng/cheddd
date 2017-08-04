@@ -96,6 +96,14 @@ public class LoginPhoneFragment extends BaseFragment implements TextWatcher, Vie
 
     private void initData() {
         client = new OkHttpClient();
+        String phone = SharedPreferencesUtils.getString(mContext, "phone", "");
+        if(!TextUtils.isEmpty(phone)){
+            mEditTextPhone.setText(phone);
+            mEditTextPhone.setSelection(11);
+        }else {
+            mEditTextPhone.setText("");
+
+        }
     }
 
     private void setListener() {

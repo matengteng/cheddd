@@ -246,7 +246,7 @@ public class ExtremeMortageActivity extends MyBaseActivity implements View.OnCli
                         }
                     }
                 }
-                Log.d(TAG, "mStoreList.toString()" + mStoreList.toString());
+               // Log.d(TAG, "mStoreList.toString()" + mStoreList.toString());
                 mAdapter1 = new ArrayAdapter<String>(ExtremeMortageActivity.this, android.R.layout.simple_list_item_1, mStoreList);
                 mDialog.dismiss();
             }

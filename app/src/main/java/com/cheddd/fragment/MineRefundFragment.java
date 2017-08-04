@@ -82,7 +82,7 @@ public class MineRefundFragment extends BaseFragment implements AdapterView.OnIt
 
             @Override
             public void onSuccess(Request request, String result) {
-                Log.d(TAG, "还款记录" + result);
+               // Log.d(TAG, "还款记录" + result);
                 try {
                     //{"token":null,"returnCode":"000000","returnMsg":"操作成功",
                     // "entity":null,"rows":[{"bindBankCardNo":"6216603600002515330",

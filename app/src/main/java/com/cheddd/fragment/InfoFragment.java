@@ -94,7 +94,7 @@ public class InfoFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "进度" + result);
+                  //  Log.d(TAG, "进度" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         returnCode1 = object.getString("returnCode");
@@ -191,7 +191,7 @@ public class InfoFragment extends BaseFragment implements View.OnClickListener {
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                        Log.d(TAG, result);
+                     //   Log.d(TAG, result);
                         JSONObject object = new JSONObject(result);
                         JSONObject entity = object.getJSONObject("entity");
                         int loanInitAud = entity.getInt("loanInitAud");

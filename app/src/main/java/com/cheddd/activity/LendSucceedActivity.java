@@ -72,7 +72,7 @@ public class LendSucceedActivity extends MyBaseActivity implements View.OnClickL
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "完成" + result);
+                   // Log.d(TAG, "完成" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         JSONObject entity = object.getJSONObject("entity");

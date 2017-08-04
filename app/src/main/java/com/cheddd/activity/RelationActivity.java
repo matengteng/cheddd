@@ -117,7 +117,7 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     mStringBufferId = new StringBuffer();
-                    Log.d(TAG, "获取联系人：" + result);
+                  //  Log.d(TAG, "获取联系人：" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -159,7 +159,6 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
                                         viewById2.setText(key);
                                     }
                                 }
-
                                 mLayout.addView(view);
                             }
                             if (rows.length() > 0) {
@@ -332,7 +331,7 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
         String contact_phone_num = getContactInfo(mLayout, CONTACT_PHONE_NUM);
         contact_phone_num = contact_phone_num.substring(0, contact_phone_num.length() - 1);
 
-        Log.d(TAG, contact_phone_num);
+     //   Log.d(TAG, contact_phone_num);
         if (stringBuffer.length() > 0)
             stringBuffer.delete(0, stringBuffer.length());
         String contact_relation = getContactInfo(mLayout, CONTACT_RELATION);
@@ -398,7 +397,7 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
         relation.setRelation(new String(stringBuffer));
         Gson gson = new Gson();
         String json = gson.toJson(relation);
-        Log.d(TAG, json);
+       // Log.d(TAG, json);
         FormBody formbody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_RELATION, formbody, new OkhttpUtils.HttpCallBack() {
             @Override
@@ -410,7 +409,7 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                        Log.d(TAG, "提交联系人:" + result);
+                      //  Log.d(TAG, "提交联系人:" + result);
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
                         String returnMsg = object.getString("returnMsg");
@@ -419,6 +418,9 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
                             finish();
                         } else if (returnCode.equals("0042")) {
                             startActivity(new Intent(RelationActivity.this, CarApproveActivity.class));
+                        } else if("0002".equals(returnCode)){
+                            ToastUtil.show(RelationActivity.this, returnMsg);
+                            return;
                         } else {
                             return;
                         }
