@@ -67,12 +67,12 @@ public class PledgeActivity extends MyBaseActivity implements View.OnClickListen
 
     private void initData() {
         MineRecord record=new MineRecord();
-        record.setOrderNo(MyApplications.getOrderNo());
+       // record.setOrderNo(MyApplications.getOrderNo());
         record.setClientType("2");
         if(extra.equals("11")){
-            record.setToken("");
+            record.setOrderNo("");
         }else if(extra.equals("12")){
-            record.setToken(MyApplications.getToken());
+            record.setOrderNo(MyApplications.getOrderNo());
         }
         record.setToken(MyApplications.getToken());
         Gson gson=new Gson();
@@ -96,7 +96,7 @@ public class PledgeActivity extends MyBaseActivity implements View.OnClickListen
                             String storeName = entity.getString("storeName");
                             String phones = entity.getString("phones");
                             double contractAmt = entity.getDouble("contractAmt");
-                            String loanInitAudDate = entity.getString("loanInitAudDate");
+                            String loanInitAudDate = entity.getString("loanAud");
                             String riskAudDate = entity.getString("riskAudDate");
                             String financeAudDate = entity.getString("financeAudDate");
                             String payAudDate = entity.getString("payAudDate");

@@ -113,6 +113,7 @@ public class PettyLoanActivity extends MyBaseActivity implements View.OnClickLis
                         }else  if("0017".equals(returnCode)){
                             startActivity(new Intent(PettyLoanActivity.this,LoginActivity.class));
                         }else{
+                            ToastUtil.show(PettyLoanActivity.this,returnMsg);
                             mRelativeAdvance.setVisibility(View.GONE);
                             mRelativeBorrowMoney.setVisibility(View.GONE);
                             mTextViewLendMoney.setEnabled(false);

@@ -95,10 +95,10 @@ public class RegisterActivity extends MyBaseActivity implements View.OnClickList
         String phone = SharedPreferencesUtils.getString(RegisterActivity.this, "phone", "");
         if(!TextUtils.isEmpty(phone)){
            mEditTextPhone.setText(phone);
-            mEditTextPhone.setFocusable(false);
+            mEditTextPhone.setSelection(11);
         }else {
             mEditTextPhone.setText("");
-            mEditTextPhone.setFocusable(true);
+
         }
     }
 

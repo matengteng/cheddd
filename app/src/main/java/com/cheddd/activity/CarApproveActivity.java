@@ -77,8 +77,9 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
 
     private void initData1() {
         mapNot = new LinkedHashMap<>();
-        mapNot.put("是", 1);
         mapNot.put("否", 0);
+        mapNot.put("是", 1);
+
 
         String json = LoginTokenUtils.getJson();
         FormBody formbody = new FormBody.Builder().add("content", json).build();
@@ -92,7 +93,7 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                      //  Log.d("TAG", "车辆信息：" + result);
+                        Log.d("TAG", "车辆信息：" + result);
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
                         String returnMsg = object.getString("returnMsg");
@@ -130,8 +131,8 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
 
     private void initData() {
         mapNot = new LinkedHashMap<>();
-        mapNot.put("是", 1);
         mapNot.put("否", 0);
+        mapNot.put("是", 1);
 
         String json = LoginTokenUtils.getJson();
         FormBody formbody = new FormBody.Builder().add("content", json).build();
@@ -145,7 +146,7 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                      //  Log.d("TAG", "车辆信息：" + result);
+                       Log.d("TAG", "车辆信息：" + result);
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
                         String returnMsg = object.getString("returnMsg");
@@ -300,7 +301,7 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
         car.setRegistrationDate(mTextViewTime.getText().toString());
         Gson gson = new Gson();
         String json = gson.toJson(car);
-      //  Log.d(TAG,"车辆车辆提交"+json);
+       Log.d(TAG,"车辆车辆提交"+json);
     FormBody formBody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_CAR, formBody, new OkhttpUtils.HttpCallBack() {
             @Override
