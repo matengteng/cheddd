@@ -1,36 +1,31 @@
 package com.cheddd.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cheddd.R;
-import com.cheddd.activity.BankApproveActivity;
-import com.cheddd.activity.CarApproveActivity;
 import com.cheddd.activity.ExtremeMortageActivity;
-import com.cheddd.activity.LiveActivity;
 import com.cheddd.activity.LoginActivity;
+import com.cheddd.activity.MainActivity;
 import com.cheddd.activity.PettyLoanActivity;
-import com.cheddd.activity.PhoneApproveActivity;
 import com.cheddd.activity.PledgeActivity;
-import com.cheddd.activity.StatsApproveActivity;
 import com.cheddd.adapter.HomeHeadViewpage;
 import com.cheddd.adapter.IndexHeaderAdapter;
-import com.cheddd.application.MyApplications;
-import com.cheddd.asynctask.NetTask;
 import com.cheddd.base.BaseFragment;
 import com.cheddd.bean.Account;
 import com.cheddd.bean.Carousel;
@@ -40,12 +35,9 @@ import com.cheddd.parse.IndexParse;
 import com.cheddd.utils.LoginTokenUtils;
 import com.cheddd.utils.OkhttpUtils;
 import com.cheddd.utils.SdCardUtils;
-import com.cheddd.utils.ToastUtil;
 import com.cheddd.view.LooperTextView;
 import com.cheddd.view.TopNavigationBar;
-import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -349,7 +341,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
 
             @Override
             public void onSuccess(Request request, String result) {
-              //  Log.d("TAG", "消息滚动条的接口" + result);
+                //  Log.d("TAG", "消息滚动条的接口" + result);
                 if (result != null) {
                     SdCardUtils.saveJsonToSD(result, NetConfig.NOTICE, mContent);
                     List<ContentBean> notice = IndexParse.getNotice(result);
@@ -396,33 +388,31 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
             startActivity(new Intent(mContent, LoginActivity.class));
             return;
         }
-        if (phoneAuth != 3) {
-            if (carInfoAuth != 3) {
-                if (personalAuth != 3) {
-                    if (bankInfoAuth != 3) {
-                        if (loanInitAud == 1) {
-                            getActivity().startActivity(new Intent(mContent, ExtremeMortageActivity.class));
-                        } else if (loanInitAud == 0) {
-                            getActivity().startActivity(new Intent(mContent, PledgeActivity.class).putExtra("che","11"));
-                        } else {
-                            getActivity().startActivity(new Intent(mContent, ExtremeMortageActivity.class));
+        if (phoneAuth == 3 || phoneAuth == 2 || carInfoAuth == 3 || carInfoAuth == 2 || personalAuth == 2 || personalAuth == 3 || bankInfoAuth == 3 || bankInfoAuth == 2) {
+            new AlertDialog.Builder(getContext())
+                    .setMessage("请完成信息认证")
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
                         }
-                    } else {
-                        ToastUtil.show(mContent, "银行认证未通过");
-                        mContent.startActivity(new Intent(mContent, BankApproveActivity.class));
-
-                    }
-                } else {
-                    ToastUtil.show(mContent, "个人信息未通过");
-                    mContent.startActivity(new Intent(mContent, StatsApproveActivity.class));
+                    }).setPositiveButton("去认证", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    RadioGroup gp = ((MainActivity) getActivity()).mRg;
+                    gp.check(gp.getChildAt(1).getId());
+                    dialog.dismiss();
                 }
-            } else {
-                ToastUtil.show(mContent, "车辆认证未通过");
-                mContent.startActivity(new Intent(mContent, CarApproveActivity.class));
-            }
+            }).show();
+            return;
+        }
+
+        if (loanInitAud == 1) {
+            getActivity().startActivity(new Intent(mContent, ExtremeMortageActivity.class));
+        } else if (loanInitAud == 0) {
+            getActivity().startActivity(new Intent(mContent, PledgeActivity.class).putExtra("che", "11"));
         } else {
-            ToastUtil.show(mContent, "手机认证未通过");
-            mContent.startActivity(new Intent(mContent, PhoneApproveActivity.class));
+            getActivity().startActivity(new Intent(mContent, ExtremeMortageActivity.class));
         }
 
     }
@@ -450,8 +440,8 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "获取可借额度和总额度，还款试算" + result);
-                   // Log.d(TAG, "onSuccess:" + NetConfig.INDEX_PETTYLOAN_INFO + "content" + "=" + json);
+                    //Log.d(TAG, "获取可借额度和总额度，还款试算" + result);
+                    // Log.d(TAG, "onSuccess:" + NetConfig.INDEX_PETTYLOAN_INFO + "content" + "=" + json);
                     try {
                         JSONObject object = new JSONObject(result);
                         returnCode = object.getString("returnCode");
@@ -478,7 +468,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "进度" + result);
+                    // Log.d(TAG, "进度" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         returnCode1 = object.getString("returnCode");

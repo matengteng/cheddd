@@ -24,7 +24,7 @@ import com.cheddd.fragment.MineFragment;
 
 public class MainActivity extends MyBaseActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
-    private RadioGroup mRg;
+    public RadioGroup mRg;
     private FragmentManager mManager;
     private Fragment mCurrentfragment;
     private boolean isExit = false;
