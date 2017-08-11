@@ -58,41 +58,47 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="cnX0VNk0GMUxvjsE4X2WEapnMUjfllnX" />
 
-        <activity android:name=".activity.SplashActivity">
+        <activity
+            android:name=".activity.SplashActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.PettyLoanActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".activity.ExtremeMortageActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".activity.LoginActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:launchMode="singleTask"/>
-        <activity android:name=".activity.ForgetPasswordActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".activity.RegisterActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".activity.PettyLoanActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.ExtremeMortageActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.ForgetPasswordActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".activity.PhoneApproveActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.StatsApproveActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.CarApproveActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.BankApproveActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activity.MotionActivity"
-            />
+        <activity android:name=".activity.MotionActivity" />
         <activity
             android:name=".activity.WorkActivity"
             android:windowSoftInputMode="stateHidden" />/>
@@ -136,7 +142,9 @@
             android:process=":remote" />
 
         <activity android:name=".activity.RefundDetailsActivity" />
-        <activity android:name=".activity.MainActivity" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".activity.HetongActivity"></activity>
 
         <meta-data

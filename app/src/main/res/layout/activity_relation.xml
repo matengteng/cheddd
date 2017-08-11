@@ -74,7 +74,7 @@
                         android:layout_marginLeft="60dp"
                         android:layout_toRightOf="@id/tv_relation_urgency"
                         android:hint="@string/app_relation_input"
-                        android:maxLength="11" />
+                        android:maxLength="16" />
                 </RelativeLayout>
 
                 <View style="@style/View" />
@@ -89,6 +89,7 @@
                     <EditText
                         android:id="@+id/et_relation_regency_phone"
                         style="@style/EditText"
+                        android:maxLength="11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/tv_relation_regency_phone"

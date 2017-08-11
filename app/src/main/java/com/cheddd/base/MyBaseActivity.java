@@ -18,34 +18,13 @@ public abstract class MyBaseActivity extends AppCompatActivity {
     private List<MyBaseActivity> copy;
     private TextView status;
 
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-    }
 
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        synchronized (mActivity) {
-            mActivity.remove(this);
-        }
-
-    }
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
         //设置具体的场景
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_ANALYTICS_OEM);
-
-
-
-//
         StatusBarUtils.assistActivity(this);
 //        status = new TextView(this);
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -97,6 +76,22 @@ public abstract class MyBaseActivity extends AppCompatActivity {
         return super.onTouchEvent(event);
 
     }
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
 
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        synchronized (mActivity) {
+            mActivity.remove(this);
+        }
+
+    }
 }

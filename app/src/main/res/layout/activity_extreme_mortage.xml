@@ -75,6 +75,7 @@
                     android:text="@string/app_money" />
 
                 <EditText
+                    android:maxLength="10"
                     android:id="@+id/et_extreme_money"
                     style="@style/EditText"
                     android:layout_toRightOf="@id/tv_extreme_money"

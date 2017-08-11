@@ -603,7 +603,7 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
     public void afterTextChanged(Editable s) {
         if (mEditTextName.getText().toString().trim().length() > 0) {
             if (mEditTextPhone.getText().toString().trim().length() == 11) {
-                if (mEditTextIDCard.getText().toString().trim().length() == 18) {
+                if (mEditTextIDCard.getText().toString().trim().length() >15) {
                     if (mEditTextDetalis.getText().toString().trim().length() > 0) {
                         if (mTextViewSex.getText().toString().length() > 0) {
                             if (mTextViewMarriage.getText().toString().length() > 0) {

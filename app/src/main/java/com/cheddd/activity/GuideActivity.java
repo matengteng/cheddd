@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import com.cheddd.R;
 import com.cheddd.adapter.GuideSlideAdapter;
 import com.cheddd.base.MyBaseActivity;
+import com.cheddd.utils.DensityUtils;
 import com.cheddd.utils.SharedPreferencesUtils;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class GuideActivity extends MyBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_guide);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
@@ -49,7 +51,6 @@ public class GuideActivity extends MyBaseActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
         }
-        setContentView(R.layout.activity_guide);
         initView();
         initData();
         setData();
@@ -103,11 +104,11 @@ public class GuideActivity extends MyBaseActivity {
             mData.add(image);
         }
         for (int i = 0; i < mImageView.length; i++) {
-            ImageView image = new ImageView(this);
-            image.setImageResource(R.mipmap.icon01);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+          View image=new View(this);
+            image.setBackgroundResource(R.mipmap.icon01);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(DensityUtils.dpTwopsx(GuideActivity.this,15),DensityUtils.dpTwopsx(GuideActivity.this,15));
             if (i > 0) {
-                params.leftMargin = 20;
+                params.leftMargin = 10;
             }
 
             image.setLayoutParams(params);

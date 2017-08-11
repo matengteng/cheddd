@@ -32,6 +32,7 @@ public class SplashActivity extends MyBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
@@ -41,36 +42,38 @@ public class SplashActivity extends MyBaseActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
         }
-
-        setContentView(R.layout.activity_splash);
         initView();
         initData();
+        setData();
+    }
+
+    private void setData() {
+        setAnimatot(mImageView);
     }
 
     private void initData() {
-        setAnimatot(mImageView);
-        mHandler.sendEmptyMessageDelayed(1, 2000);
+        mHandler.sendEmptyMessageDelayed(1, 500);
     }
 
     private void initView() {
         mImageView = (ImageView) findViewById(R.id.iv_splash_enert);
-        setAnimatot(mImageView);
+
     }
 
     private void setAnimatot(ImageView imageView) {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(imageView, "alpha", 0.0f, 1.0f);
-        animator.setDuration(2000);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(imageView, "alpha", 0.5f, 1.0f);
+        animator.setDuration(100);
         animator.start();
     }
 
     private void enertGuide() {
-
-        boolean userGuide = SharedPreferencesUtils.getBoolean(this, "is_user_guide_show", false);
+        boolean userGuide = SharedPreferencesUtils.getBoolean(SplashActivity.this, "is_user_guide_show", false);
         if (!userGuide) {
             startActivity(new Intent(SplashActivity.this, GuideActivity.class));
+            this.finish();
         } else {
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            this.finish();
         }
-        finish();
     }
 }

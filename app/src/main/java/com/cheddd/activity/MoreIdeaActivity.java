@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -118,13 +119,16 @@ public class MoreIdeaActivity extends MyBaseActivity implements TextWatcher, Vie
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
+                        Log.d("TAG",result);
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
                         String returnMsg = object.getString("returnMsg");
                         if ("000000".equals(returnCode)) {
                             ToastUtil.show(MoreIdeaActivity.this, returnMsg);
                             finish();
-                        } else {
+                        } else if("0002".equals(returnCode)){
+                            ToastUtil.show(MoreIdeaActivity.this, returnMsg);
+                        }else {
                             return;
                         }
                     } catch (JSONException e) {

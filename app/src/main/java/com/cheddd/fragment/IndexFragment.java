@@ -450,7 +450,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    //Log.d(TAG, "获取可借额度和总额度，还款试算" + result);
+                    Log.d(TAG, "获取可借额度和总额度，还款试算" + result);
                    // Log.d(TAG, "onSuccess:" + NetConfig.INDEX_PETTYLOAN_INFO + "content" + "=" + json);
                     try {
                         JSONObject object = new JSONObject(result);
@@ -478,7 +478,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    // Log.d(TAG, "进度" + result);
+                    Log.d(TAG, "进度" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         returnCode1 = object.getString("returnCode");

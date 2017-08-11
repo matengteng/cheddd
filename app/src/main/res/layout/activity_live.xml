@@ -67,6 +67,7 @@
                     android:layout_toRightOf="@id/tv_live_month"
                     android:hint="@string/app_house_money"
                     android:textColor="#333"
+                    android:maxLength="6"
                     android:textSize="15sp" />
             </RelativeLayout>
 
@@ -107,6 +108,7 @@
                     android:text="现住址" />
 
                 <EditText
+                    android:maxLength="25"
                     android:id="@+id/et_live_unit"
                     style="@style/EditText"
                     android:layout_marginLeft="55dp"

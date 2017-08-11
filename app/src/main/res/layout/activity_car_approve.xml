@@ -30,12 +30,12 @@
                     android:text="@string/app_car_type" />
 
                 <EditText
-                    android:maxLength="10"
                     android:id="@+id/et_car_types"
                     style="@style/EditText"
                     android:layout_marginLeft="32dp"
                     android:layout_toRightOf="@id/tv_car_type"
-                    android:hint="请输入车辆品牌" />
+                    android:hint="请输入车辆品牌"
+                    android:maxLength="10" />
 
             </RelativeLayout>
 
@@ -52,9 +52,9 @@
                     android:id="@+id/et_car_mark"
                     style="@style/EditText"
                     android:layout_marginLeft="50dp"
-                    android:maxLength="7"
                     android:layout_toRightOf="@id/tv_car_mark"
-                    android:hint="@string/app_car_mark_input" />
+                    android:hint="@string/app_car_mark_input"
+                    android:maxLength="10" />
             </RelativeLayout>
 
             <View style="@style/View" />
@@ -69,10 +69,10 @@
                 <EditText
                     android:id="@+id/et_car_km"
                     style="@style/EditText"
-                    android:maxLength="10"
                     android:layout_marginLeft="50dp"
                     android:layout_toRightOf="@id/tv_car_km"
-                    android:hint="@string/app_km_input" />
+                    android:hint="@string/app_km_input"
+                    android:maxLength="10" />
             </RelativeLayout>
 
             <View style="@style/ViewTop" />

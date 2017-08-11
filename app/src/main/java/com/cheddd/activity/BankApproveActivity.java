@@ -337,11 +337,13 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
                         if ("000000".equals(returnCode)) {
                             ToastUtil.show(BankApproveActivity.this, returnMsg);
                             finish();
-                        }
-                        if ("0017".equals(returnCode)) {
+                        }else if ("0017".equals(returnCode)) {
                             ToastUtil.show(BankApproveActivity.this, returnMsg);
                             startActivity(new Intent(BankApproveActivity.this, LoginActivity.class));
                             finish();
+                        }else if("0042".equals(returnCode)){
+                            ToastUtil.show(BankApproveActivity.this, returnMsg);
+                            startActivity(new Intent(BankApproveActivity.this, CarApproveActivity.class));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

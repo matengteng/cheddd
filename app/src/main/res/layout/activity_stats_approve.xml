@@ -30,6 +30,7 @@
                     android:text="@string/app_username" />
 
                 <EditText
+                    android:maxLength="10"
                     android:id="@+id/et_stats_name"
                     style="@style/EditText"
                     android:layout_marginLeft="60dp"
@@ -199,6 +200,7 @@
                     android:id="@+id/et_stats_details"
                     style="@style/EditText"
                     android:layout_marginLeft="38dp"
+                    android:maxLength="60"
                     android:layout_toRightOf="@id/tv_stats_details"
                     android:hint="@string/app_input_details"
                     android:inputType="text" />

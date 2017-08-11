@@ -96,7 +96,7 @@ public class PledgeActivity extends MyBaseActivity implements View.OnClickListen
                             String storeName = entity.getString("storeName");
                             String phones = entity.getString("phones");
                             double contractAmt = entity.getDouble("contractAmt");
-                            String loanInitAudDate = entity.getString("loanAud");
+                            String loanInitAudDate = entity.getString("loanAudDate");
                             String riskAudDate = entity.getString("riskAudDate");
                             String financeAudDate = entity.getString("financeAudDate");
                             String payAudDate = entity.getString("payAudDate");

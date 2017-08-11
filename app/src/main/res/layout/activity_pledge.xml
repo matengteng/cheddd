@@ -147,7 +147,7 @@
                     android:layout_below="@id/tv_pledge_applyfor1"
                     android:layout_centerHorizontal="true"
                     android:layout_toRightOf="@id/bt_pledge_redtop"
-                    android:text="2017年8月19日 12:24:36"
+                    android:text=""
                     android:textColor="#24CA86"
                     android:textSize="12sp" />
             </RelativeLayout>

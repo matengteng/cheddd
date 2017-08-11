@@ -40,6 +40,7 @@
                     android:text="@string/app_peopele" />
 
                 <EditText
+                    android:maxLength="16"
                     android:id="@+id/et_bank_peoplenme"
                     style="@style/EditText"
                     android:layout_marginLeft="45dp"
@@ -139,6 +140,7 @@
                     android:text="@string/app_bank_open" />
 
                 <EditText
+                    android:maxLength="25"
                     android:id="@+id/et_bank_open"
                     style="@style/EditText"
                     android:layout_marginLeft="50dp"

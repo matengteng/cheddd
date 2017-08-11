@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">车贷贷</string>
+    <string name="app_name">车贷贷2</string>
     <string name="phone_captcha_time_remain">%d秒重新获取</string>
     <string name="app_petty_loan">小额借款</string>
     <string name="app_extreme_mortgage">极速抵押</string>

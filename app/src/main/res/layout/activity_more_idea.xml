@@ -39,6 +39,7 @@
                     android:layout_marginRight="10dp"
                     android:background="@color/colorWhite"
                     android:gravity="left"
+                    android:maxLength="32"
                     android:hint="您的宝贵意见，就是我们进步的源泉" />
             </RelativeLayout>
 

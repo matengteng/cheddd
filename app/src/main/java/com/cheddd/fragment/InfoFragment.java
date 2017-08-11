@@ -64,6 +64,7 @@ public class InfoFragment extends BaseFragment implements View.OnClickListener {
     private String returnMsg1;
 
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -314,7 +315,7 @@ public class InfoFragment extends BaseFragment implements View.OnClickListener {
             if (loanInitAud == 1) {
                 getActivity().startActivity(new Intent(mContext, ExtremeMortageActivity.class));
             } else {
-                getActivity().startActivity(new Intent(mContext, PledgeActivity.class));
+                getActivity().startActivity(new Intent(mContext, PledgeActivity.class).putExtra("che","11"));
             }
         }
     }
@@ -332,7 +333,7 @@ public class InfoFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    // Log.d(TAG, "进度" + result);
+                    Log.d(TAG, "进度" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         returnCode = object.getString("returnCode");

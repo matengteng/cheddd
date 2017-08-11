@@ -34,6 +34,7 @@ public class MineBankActivity extends MyBaseActivity implements AdapterView.OnIt
     private ListView mListView;
     private MinebankAdapter mAdapter;
     private List<MineBankBean> mData;
+    private JSONObject entity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +70,11 @@ public class MineBankActivity extends MyBaseActivity implements AdapterView.OnIt
                    Log.d(TAG, "借款银行卡" + result);
                     try {
                         JSONObject object = new JSONObject(result);
-                        JSONObject entity = object.getJSONObject("entity");
+                        try{
+                            entity = object.getJSONObject("entity");
+                        }catch (Exception e){
+                           return;
+                        }
                         String dictionaryName = entity.getString("dictionaryName");
                         String khBankPro = entity.getString("cardNo");
                         if (khBankPro.length() > 4) {

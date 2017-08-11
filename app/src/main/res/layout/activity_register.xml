@@ -93,7 +93,7 @@
                     android:layout_toRightOf="@id/iv_register_password"
                     android:hint="@string/app_password"
                     android:inputType="textPassword"
-                    android:maxLength="11" />
+                    android:maxLength="16" />
 
             </RelativeLayout>
 
