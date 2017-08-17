@@ -11,7 +11,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -220,7 +219,7 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
                 showRelationDialog((TextView) v, (Integer) v.getTag());
                 break;
             case R.id.bt_relation_submit:
-                if (textIsEmpty()) {
+                if (!textIsEmpty()) {
                     StringBuffer nameSB = new StringBuffer();
                     StringBuffer phoneSB = new StringBuffer();
                     StringBuffer idSB = new StringBuffer();
@@ -322,12 +321,12 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
 
     private boolean textIsEmpty() {
         for (int i = 0; i < ll_relation_container.getChildCount(); i++) {
-            for (int i1 = 0; i1 < ((ViewGroup) ll_relation_container.getChildAt(i)).getChildCount(); i1++) {
-                if (((ViewGroup) ll_relation_container.getChildAt(i)).getChildAt(i1) instanceof TextView) {
-                    String cont = ((TextView) ((ViewGroup) ll_relation_container.getChildAt(i)).getChildAt(i1)).getText().toString();
-                    if (TextUtils.isEmpty(cont))
-                        return true;
-                }
+            View view = ll_relation_container.getChildAt(i);
+            TextView tv_relation_relation = (TextView) view.findViewById(R.id.tv_relation_relation);
+            EditText et_relation_name = (EditText) view.findViewById(R.id.et_relation_name);
+            EditText et_relation_phone = (EditText) view.findViewById(R.id.et_relation_phone);
+            if (TextUtils.isEmpty(tv_relation_relation.getText()) || TextUtils.isEmpty(et_relation_name.getText()) || TextUtils.isEmpty(et_relation_phone.getText())) {
+                return true;
             }
         }
 
