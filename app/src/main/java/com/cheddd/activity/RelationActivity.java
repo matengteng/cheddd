@@ -410,7 +410,7 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
             }
 
             //  relation.setRelation(new String(mStringBufferRelayion) + new String(stringBuffer).replace("null", ""));
-            relation.setRelation((new String(mStringBufferRelayion) + new String(stringBuffer).replace("null", "")).substring(((new String(mStringBufferRelayion) + new String(stringBuffer).replace("null", ""))).length() - 1));
+            relation.setRelation((new String(mStringBufferRelayion) + new String(stringBuffer).replace("null", "")));
         } else if (rows == null) {
             relation.setId("");
             StringBuffer stringBuffer = new StringBuffer();
@@ -455,6 +455,7 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
         relation.setRelation(new String(stringBuffer));*/
         Gson gson = new Gson();
         String json = gson.toJson(relation);
+        Log.d(TAG,"++++++++++++++++++++++++++++++++++"+json);
         final NetProgressDialog dialog = new NetProgressDialog();
         dialog.show(getSupportFragmentManager(),"11");
         FormBody formbody = new FormBody.Builder().add("content", json).build();
