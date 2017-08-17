@@ -61,6 +61,7 @@
                     android:text="@string/app_month_monry" />
 
                 <EditText
+                    android:inputType="number"
                     android:id="@+id/et_live_month"
                     style="@style/EditText"
                     android:layout_marginLeft="52dp"

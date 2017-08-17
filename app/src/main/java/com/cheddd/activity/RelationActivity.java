@@ -30,6 +30,7 @@ import com.cheddd.base.MyBaseActivity;
 import com.cheddd.bean.InfoRelation;
 import com.cheddd.bean.RelationsBean;
 import com.cheddd.config.NetConfig;
+import com.cheddd.fragment.NetProgressDialog;
 import com.cheddd.utils.LoginTokenUtils;
 import com.cheddd.utils.OkhttpUtils;
 import com.cheddd.utils.ToastUtil;
@@ -83,6 +84,9 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
 
     private Map<String, Integer> mapRelation;
     private String flag;
+    private String urgentId1;
+    private String urgentTelNo;
+    private String urgentContractName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +97,7 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
         setData();
         setListener();
         findViewAllValidateEmpty(findViewById(android.R.id.content));
-       Log.d(TAG, "findViewAllValidateEmpty():" + textIsEmpty);
+        Log.d(TAG, "findViewAllValidateEmpty():" + textIsEmpty);
         mLayout.addView(addView());
     }
 
@@ -114,14 +118,12 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
             public void onError(Request request, IOException e) {
                 Log.d(TAG, e.getMessage());
             }
-//{"bankInfoAuth":3,"carInfoAuth":3,"contactsInfoAuth":3,"entity":null,"flag":"false","houseInfoAuth":3,"loanInitAud":1,
-// "personalAuth":3,"personalInfoUpdateYN":1,"phoneAuth":3,"returnCode":"0042","returnMsg":"填写车辆信息后才能操作",
-// "rows":[],"token":"","workInfoAuth":3}
+
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     mStringBufferId = new StringBuffer();
-                    mStringBufferRelayion=new StringBuffer();
+                    mStringBufferRelayion = new StringBuffer();
                     Log.d(TAG, "获取联系人：" + result);
                     try {
                         JSONObject object = new JSONObject(result);
@@ -129,19 +131,20 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
                         String returnMsg = object.getString("returnMsg");
 
                         if ("000000".equals(returnCode)) {
-                            try {
+                          /*  try {
                                 entity = object.getJSONObject("entity");
+                                Log.d(TAG, entity.toString());
                             } catch (Exception e) {
                                 return;
-                            }
-
-                            String urgentId = entity.getString("urgentId");
-                            String urgentTelNo = entity.getString("urgentTelNo");
-                            String urgentContractName = entity.getString("urgentContractName");
+                            }*/
+                           entity = object.getJSONObject("entity");
+                            urgentId1 = entity.getString("urgentId");
+                            urgentTelNo = entity.getString("urgentTelNo");
+                            urgentContractName = entity.getString("urgentContractName");
                             mEditTextUrgencyPhone.setText(urgentTelNo);
                             mEditTextrgencyName.setText(urgentContractName);
                             rows = object.getJSONArray("rows");
-                            if(rows.length()>=0){
+                            if (rows.length() >= 0) {
                                 mLayout.removeAllViews();
                             }
                             flag = object.getString("flag");
@@ -168,12 +171,12 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
                                 }
                                 mLayout.addView(view);
                             }
-                            if(rows.length()>=3){
+                            if (rows.length() >= 3) {
                                 mButtonAdd.setVisibility(View.GONE);
                             }
                             if (rows.length() > 0) {
                                 mStringBufferId.delete(mStringBufferId.length() - 1, mStringBufferId.length());
-                                mStringBufferRelayion.delete(mStringBufferRelayion.length()-1,mStringBufferRelayion.length());
+                                mStringBufferRelayion.delete(mStringBufferRelayion.length() - 1, mStringBufferRelayion.length());
                             } else {
                                 return;
                             }
@@ -190,7 +193,7 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
     private void loanInfo() {
         String json = LoginTokenUtils.getJson();
         final FormBody formbody = new FormBody.Builder().add("content", json).build();
-        OkhttpUtils.getInstance(this).asyncPost(NetConfig.INDEX_PLEDGE_INFO, formbody, new OkhttpUtils.HttpCallBack() {
+        OkhttpUtils.getInstance(this).asyncPost(NetConfig.OAUTH_SETP, formbody, new OkhttpUtils.HttpCallBack() {
             @Override
             public void onError(Request request, IOException e) {
 
@@ -201,12 +204,12 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
                 if (result != null) {
                     try {
                         JSONObject object = new JSONObject(result);
-                        JSONObject entity = object.getJSONObject("entity");
-                        int loanInitAud = entity.getInt("loanInitAud");
-                        if (loanInitAud == 0) {
+                        //  JSONObject entity = object.getJSONObject("entity");
+                        int loanInitAud = object.getInt("loanInitAud");
+                        int contactsInfoAuth = object.getInt("contactsInfoAuth");
+                        if (loanInitAud == 0 || contactsInfoAuth == 1) {
                             mButtonSubmit.setVisibility(View.GONE);
                             mButtonAdd.setVisibility(View.GONE);
-
                         } else {
                             mButtonSubmit.setVisibility(View.VISIBLE);
                             mButtonAdd.setVisibility(View.VISIBLE);
@@ -218,6 +221,7 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
             }
         });
     }
+
     private void setData() {
 
     }
@@ -257,29 +261,28 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
                     cellPhone();
                     break;
                 case R.id.bt_relation_add:
-                    Log.d(TAG,"++++++++++++++++++++++"+rows);
+                    Log.d(TAG, "++++++++++++++++++++++" + rows);
                     try {
-
-                        if(rows==null){
+                        if (rows == null) {
                             mCount++;
                             mLayout.addView(addView());
                             if (mCount == 2) {
                                 mButtonAdd.setVisibility(View.GONE);
                             }
-                        }else if(rows.length()==1){
+                        } else if (rows.length() == 1) {
                             mCount++;
                             mLayout.addView(addView());
                             if (mCount == 2) {
                                 mButtonAdd.setVisibility(View.GONE);
                             }
-                        }else if(rows.length()==2){
+                        } else if (rows.length() == 2) {
                             mCount++;
                             mLayout.addView(addView());
                             if (mCount == 1) {
                                 mButtonAdd.setVisibility(View.GONE);
                             }
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         return;
                     }
 
@@ -395,7 +398,7 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
         relation.setClientType("2");
         relation.setToken(MyApplications.getToken());
         if (rows != null && rows.length() > 0) {
-            relation.setId(new String(mStringBufferId ));
+            relation.setId(new String(mStringBufferId));
             StringBuffer stringBuffer = new StringBuffer();
             String[] relations = contact_relation.split(",");
             for (int i = 0; i < relations.length; i++) {
@@ -406,7 +409,8 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
                 }
             }
 
-            relation.setRelation(new String(mStringBufferRelayion)+new String(stringBuffer).replace("null",""));
+            //  relation.setRelation(new String(mStringBufferRelayion) + new String(stringBuffer).replace("null", ""));
+            relation.setRelation((new String(mStringBufferRelayion) + new String(stringBuffer).replace("null", "")).substring(((new String(mStringBufferRelayion) + new String(stringBuffer).replace("null", ""))).length() - 1));
         } else if (rows == null) {
             relation.setId("");
             StringBuffer stringBuffer = new StringBuffer();
@@ -423,10 +427,10 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
         }
         relation.setContractName(contact_name);
         relation.setTelNo(contact_phone_num);
-        if (entity == null) {
-            relation.setUrgentId("");
+        if (entity != null) {
+            relation.setUrgentId(urgentId1);
         } else {
-            relation.setUrgentId(urgentId);
+            relation.setUrgentId("");
         }
         relation.setUrgentContractName(mEditTextrgencyName.getText().toString().trim());
         relation.setUrgentTelNo(mEditTextUrgencyPhone.getText().toString().trim());
@@ -451,16 +455,18 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
         relation.setRelation(new String(stringBuffer));*/
         Gson gson = new Gson();
         String json = gson.toJson(relation);
-        Log.d(TAG, json);
+        final NetProgressDialog dialog = new NetProgressDialog();
+        dialog.show(getSupportFragmentManager(),"11");
         FormBody formbody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_RELATION, formbody, new OkhttpUtils.HttpCallBack() {
             @Override
             public void onError(Request request, IOException e) {
-
+                dialog.dismissAllowingStateLoss();
             }
 
             @Override
             public void onSuccess(Request request, String result) {
+                dialog.dismissAllowingStateLoss();
                 if (result != null) {
                     try {
                         Log.d(TAG, "提交联系人:" + result);
@@ -472,9 +478,9 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
                             finish();
                         } else if (returnCode.equals("0042")) {
                             startActivity(new Intent(RelationActivity.this, CarApproveActivity.class));
-                        } else if("0002".equals(returnCode)){
+                        } else if ("0002".equals(returnCode)) {
                             ToastUtil.show(RelationActivity.this, returnMsg);
-                            return;
+
                         } else {
                             return;
                         }

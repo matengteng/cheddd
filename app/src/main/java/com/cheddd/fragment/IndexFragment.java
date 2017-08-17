@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,10 +27,12 @@ import com.cheddd.activity.PettyLoanActivity;
 import com.cheddd.activity.PledgeActivity;
 import com.cheddd.adapter.HomeHeadViewpage;
 import com.cheddd.adapter.IndexHeaderAdapter;
+import com.cheddd.application.MyApplications;
 import com.cheddd.base.BaseFragment;
 import com.cheddd.bean.Account;
 import com.cheddd.bean.Carousel;
 import com.cheddd.bean.ContentBean;
+import com.cheddd.bean.MineRecord;
 import com.cheddd.config.NetConfig;
 import com.cheddd.parse.IndexParse;
 import com.cheddd.utils.LoginTokenUtils;
@@ -37,6 +40,7 @@ import com.cheddd.utils.OkhttpUtils;
 import com.cheddd.utils.SdCardUtils;
 import com.cheddd.view.LooperTextView;
 import com.cheddd.view.TopNavigationBar;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -70,7 +74,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     private List<String> mTitle;
     private List<ImageView> mImageView;
     private IndexHeaderAdapter mAdapter;
-    // 自动循环 标记 当当前Activity 销毁 停止循环
+    // 自动循环 标记 当前Activity 销毁 停止循环
     private boolean isStop = true;
     // 记录是否有重复添加页卡
     private boolean isAdd = false;
@@ -96,6 +100,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     private int bankInfoAuth;
     private int personalAuth;
     private int loanInitAud;
+    private int loanInitAud1;
 
 
     @Nullable
@@ -222,7 +227,44 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         }*/
         indexPetty();
         extremeMoreage();
+        pledge();
     }
+
+    private void pledge() {
+        MineRecord record=new MineRecord();
+        record.setClientType("2");
+        record.setOrderNo("");
+        record.setToken(MyApplications.getToken());
+        Gson gson=new Gson();
+        String json = gson.toJson(record);
+        FormBody formbody = new FormBody.Builder().add("content", json).build();
+        OkhttpUtils.getInstance(mContent).asyncPost(NetConfig.INDEX_PLEDGE_INFO, formbody, new OkhttpUtils.HttpCallBack() {
+            @Override
+            public void onError(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onSuccess(Request request, String result) {
+                if (result != null) {
+                    Log.d(TAG, "获取抵押贷款贷款详情" + result);
+                    try {
+                        JSONObject object = new JSONObject(result);
+                        String returnCode = object.getString("returnCode");
+                        if ("000000".equals(returnCode)) {
+                            JSONObject entity = object.getJSONObject("entity");
+                            loanInitAud1 = entity.getInt("loanInitAud");
+                        } else {
+                            return;
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
 
     private void initRound() {
         for (int i = 0; i < mData.size(); i++) {
@@ -407,14 +449,11 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
             return;
         }
 
-        if (loanInitAud == 1) {
+        if (loanInitAud1 == 1) {
             getActivity().startActivity(new Intent(mContent, ExtremeMortageActivity.class));
-        } else if (loanInitAud == 0) {
+        } else if (loanInitAud1 == 0) {
             getActivity().startActivity(new Intent(mContent, PledgeActivity.class).putExtra("che", "11"));
-        } else {
-            getActivity().startActivity(new Intent(mContent, ExtremeMortageActivity.class));
         }
-
     }
 
     //小额借款

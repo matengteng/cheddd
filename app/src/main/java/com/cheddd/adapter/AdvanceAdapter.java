@@ -78,8 +78,8 @@ public class AdvanceAdapter extends MyBaseAdapter {
         notifyDataSetChanged();
     }
 
-    public int getMoney() {
-        int money = 0;
+    public double getMoney() {
+        double money = 0;
         if (mData == null || mData.size() == 0) {
             return money;
         }

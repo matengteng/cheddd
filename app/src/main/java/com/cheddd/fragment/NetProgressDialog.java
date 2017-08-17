@@ -52,7 +52,6 @@ public class NetProgressDialog extends DialogFragment {
         animator.setInterpolator(new LinearInterpolator());
         animator.setRepeatCount(-1);
         animator.start();
-
         return imageView;
     }
 

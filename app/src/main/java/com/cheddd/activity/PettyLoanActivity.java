@@ -52,7 +52,8 @@ public class PettyLoanActivity extends MyBaseActivity implements View.OnClickLis
 
     private TopNavigationBar mTnb;
     private Button mButtonProblem, mButtonKnow;
-   /* private Handler mHandler = new Handler() {
+    private int loanLimit;
+    /* private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -87,15 +88,15 @@ public class PettyLoanActivity extends MyBaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                   // Log.d(TAG, "获取可借额度和总额度，还款试算" + result);
-                   // Log.d(TAG, "onSuccess:" + NetConfig.INDEX_PETTYLOAN_INFO + "content" + "=" + json);
+                   Log.d(TAG, "获取可借额度和总额度，还款试算" + result);
+                  //  Log.d(TAG, "onSuccess:" + NetConfig.INDEX_PETTYLOAN_INFO + "content" + "=" + json);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
                         String returnMsg = object.getString("returnMsg");
                         if ("000000".equals(returnCode)) {
                             JSONObject entity = object.getJSONObject("entity");
-                            int loanLimit = entity.getInt("loanLimit");
+                            loanLimit = entity.getInt("loanLimit");
                             int smallLoanSum = entity.getInt("smallLoanSum");
                             String orderNo = entity.getString("orderNo");
                             MyApplications.setOrderNo(orderNo);
@@ -103,7 +104,7 @@ public class PettyLoanActivity extends MyBaseActivity implements View.OnClickLis
                             double newRepayment = entity.getDouble("newRepayment");
                             mTextViewData.setText(newRepaymentDate + "应还");
                             mTextViewMoney.setText("￥" + newRepayment / 100 + "");
-                            if(loanLimit<0){
+                            if(loanLimit <0){
                                 mTextViewSmall.setText(0+"");
                                 mProgressBar.setValue((int) (0* 360));
                             }else {
@@ -170,7 +171,7 @@ public class PettyLoanActivity extends MyBaseActivity implements View.OnClickLis
                     break;
                 //提前还请借款
                 case R.id.rl_petty_advance:
-                    startActivity(new Intent(this, AdvanceActivtiy.class));
+                    startActivity(new Intent(this, AdvanceActivtiy.class).putExtra("order","12"));
                     finish();
                     break;
                 case R.id.bt_petty_money:

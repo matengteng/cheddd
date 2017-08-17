@@ -45,6 +45,7 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
     private List<MineRecord> mData;
     private Context mContent;
     private static final String TAG = MineRecordFragment.class.getSimpleName();
+    private int orderType;
 
 
     @Nullable
@@ -73,6 +74,7 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
         final String json = LoginTokenUtils.getJson();
         FormBody formbody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(mContent).asyncPost(NetConfig.MINE_ACCOUNT_LIST, formbody, new OkhttpUtils.HttpCallBack() {
+
             @Override
             public void onError(Request request, IOException e) {
 
@@ -80,7 +82,7 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
 
             @Override
             public void onSuccess(Request request, String result) {
-               // Log.d(TAG, "借款记录" + result);
+                Log.d(TAG, "借款记录" + result);
                 //{"token":null,"returnCode":"000000","returnMsg":"操作成功","entity":null,
                 // "rows":[{"bindBankCardNo":"1234567o","loanAmt":6700,"orderNo":"EM000001E3",
                 // "loanStatus":0,"bindBankTag":"CMB","bindBank":"招商银行","loanAudDate":"2017-07-12 18:23:47"},
@@ -97,6 +99,7 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
                             String bindBankCardNo = jsonObject.getString("bindBankCardNo");
                             String orderNo = jsonObject.getString("orderNo");
                             String bindBank = jsonObject.getString("bindBank");
+                            orderType = jsonObject.getInt("orderType");
                             String loanAudDate = jsonObject.getString("loanAudDate");
                             double loanAmt = jsonObject.getDouble("loanAmt");
                             int loanStatus = jsonObject.getInt("loanStatus");
@@ -137,10 +140,10 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
         String orderNo = mData.get(position).getOrderNo();
         MyApplications.setOrderNo(orderNo);
         CharSequence charSequence = orderNo.subSequence(0, 1);
-        if("EM".equals(charSequence)){
+        if (orderType == 4) {
             startActivity(new Intent(getActivity(), LendDetailsActivity.class));
-        }else {
-            startActivity(new Intent(getActivity(), PledgeActivity.class).putExtra("che","12"));
+        } else {
+            startActivity(new Intent(getActivity(), PledgeActivity.class).putExtra("che", "12"));
         }
 
     }

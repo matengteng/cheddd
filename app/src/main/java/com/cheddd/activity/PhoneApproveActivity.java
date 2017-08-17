@@ -129,6 +129,9 @@ public class PhoneApproveActivity extends MyBaseActivity implements View.OnClick
                             JSONObject entity = object.getJSONObject("entity");
                             String telNo = entity.getString("telNo");
                             String spPassword = entity.getString("spPassword");
+                            String contacts = entity.getString("contacts");
+                            String location = entity.getString("location");
+                            String messgae = entity.getString("messgae");
                             isContacts = entity.getInt("isContacts");
                             isLocation = entity.getInt("isLocation");
                             isMessgae = entity.getInt("isMessgae");
@@ -136,18 +139,24 @@ public class PhoneApproveActivity extends MyBaseActivity implements View.OnClick
                             mEditTextPhone.setText(telNo);
                             if (isContacts == 0) {
                                 mButtonAddressBook.setEnabled(true);
+                                mAddressBook.setText(contacts);
                             } else {
                                 mButtonAddressBook.setEnabled(false);
+                                mAddressBook.setText("");
                             }
                             if (isLocation == 0) {
                                 mButtonLocation.setEnabled(true);
+                                mLocation.setText(location);
                             } else {
                                 mButtonLocation.setEnabled(false);
+                                mLocation.setText("");
                             }
                             if (isMessgae == 0) {
                                 mButtonSms.setEnabled(true);
+                                mSms.setText(messgae);
                             } else {
                                 mButtonSms.setEnabled(false);
+                                mSms.setText("");
                             }
                         } else if ("0017".equals(returnCode)) {
                             ToastUtil.show(PhoneApproveActivity.this, returnMsg);
@@ -167,7 +176,7 @@ public class PhoneApproveActivity extends MyBaseActivity implements View.OnClick
     private void loanInfo() {
         String json = LoginTokenUtils.getJson();
         final FormBody formbody = new FormBody.Builder().add("content", json).build();
-        OkhttpUtils.getInstance(this).asyncPost(NetConfig.INDEX_PLEDGE_INFO, formbody, new OkhttpUtils.HttpCallBack() {
+        OkhttpUtils.getInstance(this).asyncPost(NetConfig.OAUTH_SETP, formbody, new OkhttpUtils.HttpCallBack() {
             @Override
             public void onError(Request request, IOException e) {
 
@@ -176,11 +185,13 @@ public class PhoneApproveActivity extends MyBaseActivity implements View.OnClick
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
+                    Log.d(TAG,"按钮是否可提交"+result);
                     try {
                         JSONObject object = new JSONObject(result);
-                        JSONObject entity = object.getJSONObject("entity");
-                        int loanInitAud = entity.getInt("loanInitAud");
-                        if (loanInitAud == 0) {
+                       // JSONObject entity = object.getJSONObject("entity");
+                        int loanInitAud = object.getInt("loanInitAud");
+                        int phoneAuth = object.getInt("phoneAuth");
+                        if (loanInitAud == 0||phoneAuth==1) {
                             mButtonSubmit.setVisibility(View.GONE);
                             mEditTextPhone.setCursorVisible(false);
                             mEditTextPassword.setCursorVisible(false);
@@ -535,16 +546,18 @@ public class PhoneApproveActivity extends MyBaseActivity implements View.OnClick
         }
         Gson gson = new Gson();
         String json = gson.toJson(phoneBean);
-        new NetProgressDialog().show(getSupportFragmentManager(),"11");
+        final NetProgressDialog dialog = new NetProgressDialog();
+        dialog.show(getSupportFragmentManager(),"11");
         FormBody formBody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_PHONE, formBody, new OkhttpUtils.HttpCallBack() {
             @Override
             public void onError(Request request, IOException e) {
-
+            dialog.dismissAllowingStateLoss();
             }
 
             @Override
             public void onSuccess(Request request, String result) {
+                dialog.dismissAllowingStateLoss();
                 if (result != null) {
                    // Log.d(TAG, "result:" + result);
                     try {

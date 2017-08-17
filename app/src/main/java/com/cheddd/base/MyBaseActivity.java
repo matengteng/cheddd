@@ -14,7 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public abstract class MyBaseActivity extends AppCompatActivity {
-    private List<MyBaseActivity> mActivity = new LinkedList<>();
+    public final static List<MyBaseActivity> mActivity = new LinkedList<>();
     private List<MyBaseActivity> copy;
     private TextView status;
 
@@ -26,11 +26,6 @@ public abstract class MyBaseActivity extends AppCompatActivity {
         //设置具体的场景
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_ANALYTICS_OEM);
         StatusBarUtils.assistActivity(this);
-//        status = new TextView(this);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            getWindow().setStatusBarColor(Color.parseColor("#e83d2e"));
-//        }
-
         synchronized (mActivity) {
             mActivity.add(this);
         }
@@ -41,7 +36,6 @@ public abstract class MyBaseActivity extends AppCompatActivity {
         synchronized (mActivity) {
             copy = new LinkedList<>(mActivity);
         }
-
         for (MyBaseActivity activity : copy) {
             activity.finish();
         }

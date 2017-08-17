@@ -77,6 +77,12 @@ public class LoginPhoneFragment extends BaseFragment implements TextWatcher, Vie
                     getActivity().startActivity(new Intent(getActivity(), RegisterActivity.class));
                     getActivity().finish();
                     break;
+                case 4:
+                    ToastUtil.show(getActivity(), returnMsg);
+                    break;
+                case 5:
+                    ToastUtil.show(getActivity(), returnMsg);
+                    break;
                 default:
                     break;
             }
@@ -97,10 +103,10 @@ public class LoginPhoneFragment extends BaseFragment implements TextWatcher, Vie
     private void initData() {
         client = new OkHttpClient();
         String phone = SharedPreferencesUtils.getString(mContext, "phone", "");
-        if(!TextUtils.isEmpty(phone)){
+        if (!TextUtils.isEmpty(phone)) {
             mEditTextPhone.setText(phone);
             mEditTextPhone.setSelection(11);
-        }else {
+        } else {
             mEditTextPhone.setText("");
 
         }
@@ -212,6 +218,11 @@ public class LoginPhoneFragment extends BaseFragment implements TextWatcher, Vie
                                 msg.what = 2;
                             } else if ("0026".equals(returnCode)) {
                                 msg.what = 3;
+                            } else if ("0018".equals(returnCode)) {
+                                msg.what = 4;
+                            } else if ("0002".equals(returnCode)) {
+                                msg.what = 5;
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -277,12 +288,12 @@ public class LoginPhoneFragment extends BaseFragment implements TextWatcher, Vie
                         String returnMsg = json.getString("returnMsg");
                         if ("000000".equals(returnCode)) {
                             ToastUtil.show(getActivity(), returnMsg);
-                        }
-                        if ("0025".equals(returnCode)) {
+                        }else if ("0025".equals(returnCode)) {
                             ToastUtil.show(getActivity(), returnMsg);
                             startActivity(new Intent(getActivity(), RegisterActivity.class));
-                        }
-                        if ("0026".equals(returnCode)) {
+                        }else if ("0026".equals(returnCode)) {
+                            ToastUtil.show(getActivity(), returnMsg);
+                        }else if("0002".equals(returnCode)){
                             ToastUtil.show(getActivity(), returnMsg);
                         }
                     } catch (JSONException e) {

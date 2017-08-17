@@ -119,7 +119,6 @@ public class MineRefundFragment extends BaseFragment implements AdapterView.OnIt
                                 record.setMark("提前还款");
                             } else if (3 == overdueStatus) {
                                 record.setMark("还款失败");
-                                return;
                             }
                              record.setTime(loanAudDate);
                             mData.add(record);

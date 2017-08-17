@@ -20,6 +20,7 @@ import com.cheddd.base.MyBaseActivity;
 import com.cheddd.bean.InfoStatBean;
 import com.cheddd.bean.ProvinceBean;
 import com.cheddd.config.NetConfig;
+import com.cheddd.fragment.NetProgressDialog;
 import com.cheddd.utils.JsonFileReader;
 import com.cheddd.utils.LoginTokenUtils;
 import com.cheddd.utils.OkhttpUtils;
@@ -118,7 +119,7 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
     private void loanInfo() {
         String json = LoginTokenUtils.getJson();
         final FormBody formbody = new FormBody.Builder().add("content", json).build();
-        OkhttpUtils.getInstance(this).asyncPost(NetConfig.INDEX_PLEDGE_INFO, formbody, new OkhttpUtils.HttpCallBack() {
+        OkhttpUtils.getInstance(this).asyncPost(NetConfig.OAUTH_SETP, formbody, new OkhttpUtils.HttpCallBack() {
             @Override
             public void onError(Request request, IOException e) {
 
@@ -129,9 +130,10 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
                 if (result != null) {
                     try {
                         JSONObject object = new JSONObject(result);
-                        JSONObject entity = object.getJSONObject("entity");
-                        int loanInitAud = entity.getInt("loanInitAud");
-                        if (loanInitAud == 0) {
+                        // JSONObject entity = object.getJSONObject("entity");
+                        int loanInitAud = object.getInt("loanInitAud");
+                        int personalAuth = object.getInt("personalAuth");
+                        if (loanInitAud == 0 || personalAuth == 1) {
                             mButtonSubmit.setVisibility(View.GONE);
                             mEditTextDetalis.setCursorVisible(false);
                             mEditTextIDCard.setCursorVisible(false);
@@ -160,7 +162,7 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                  //  Log.d(TAG, "个人信息请求" + result);
+                    //  Log.d(TAG, "个人信息请求" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -505,11 +507,11 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
     private void submit() {
         //用户名
         String name = mEditTextName.getText().toString().trim();
-       /* String nameRegular = "[\u4E00-\u9FA5]{2,5}(?:·[\u4E00-\u9FA5]{2,5})*";
+        String nameRegular = "[\u4E00-\u9FA5]{2,5}(?:·[\u4E00-\u9FA5]{2,5})*";
         if (!name.matches(nameRegular)) {
             ToastUtil.show(this, "姓名格式错误");
             return;
-        }*/
+        }
         //身份证号码的判断
         String IdCard = mEditTextIDCard.getText().toString().trim();
 
@@ -523,7 +525,7 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
             ToastUtil.show(this, "手机格式错误");
             return;
         }
-        String details = mEditTextDetalis.getText().toString().trim();
+        final String details = mEditTextDetalis.getText().toString().trim();
       /*  if (!details.matches("^[\\u4e00-\\u9fa5_a-zA-Z0-9]+$")) {
             ToastUtil.show(this, "详细地址输入有误");
             return;
@@ -555,18 +557,22 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
         stat.setCity(mTextViewCity.getText().toString());
         Gson gson = new Gson();
         String json = gson.toJson(stat);
-     //   Log.d(TAG, "fghjkl;'" + json);
+        // new NetProgressDialog().show(getSupportFragmentManager(), "11");
+        final NetProgressDialog dialog = new NetProgressDialog();
+        dialog.show(getSupportFragmentManager(), "11");
+        //   Log.d(TAG, "fghjkl;'" + json);
         FormBody formBody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO, formBody, new OkhttpUtils.HttpCallBack() {
             @Override
             public void onError(Request request, IOException e) {
-
+                dialog.dismissAllowingStateLoss();
             }
 
             @Override
             public void onSuccess(Request request, String result) {
+                dialog.dismissAllowingStateLoss();
                 if (result != null) {
-                 //   Log.d(TAG, "个人信息" + result);
+                    Log.d(TAG, "个人信息" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -578,9 +584,11 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
                         } else if ("000000".equals(returnCode)) {
                             ToastUtil.show(StatsApproveActivity.this, returnMsg);
                             finish();
-                        }else if("0002".equals(returnCode)){
+                        } else if ("0002".equals(returnCode)) {
                             ToastUtil.show(StatsApproveActivity.this, returnMsg);
-                            return;
+
+                            dialog.dismissAllowingStateLoss();
+
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -603,7 +611,7 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
     public void afterTextChanged(Editable s) {
         if (mEditTextName.getText().toString().trim().length() > 0) {
             if (mEditTextPhone.getText().toString().trim().length() == 11) {
-                if (mEditTextIDCard.getText().toString().trim().length() >15) {
+                if (mEditTextIDCard.getText().toString().trim().length() > 15) {
                     if (mEditTextDetalis.getText().toString().trim().length() > 0) {
                         if (mTextViewSex.getText().toString().length() > 0) {
                             if (mTextViewMarriage.getText().toString().length() > 0) {

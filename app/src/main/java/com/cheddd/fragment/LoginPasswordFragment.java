@@ -81,6 +81,9 @@ public class LoginPasswordFragment extends BaseFragment implements View.OnClickL
                 case 4:
                     ToastUtil.show(getActivity(), returnMsg);
                     break;
+                case 2:
+                    ToastUtil.show(getActivity(), returnMsg);
+                    break;
                 default:
                     break;
             }
@@ -110,10 +113,10 @@ public class LoginPasswordFragment extends BaseFragment implements View.OnClickL
     private void initData() {
         client = new OkHttpClient();
         String phone = SharedPreferencesUtils.getString(mContext, "phone", "");
-        if(!TextUtils.isEmpty(phone)){
+        if (!TextUtils.isEmpty(phone)) {
             mEditTextPhone.setText(phone);
             mEditTextPhone.setSelection(11);
-        }else {
+        } else {
             mEditTextPhone.setText("");
 
         }
@@ -201,6 +204,8 @@ public class LoginPasswordFragment extends BaseFragment implements View.OnClickL
                                 msg.what = 3;
                             } else if ("0027".equals(returnCode)) {
                                 msg.what = 4;
+                            } else if ("0018".equals(returnCode)) {
+                                msg.what = 2;
                             }
 
                         } catch (JSONException e) {

@@ -29,6 +29,7 @@ import com.cheddd.bean.InfoBankBean;
 import com.cheddd.bean.InfoBankList;
 import com.cheddd.bean.ProvinceBean;
 import com.cheddd.config.NetConfig;
+import com.cheddd.fragment.NetProgressDialog;
 import com.cheddd.parse.InfoParse;
 import com.cheddd.utils.JsonFileReader;
 import com.cheddd.utils.LoginTokenUtils;
@@ -127,7 +128,7 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                      //  Log.d(TAG, "银行卡请求" + result);
+                        //  Log.d(TAG, "银行卡请求" + result);
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
                         String returnMsg = object.getString("returnMsg");
@@ -166,7 +167,7 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
     private void loanInfo() {
         String json = LoginTokenUtils.getJson();
         final FormBody formbody = new FormBody.Builder().add("content", json).build();
-        OkhttpUtils.getInstance(this).asyncPost(NetConfig.INDEX_PLEDGE_INFO, formbody, new OkhttpUtils.HttpCallBack() {
+        OkhttpUtils.getInstance(this).asyncPost(NetConfig.OAUTH_SETP, formbody, new OkhttpUtils.HttpCallBack() {
             @Override
             public void onError(Request request, IOException e) {
 
@@ -177,9 +178,10 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
                 if (result != null) {
                     try {
                         JSONObject object = new JSONObject(result);
-                        JSONObject entity = object.getJSONObject("entity");
-                        int loanInitAud = entity.getInt("loanInitAud");
-                        if (loanInitAud == 0) {
+                        //  JSONObject entity = object.getJSONObject("entity");
+                        int loanInitAud = object.getInt("loanInitAud");
+                        int bankInfoAuth = object.getInt("bankInfoAuth");
+                        if (loanInitAud == 0 || bankInfoAuth == 1) {
                             mButtonSubmit.setVisibility(View.GONE);
                             mEditTextBank.setCursorVisible(false);
                             mEditTextPhone.setCursorVisible(false);
@@ -302,9 +304,9 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
         bankBean.setCardNo(mEditTextCard.getText().toString().trim());
         bankBean.setKhBankCity(mTextViewCity.getText().toString());
         bankBean.setKhBankPro(mTextViewProvince.getText().toString());
-        if(!TextUtils.isEmpty(bankId)){
+        if (!TextUtils.isEmpty(bankId)) {
             bankBean.setBankId(bankId);
-        }else {
+        } else {
             bankBean.setBankId("");
         }
         for (Map.Entry<String, String> entry : map.entrySet()) {
@@ -318,18 +320,22 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
         bankBean.setKhBankName(mEditTextBank.getText().toString().trim());
         Gson gson = new Gson();
         String json = gson.toJson(bankBean);
-       // Log.d(TAG, "银行卡认证的提交" + json);
+    //    new NetProgressDialog().show(getSupportFragmentManager(), "11");
+        final NetProgressDialog pro = new NetProgressDialog();
+        pro.show(getSupportFragmentManager(), "11");
+        Log.d(TAG, "银行卡认证的提交" + json);
         FormBody formbody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_BANK, formbody, new OkhttpUtils.HttpCallBack() {
             @Override
             public void onError(Request request, IOException e) {
-
+                pro.dismissAllowingStateLoss();
             }
 
             @Override
             public void onSuccess(Request request, String result) {
+                 pro.dismissAllowingStateLoss();
                 if (result != null) {
-                    //  Log.d(TAG, result);
+                    Log.d(TAG, result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -337,13 +343,17 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
                         if ("000000".equals(returnCode)) {
                             ToastUtil.show(BankApproveActivity.this, returnMsg);
                             finish();
-                        }else if ("0017".equals(returnCode)) {
+                        } else if ("0017".equals(returnCode)) {
                             ToastUtil.show(BankApproveActivity.this, returnMsg);
                             startActivity(new Intent(BankApproveActivity.this, LoginActivity.class));
                             finish();
-                        }else if("0042".equals(returnCode)){
+                        } else if ("0042".equals(returnCode)) {
                             ToastUtil.show(BankApproveActivity.this, returnMsg);
                             startActivity(new Intent(BankApproveActivity.this, CarApproveActivity.class));
+                        } else if ("0033".equals(returnCode)) {
+                            ToastUtil.show(BankApproveActivity.this, returnMsg);
+                        } else if ("0002".equals(returnCode)) {
+                            ToastUtil.show(BankApproveActivity.this, returnMsg);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

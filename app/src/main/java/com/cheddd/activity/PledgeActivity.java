@@ -87,7 +87,7 @@ public class PledgeActivity extends MyBaseActivity implements View.OnClickListen
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                 //   Log.d(TAG, "获取抵押贷款贷款详情" + result);
+                  Log.d(TAG, "获取抵押贷款贷款详情" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");

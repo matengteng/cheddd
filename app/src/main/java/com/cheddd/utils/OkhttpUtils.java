@@ -35,7 +35,7 @@ public class OkhttpUtils {
     private OkhttpUtils(Context context) {
         client = new OkHttpClient().newBuilder().readTimeout(20, TimeUnit.SECONDS)
                 .connectTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(20, TimeUnit.SECONDS).build();
+                .writeTimeout(10, TimeUnit.SECONDS).build();
         mHandler = new Handler(Looper.getMainLooper());
         mContext = context;
     }
@@ -99,6 +99,7 @@ public class OkhttpUtils {
         Request request = new Request.Builder().addHeader("cookie", session).url(url).post(formBody).build();
         client.newCall(request).enqueue(new StringCallBack(httpCallBack, request));
     }
+
     public interface HttpCallBack {
         void onError(Request request, IOException e);
 

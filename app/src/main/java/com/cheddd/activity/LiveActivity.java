@@ -19,6 +19,7 @@ import com.cheddd.base.MyBaseActivity;
 import com.cheddd.bean.InfoLiveBean;
 import com.cheddd.bean.LoginTokenBean;
 import com.cheddd.config.NetConfig;
+import com.cheddd.fragment.NetProgressDialog;
 import com.cheddd.utils.LoginTokenUtils;
 import com.cheddd.utils.OkhttpUtils;
 import com.cheddd.utils.SharedPreferencesUtils;
@@ -87,7 +88,7 @@ public class LiveActivity extends MyBaseActivity implements View.OnClickListener
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                  //  Log.d(TAG, "请求居住信息" + result);
+                    Log.d(TAG, "请求居住信息" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         JSONObject entity = object.getJSONObject("entity");
@@ -109,7 +110,11 @@ public class LiveActivity extends MyBaseActivity implements View.OnClickListener
                                 mTextViewProduct.setText(key);
                             }
                         }
-                        mEditTextMonth.setText(monthRent / 100 + "");
+                        if(0==monthRent){
+                            mEditTextMonth.setText("");
+                        }else {
+                            mEditTextMonth.setText(monthRent / 100 + "");
+                        }
                         mEditTextUnit.setText(address);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -124,7 +129,7 @@ public class LiveActivity extends MyBaseActivity implements View.OnClickListener
     private void loanInfo() {
         String json = LoginTokenUtils.getJson();
         final FormBody formbody = new FormBody.Builder().add("content", json).build();
-        OkhttpUtils.getInstance(this).asyncPost(NetConfig.INDEX_PLEDGE_INFO, formbody, new OkhttpUtils.HttpCallBack() {
+        OkhttpUtils.getInstance(this).asyncPost(NetConfig.OAUTH_SETP, formbody, new OkhttpUtils.HttpCallBack() {
             @Override
             public void onError(Request request, IOException e) {
 
@@ -135,9 +140,10 @@ public class LiveActivity extends MyBaseActivity implements View.OnClickListener
                 if (result != null) {
                     try {
                         JSONObject object = new JSONObject(result);
-                        JSONObject entity = object.getJSONObject("entity");
-                        int loanInitAud = entity.getInt("loanInitAud");
-                        if (loanInitAud == 0) {
+                       // JSONObject entity = object.getJSONObject("entity");
+                        int loanInitAud = object.getInt("loanInitAud");
+                        int houseInfoAuth = object.getInt("houseInfoAuth");
+                        if (loanInitAud == 0||houseInfoAuth==1) {
                             mButtonSubmit.setVisibility(View.GONE);
                             mEditTextUnit.setCursorVisible(false);
                             mEditTextMonth.setCursorVisible(false);
@@ -223,16 +229,19 @@ public class LiveActivity extends MyBaseActivity implements View.OnClickListener
         }
         Gson gson = new Gson();
         String json = gson.toJson(live);
+        final NetProgressDialog dialog = new NetProgressDialog();
+        dialog.show(getSupportFragmentManager(),"11");
         FormBody formBody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_LIVE, formBody, new OkhttpUtils.HttpCallBack() {
             @Override
             public void onError(Request request, IOException e) {
-
+                dialog.dismissAllowingStateLoss();
             }
 
             @Override
             public void onSuccess(Request request, String result) {
              //   Log.d(TAG, result);
+                dialog.dismissAllowingStateLoss();
                 if (request != null) {
                     try {
                         JSONObject object = new JSONObject(result);

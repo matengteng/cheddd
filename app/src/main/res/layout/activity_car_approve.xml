@@ -70,6 +70,7 @@
                     android:id="@+id/et_car_km"
                     style="@style/EditText"
                     android:layout_marginLeft="50dp"
+                    android:inputType="number"
                     android:layout_toRightOf="@id/tv_car_km"
                     android:hint="@string/app_km_input"
                     android:maxLength="10" />

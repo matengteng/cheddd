@@ -23,6 +23,7 @@ import com.cheddd.bean.InfoWorkBean;
 import com.cheddd.bean.LoginTokenBean;
 import com.cheddd.bean.ProvinceBean;
 import com.cheddd.config.NetConfig;
+import com.cheddd.fragment.NetProgressDialog;
 import com.cheddd.utils.JsonFileReader;
 import com.cheddd.utils.LoginTokenUtils;
 import com.cheddd.utils.OkhttpUtils;
@@ -152,7 +153,7 @@ public class WorkActivity extends MyBaseActivity implements View.OnClickListener
     private void loanInfo() {
         String json = LoginTokenUtils.getJson();
         final FormBody formbody = new FormBody.Builder().add("content", json).build();
-        OkhttpUtils.getInstance(this).asyncPost(NetConfig.INDEX_PLEDGE_INFO, formbody, new OkhttpUtils.HttpCallBack() {
+        OkhttpUtils.getInstance(this).asyncPost(NetConfig.OAUTH_SETP, formbody, new OkhttpUtils.HttpCallBack() {
             @Override
             public void onError(Request request, IOException e) {
 
@@ -163,9 +164,10 @@ public class WorkActivity extends MyBaseActivity implements View.OnClickListener
                 if (result != null) {
                     try {
                         JSONObject object = new JSONObject(result);
-                        JSONObject entity = object.getJSONObject("entity");
-                        int loanInitAud = entity.getInt("loanInitAud");
-                        if (loanInitAud == 0) {
+                        //   JSONObject entity = object.getJSONObject("entity");
+                        int loanInitAud = object.getInt("loanInitAud");
+                        int workInfoAuth = object.getInt("workInfoAuth");
+                        if (loanInitAud == 0 || workInfoAuth == 1) {
                             mButtonfinsh.setVisibility(View.GONE);
                             mEditTextPosition.setCursorVisible(false);
                             mEditTextComTelno.setCursorVisible(false);
@@ -280,17 +282,21 @@ public class WorkActivity extends MyBaseActivity implements View.OnClickListener
         }
         Gson gson = new Gson();
         final String json = gson.toJson(work);
-     //   Log.d(TAG, json);
+        //   Log.d(TAG, json);
+        //new NetProgressDialog().show(getSupportFragmentManager(), "11");
+        final NetProgressDialog dialog = new NetProgressDialog();
+        dialog.show(getSupportFragmentManager(), "11");
         FormBody formBody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_WORK, formBody, new OkhttpUtils.HttpCallBack() {
             @Override
             public void onError(Request request, IOException e) {
-
+                dialog.dismissAllowingStateLoss();
             }
 
             @Override
             public void onSuccess(Request request, String result) {
-               // Log.d(TAG, "工作信息" + result);
+                dialog.dismissAllowingStateLoss();
+                // Log.d(TAG, "工作信息" + result);
                 try {
                     Log.d(TAG, NetConfig.INFO_WORK + "content" + "=" + json);
                     JSONObject object = new JSONObject(result);
@@ -302,7 +308,7 @@ public class WorkActivity extends MyBaseActivity implements View.OnClickListener
                     } else if ("0017".equals(returnCode)) {
                         ToastUtil.show(WorkActivity.this, returnMsg);
                         startActivity(new Intent(WorkActivity.this, LoginActivity.class));
-                    }else if("0002".equals(returnCode)){
+                    } else if ("0002".equals(returnCode)) {
                         ToastUtil.show(WorkActivity.this, returnMsg);
                     } else {
                         return;

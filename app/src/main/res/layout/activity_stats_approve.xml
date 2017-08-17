@@ -54,7 +54,7 @@
                     android:layout_toRightOf="@id/tv_stats_IDCard"
                     android:hint="请输入二代省份证"
                     android:inputType="text"
-                    android:maxLength="18" />
+                    android:maxLength="19" />
             </RelativeLayout>
 
             <View style="@style/View" />

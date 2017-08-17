@@ -190,7 +190,7 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
             mCheckBox.setChecked(false);
             mButton.setEnabled(false);
         }
-        int money = mAdapter.getMoney();
+        double money = mAdapter.getMoney();
         mTextViewTotal.setText(money + "");
     }
 

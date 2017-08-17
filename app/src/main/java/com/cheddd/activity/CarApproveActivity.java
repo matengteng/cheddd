@@ -21,6 +21,7 @@ import com.cheddd.application.MyApplications;
 import com.cheddd.base.MyBaseActivity;
 import com.cheddd.bean.InfoCarBean;
 import com.cheddd.config.NetConfig;
+import com.cheddd.fragment.NetProgressDialog;
 import com.cheddd.utils.LoginTokenUtils;
 import com.cheddd.utils.OkhttpUtils;
 import com.cheddd.utils.SharedPreferencesUtils;
@@ -100,15 +101,18 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
                         if ("000000".equals(returnCode)) {
                             entity = object.getJSONObject("entity");
                             String registrationDate = entity.getString("registrationDate");
-                            String mileage = entity.getString("mileage");
+                            int mileage = entity.getInt("mileage");
                             id = entity.getString("id");
                             String brand = entity.getString("brand");
                             String license = entity.getString("license");
                             int mortgageFlag = entity.getInt("mortgageFlag");
                             mEditTextMark.setText(license);
                             mEditTextType.setText(brand);
-
-                            mEditTextKm.setText(String.valueOf(Integer.parseInt(mileage) / 100));
+                            if(0==mileage){
+                                mEditTextKm.setText(null);
+                            }else {
+                                mEditTextKm.setText(mileage/100+"");
+                            }
                             mTextViewTime.setText(registrationDate);
                             for (Map.Entry<String, Integer> entry : mapNot.entrySet()) {
                                 int value = entry.getValue().intValue();
@@ -146,14 +150,14 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                       Log.d("TAG", "车辆信息：" + result);
+                        Log.d("TAG", "车辆信息：" + result);
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
                         String returnMsg = object.getString("returnMsg");
                         if ("000000".equals(returnCode)) {
                             entity = object.getJSONObject("entity");
                             String registrationDate = entity.getString("registrationDate");
-                            String mileage = entity.getString("mileage");
+                            int mileage = entity.getInt("mileage");
                             id = entity.getString("id");
                             String brand = entity.getString("brand");
                             String license = entity.getString("license");
@@ -161,7 +165,11 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
                             mEditTextMark.setText(license);
                             mEditTextType.setText(brand);
 
-                            mEditTextKm.setText(String.valueOf(Integer.parseInt(mileage) / 100));
+                            if(0==mileage){
+                                mEditTextKm.setText(null);
+                            }else {
+                                mEditTextKm.setText(mileage/100+"");
+                            }
                             mTextViewTime.setText(registrationDate);
                             for (Map.Entry<String, Integer> entry : mapNot.entrySet()) {
                                 int value = entry.getValue().intValue();
@@ -188,7 +196,7 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
     private void loanInfo() {
         String json = LoginTokenUtils.getJson();
         final FormBody formbody = new FormBody.Builder().add("content", json).build();
-        OkhttpUtils.getInstance(this).asyncPost(NetConfig.INDEX_PLEDGE_INFO, formbody, new OkhttpUtils.HttpCallBack() {
+        OkhttpUtils.getInstance(this).asyncPost(NetConfig.OAUTH_SETP, formbody, new OkhttpUtils.HttpCallBack() {
             @Override
             public void onError(Request request, IOException e) {
 
@@ -199,9 +207,10 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
                 if (result != null) {
                     try {
                         JSONObject object = new JSONObject(result);
-                        JSONObject entity = object.getJSONObject("entity");
-                        int loanInitAud = entity.getInt("loanInitAud");
-                        if (loanInitAud == 0) {
+                        // JSONObject entity = object.getJSONObject("entity");
+                        int loanInitAud = object.getInt("loanInitAud");
+                        int carInfoAuth = object.getInt("carInfoAuth");
+                        if (loanInitAud == 0 || carInfoAuth == 1) {
                             mButtonSubmit.setVisibility(View.GONE);
                             mEditTextKm.setCursorVisible(false);
                             mEditTextType.setCursorVisible(false);
@@ -301,16 +310,19 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
         car.setRegistrationDate(mTextViewTime.getText().toString());
         Gson gson = new Gson();
         String json = gson.toJson(car);
-       Log.d(TAG,"车辆车辆提交"+json);
-    FormBody formBody = new FormBody.Builder().add("content", json).build();
+        final NetProgressDialog dialog = new NetProgressDialog();
+        dialog .show(getSupportFragmentManager(),"11");
+        Log.d(TAG, "车辆车辆提交" + json);
+        FormBody formBody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_CAR, formBody, new OkhttpUtils.HttpCallBack() {
             @Override
             public void onError(Request request, IOException e) {
-
+                dialog.dismissAllowingStateLoss();
             }
 
             @Override
             public void onSuccess(Request request, String result) {
+                dialog.dismissAllowingStateLoss();
                 if (request != null) {
                     try {
                         JSONObject json = new JSONObject(result);
@@ -322,7 +334,7 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
                         } else if ("000000".equals(returnCode)) {
                             ToastUtil.show(CarApproveActivity.this, returnMsg);
                             finish();
-                        }else if("0002".equals(returnCode)){
+                        } else if ("0002".equals(returnCode)) {
                             ToastUtil.show(CarApproveActivity.this, returnMsg);
                             return;
                         }

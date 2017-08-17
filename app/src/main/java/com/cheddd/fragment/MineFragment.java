@@ -127,7 +127,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                    //    Log.d(TAG, "借钱" + result);
+                       Log.d(TAG, "借钱" + result);
                         JSONObject object = new JSONObject(result);
                         returnCode1 = object.getString("returnCode");
                         returnMsg1 = object.getString("returnMsg");
@@ -183,6 +183,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                             JSONObject entity = object.getJSONObject("entity");
                             canLoanYN = entity.getInt("canLoanYN");
                         } else {
+                            ToastUtil.show(mContext, returnMsg);
                             return;
                         }
                     } catch (JSONException e) {
@@ -233,10 +234,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                         startActivity(new Intent(getActivity(), LoginActivity.class));
                         //  ToastUtil.show(mContext, returnMsg);
                     } else {
+                        ToastUtil.show(mContext, returnMsg);
                         return;
                     }
                     break;
                 case R.id.bt_mine_login:
+
                     if ("0017".equals(returnCode)) {
                         startActivity(new Intent(getActivity(), LoginActivity.class));
                     } else {
@@ -289,7 +292,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     //借钱
     private void withDraw() {
-        if ("000000".equals(returnCode1)) {
+        Log.d(TAG, "returnCode:"+returnCode1);
+        Log.d(TAG, "canLoanYN:" + canLoanYN);
+        if ("000000".equals(returnCode1) || "0020".equals(returnCode1)) {
             if (canLoanYN == 0) {
                 startActivity(new Intent(mContext, PettyLoanActivity.class));
             } else {
@@ -297,7 +302,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             }
         } else if ("0021".equals(returnCode1)) {
             ToastUtil.show(mContext, returnMsg1);
-            return;
         } else {
             return;
         }

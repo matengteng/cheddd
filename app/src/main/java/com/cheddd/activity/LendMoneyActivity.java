@@ -90,6 +90,8 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
     private String loanCycle;
     private ArrayList<String> list1;
     private ArrayList<String> list2;
+    private int loanLimit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,12 +107,44 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
     }
 
     private void initData() {
+        lendMoney();
         mMapStyle();
         mList = new ArrayList<>();
         MonthlyINterest();
 
     }
 
+    private void lendMoney() {
+        final String json = LoginTokenUtils.getJson();
+        FormBody formbody = new FormBody.Builder().add("content", json).build();
+        OkhttpUtils.getInstance(this).asyncPost(NetConfig.INDEX_PETTYLOAN_INFO, formbody, new OkhttpUtils.HttpCallBack() {
+            @Override
+            public void onError(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onSuccess(Request request, String result) {
+                if (result != null) {
+                    // Log.d(TAG, "获取可借额度和总额度，还款试算" + result);
+                    // Log.d(TAG, "onSuccess:" + NetConfig.INDEX_PETTYLOAN_INFO + "content" + "=" + json);
+                    try {
+                        JSONObject object = new JSONObject(result);
+                        String returnCode = object.getString("returnCode");
+                        String returnMsg = object.getString("returnMsg");
+                        if ("000000".equals(returnCode)) {
+                            JSONObject entity = object.getJSONObject("entity");
+                            loanLimit = entity.getInt("loanLimit");
+                            Log.d(TAG,"+++++++++++++++++++++++++++++++++++"+String.valueOf(loanLimit).toString());
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        });
+    }
 
     private void mMapStyle() {
         mMapStyle = new LinkedHashMap<>();
@@ -158,7 +192,7 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                       // Log.d(TAG, "获取小额借款月利率、日利率" + result);
+                        // Log.d(TAG, "获取小额借款月利率、日利率" + result);
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
                         if ("000000".equals(returnCode)) {
@@ -175,13 +209,13 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
                                 list1.add(name);
                                 mMap.put("单期借款", list1);
                             }
-                           // Log.d(TAG,mMapDay.toString()+);
+                            // Log.d(TAG,mMapDay.toString()+);
                             JSONArray cashCycleList = entity.getJSONArray("cashCycleList");
-                            for (int i = 0; i <cashCycleList.length() ; i++) {
+                            for (int i = 0; i < cashCycleList.length(); i++) {
                                 JSONObject jsonObject = cashCycleList.getJSONObject(i);
                                 String name = jsonObject.getString("name");
                                 String value = jsonObject.getString("value");
-                                mMapMonth.put(name,Integer.parseInt(value));
+                                mMapMonth.put(name, Integer.parseInt(value));
                                 list2.add(name);
                                 mMap.put("现金分期", list2);
                             }
@@ -191,9 +225,9 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
                             String key = entry.getKey();
                             mListStyle.add(key);
                         }
-                        if(mAdapterStyle==null){
+                        if (mAdapterStyle == null) {
                             mAdapterStyle = new ArrayAdapter<String>(LendMoneyActivity.this, android.R.layout.simple_list_item_1, mListStyle);
-                        }else {
+                        } else {
                             mAdapterStyle.notifyDataSetChanged();
                         }
                     } catch (JSONException e) {
@@ -361,7 +395,7 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                  //  Log.d(TAG, "0现金分期；1单期借款" + result);
+                    //  Log.d(TAG, "0现金分期；1单期借款" + result);
                     try {
                         JSONObject objece = new JSONObject(result);
                         String returnCode = objece.getString("returnCode");
@@ -415,7 +449,7 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                  //  Log.d(TAG, "获取小额借贷试算结果" + result);
+                    //  Log.d(TAG, "获取小额借贷试算结果" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -436,42 +470,47 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
     //借款方式
     private void style() {
         if (mEdittextMoney.getText().toString().length() > 0) {
-            mDialog = new AlertDialog.Builder(this).create();
-            View view = LayoutInflater.from(this).inflate(R.layout.dialog_listview, null);
-            mDialog.setCanceledOnTouchOutside(false);
-            mListViewStyle = (ListView) view.findViewById(R.id.lv_dialog);
-            mListViewStyle.setAdapter(mAdapterStyle);
-            mListViewStyle.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mTextViewRefund.setText(null);
-                    String s = mListStyle.get(position);
-                    mTextViewStyle.setText(s.toString());
-                    String style = (String) parent.getItemAtPosition(position);
-                    if (s.equals("单期借款")) {
-                        mTextViewInterest.setText("*按日计息，日利率为" + dailyinterest);
-                    }
-                    if (s.equals("现金分期")) {
-                        mTextViewInterest.setText("*按月计息，月利率为" + monthly);
-                    }
-                    for (Map.Entry<String, List<String>> entry : mMap.entrySet()) {
-                        String key = entry.getKey();
-                        if (key.equals(mTextViewStyle.getText().toString())) {
-                            List<String> value = entry.getValue();
-                            mListRefund = new ArrayList<>();
-                            for (int i = 0; i < value.size(); i++) {
-                                String refund = value.get(i);
-                                mListRefund.add(refund);
-                            }
-                            mAdapterRefund = new ArrayAdapter<String>(LendMoneyActivity.this, android.R.layout.simple_list_item_1, mListRefund);
-                            mAdapterRefund.notifyDataSetInvalidated();
+            if (Integer.valueOf(mEdittextMoney.getText().toString()).intValue() < loanLimit) {
+                mDialog = new AlertDialog.Builder(this).create();
+                View view = LayoutInflater.from(this).inflate(R.layout.dialog_listview, null);
+                mDialog.setCanceledOnTouchOutside(false);
+                mListViewStyle = (ListView) view.findViewById(R.id.lv_dialog);
+                mListViewStyle.setAdapter(mAdapterStyle);
+                mListViewStyle.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        mTextViewRefund.setText(null);
+                        String s = mListStyle.get(position);
+                        mTextViewStyle.setText(s.toString());
+                        String style = (String) parent.getItemAtPosition(position);
+                        if (s.equals("单期借款")) {
+                            mTextViewInterest.setText("*按日计息，日利率为" + dailyinterest);
                         }
+                        if (s.equals("现金分期")) {
+                            mTextViewInterest.setText("*按月计息，月利率为" + monthly);
+                        }
+                        for (Map.Entry<String, List<String>> entry : mMap.entrySet()) {
+                            String key = entry.getKey();
+                            if (key.equals(mTextViewStyle.getText().toString())) {
+                                List<String> value = entry.getValue();
+                                mListRefund = new ArrayList<>();
+                                for (int i = 0; i < value.size(); i++) {
+                                    String refund = value.get(i);
+                                    mListRefund.add(refund);
+                                }
+                                mAdapterRefund = new ArrayAdapter<String>(LendMoneyActivity.this, android.R.layout.simple_list_item_1, mListRefund);
+                                mAdapterRefund.notifyDataSetInvalidated();
+                            }
+                        }
+                        mDialog.dismiss();
                     }
-                    mDialog.dismiss();
-                }
-            });
-            mDialog.show();
-            mDialog.getWindow().setContentView((LinearLayout) view);
+                });
+                mDialog.show();
+                mDialog.getWindow().setContentView((LinearLayout) view);
+            } else {
+                ToastUtil.show(this, "超额了");
+             return;
+            }
         } else {
             ToastUtil.show(this, "请选择借款金额");
             return;
@@ -488,7 +527,7 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
 
     //查看还款详情
     private void check() {
-        if(mTextViewRefund.getText().toString().length()>0){
+        if (mTextViewRefund.getText().toString().length() > 0) {
             mDialog = new AlertDialog.Builder(this).create();
             mDialog.setCanceledOnTouchOutside(false);
             View view = LayoutInflater.from(this).inflate(R.layout.dialog_refunddetails, null);
@@ -503,8 +542,8 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
             mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             mDialog.show();
             mDialog.getWindow().setContentView((LinearLayout) view);
-        }else {
-            ToastUtil.show(this,"请选择还款期数");
+        } else {
+            ToastUtil.show(this, "请选择还款期数");
             return;
         }
     }

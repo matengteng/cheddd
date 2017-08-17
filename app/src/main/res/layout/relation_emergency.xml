@@ -5,9 +5,9 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_marginTop="10dp"
         android:id="@+id/rl_relation_relatio"
-        style="@style/InfoRelativeLayout">
+        style="@style/InfoRelativeLayout"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/tv_relation_father1"
@@ -19,9 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="60dp"
-            android:tag="CONTACT_RELATION"
             android:layout_toRightOf="@id/tv_relation_father1"
             android:gravity="center_vertical"
+            android:tag="CONTACT_RELATION"
             android:text=""
             android:textColor="#333"
             android:textSize="15sp" />
@@ -43,10 +43,10 @@
         <EditText
             android:id="@+id/et_relation_name"
             style="@style/EditText"
-            android:tag="CONTACT_NAME"
             android:layout_marginLeft="60dp"
             android:layout_toRightOf="@id/tv_relation_name"
-            android:hint="@string/app_relation_input" />
+            android:hint="@string/app_relation_input"
+            android:tag="CONTACT_NAME" />
     </RelativeLayout>
 
     <View style="@style/View" />
@@ -63,19 +63,19 @@
             style="@style/EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:tag="CONTACT_PHONE_NUM"
-            android:maxLength="11"
             android:layout_toRightOf="@id/tv_relation_phone"
-            android:hint="@string/app_cellphone" />
+            android:hint="@string/app_cellphone"
+            android:maxLength="11"
+            android:tag="CONTACT_PHONE_NUM" />
 
         <ImageView
             android:id="@+id/iv_relation_cellPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
+            android:paddingLeft="20dp"
             android:src="@android:drawable/sym_action_call" />
     </RelativeLayout>
 
