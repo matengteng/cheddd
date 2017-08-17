@@ -1,14 +1,9 @@
 package com.cheddd.activity;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -27,8 +22,8 @@ import android.widget.Toast;
 import com.cheddd.R;
 import com.cheddd.application.MyApplications;
 import com.cheddd.base.MyBaseActivity;
-import com.cheddd.bean.InfoRelation;
-import com.cheddd.bean.RelationsBean;
+import com.cheddd.bean.AddContactParams;
+import com.cheddd.bean.ConstantBean;
 import com.cheddd.config.NetConfig;
 import com.cheddd.fragment.NetProgressDialog;
 import com.cheddd.utils.LoginTokenUtils;
@@ -36,8 +31,8 @@ import com.cheddd.utils.OkhttpUtils;
 import com.cheddd.utils.ToastUtil;
 import com.cheddd.view.TopNavigationBar;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -62,7 +57,6 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
     private static String TAG = RegisterActivity.class.getSimpleName();
     private Map<String, Integer> map = new LinkedHashMap<>();
     private ImageView mImageView, mImageViewPhone;//打电话、紧急联系人打电话
-    private LinearLayout mLayout, mLayout2, mLayout3;
     //增加、提交
     private Button mButtonAdd, mButtonSubmit;
     private TopNavigationBar mTnb;
@@ -71,160 +65,108 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
     //直系 姓名，手机号码；紧急姓名，手机号码
     private EditText mEditTextUrgencyPhone, mEditTextrgencyName;
 
-    private int position;
-    private int mCount = 0;
-
-    private boolean textIsEmpty = false;
-    private String id;
-    private JSONArray rows;
-    private StringBuffer mStringBufferId;
-    private StringBuffer mStringBufferRelayion;
-    private JSONObject entity;
-    private String urgentId;
-
-    private Map<String, Integer> mapRelation;
-    private String flag;
-    private String urgentId1;
-    private String urgentTelNo;
-    private String urgentContractName;
+    private Map<Integer, String> mapRelation;
+    private LinearLayout ll_relation_container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relation);
+
+
+        //0.配偶1父亲.2母亲.3子女4亲属5同事6朋友
+        mapRelation = new LinkedHashMap<>();
+        mapRelation.put(0, "配偶");
+        mapRelation.put(1, "父亲");
+        mapRelation.put(2, "母亲");
+        mapRelation.put(3, "子女");
+        mapRelation.put(4, "亲属");
+        mapRelation.put(5, "同事");
+        mapRelation.put(6, "朋友");
+
+
         initView();
         initData();
-        setData();
         setListener();
-        findViewAllValidateEmpty(findViewById(android.R.id.content));
-        Log.d(TAG, "findViewAllValidateEmpty():" + textIsEmpty);
-        mLayout.addView(addView());
+    }
+
+    private void showRelationDialog(final TextView textView, int position) {
+        final String[] strings = mapRelation.values().toArray(new String[]{});
+
+        new AlertDialog.Builder(this).setSingleChoiceItems(strings, position, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                textView.setText(strings[which]);
+                textView.setTag(which);
+                dialog.dismiss();
+            }
+        }).show();
     }
 
     private void initData() {
-        //0.配偶1父亲.2母亲.3子女4亲属5同事6朋友
-        mapRelation = new LinkedHashMap<>();
-        mapRelation.put("配偶", 0);
-        mapRelation.put("父亲", 1);
-        mapRelation.put("母亲", 2);
-        mapRelation.put("子女", 3);
-        mapRelation.put("亲属", 4);
-        mapRelation.put("同事", 5);
-        mapRelation.put("朋友", 6);
+
+        final NetProgressDialog netProgressDialog = new NetProgressDialog();
+        netProgressDialog.show(getSupportFragmentManager(), "");
+
         final String json = LoginTokenUtils.getJson();
         FormBody formBody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_RELATION_INFO, formBody, new OkhttpUtils.HttpCallBack() {
             @Override
             public void onError(Request request, IOException e) {
                 Log.d(TAG, e.getMessage());
+                netProgressDialog.dismissAllowingStateLoss();
             }
 
             @Override
             public void onSuccess(Request request, String result) {
-                if (result != null) {
-                    mStringBufferId = new StringBuffer();
-                    mStringBufferRelayion = new StringBuffer();
-                    Log.d(TAG, "获取联系人：" + result);
-                    try {
-                        JSONObject object = new JSONObject(result);
-                        String returnCode = object.getString("returnCode");
-                        String returnMsg = object.getString("returnMsg");
 
-                        if ("000000".equals(returnCode)) {
-                          /*  try {
-                                entity = object.getJSONObject("entity");
-                                Log.d(TAG, entity.toString());
-                            } catch (Exception e) {
-                                return;
-                            }*/
-                           entity = object.getJSONObject("entity");
-                            urgentId1 = entity.getString("urgentId");
-                            urgentTelNo = entity.getString("urgentTelNo");
-                            urgentContractName = entity.getString("urgentContractName");
-                            mEditTextUrgencyPhone.setText(urgentTelNo);
-                            mEditTextrgencyName.setText(urgentContractName);
-                            rows = object.getJSONArray("rows");
-                            if (rows.length() >= 0) {
-                                mLayout.removeAllViews();
-                            }
-                            flag = object.getString("flag");
-                            for (int i = 0; i < rows.length(); i++) {
-                                JSONObject jsonObject = rows.getJSONObject(i);
-                                String id = jsonObject.getString("id");
-                                String contractName = jsonObject.getString("contractName");
-                                int relation = jsonObject.getInt("relation");
-                                String telNo = jsonObject.getString("telNo");
-                                mStringBufferId.append(id).append(",");
-                                mStringBufferRelayion.append(relation).append(",");
-                                View view = addView();
-                                TextView viewById = (TextView) view.findViewById(R.id.et_relation_name);
-                                TextView viewById1 = (TextView) view.findViewById(R.id.et_relation_phone);
-                                TextView viewById2 = (TextView) view.findViewById(R.id.tv_relation_relation);
-                                viewById.setText(contractName);
-                                viewById1.setText(telNo);
-                                for (Map.Entry<String, Integer> entry : mapRelation.entrySet()) {
-                                    Integer value = entry.getValue();
-                                    if (value == relation) {
-                                        String key = entry.getKey();
-                                        viewById2.setText(key);
-                                    }
-                                }
-                                mLayout.addView(view);
-                            }
-                            if (rows.length() >= 3) {
-                                mButtonAdd.setVisibility(View.GONE);
-                            }
-                            if (rows.length() > 0) {
-                                mStringBufferId.delete(mStringBufferId.length() - 1, mStringBufferId.length());
-                                mStringBufferRelayion.delete(mStringBufferRelayion.length() - 1, mStringBufferRelayion.length());
-                            } else {
-                                return;
-                            }
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                netProgressDialog.dismissAllowingStateLoss();
+
+                Log.d(TAG, "res:" + result);
+                try {
+                    ConstantBean constantBean = new Gson().fromJson(result, ConstantBean.class);
+                    if (constantBean.getRows().size() > 0) {
+                        ll_relation_container.removeAllViews();
                     }
-                }
-            }
-        });
-        loanInfo();
-    }
 
-    private void loanInfo() {
-        String json = LoginTokenUtils.getJson();
-        final FormBody formbody = new FormBody.Builder().add("content", json).build();
-        OkhttpUtils.getInstance(this).asyncPost(NetConfig.OAUTH_SETP, formbody, new OkhttpUtils.HttpCallBack() {
-            @Override
-            public void onError(Request request, IOException e) {
+                    for (ConstantBean.RowsBean rowsBean : constantBean.getRows()) {
+                        View view = LayoutInflater.from(RelationActivity.this).inflate(R.layout.relation_emergency, null, false);
 
-            }
-
-            @Override
-            public void onSuccess(Request request, String result) {
-                if (result != null) {
-                    try {
-                        JSONObject object = new JSONObject(result);
-                        //  JSONObject entity = object.getJSONObject("entity");
-                        int loanInitAud = object.getInt("loanInitAud");
-                        int contactsInfoAuth = object.getInt("contactsInfoAuth");
-                        if (loanInitAud == 0 || contactsInfoAuth == 1) {
-                            mButtonSubmit.setVisibility(View.GONE);
-                            mButtonAdd.setVisibility(View.GONE);
-                        } else {
-                            mButtonSubmit.setVisibility(View.VISIBLE);
-                            mButtonAdd.setVisibility(View.VISIBLE);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        TextView tv_relation_relation = (TextView) view.findViewById(R.id.tv_relation_relation);
+                        EditText et_relation_name = (EditText) view.findViewById(R.id.et_relation_name);
+                        final EditText et_relation_phone = (EditText) view.findViewById(R.id.et_relation_phone);
+                        ImageView imageView = (ImageView) view.findViewById(R.id.iv_relation_cellPhone);
+                        et_relation_name.setText(rowsBean.getContractName());
+                        et_relation_phone.setText(rowsBean.getTelNo());
+                        tv_relation_relation.setText(mapRelation.get(rowsBean.getRelation()));
+                        tv_relation_relation.setTag(rowsBean.getRelation());
+                        view.setTag(rowsBean.getId());
+                        tv_relation_relation.setOnClickListener(RelationActivity.this);
+                        imageView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                CallPhone(et_relation_phone);
+                            }
+                        });
+                        ll_relation_container.addView(view);
                     }
+
+                    if (constantBean.getRows().size() == 3) {
+                        mButtonAdd.setVisibility(View.GONE);
+                    }
+
+                    if (constantBean.getEntity() != null) {
+                        mEditTextrgencyName.setText(constantBean.getEntity().getUrgentContractName());
+                        mEditTextUrgencyPhone.setText(constantBean.getEntity().getUrgentTelNo());
+                    }
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
                 }
+
             }
         });
     }
 
-    private void setData() {
-
-    }
 
     private void setListener() {
 
@@ -243,323 +185,129 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
     }
 
     private void initView() {
+        ll_relation_container = (LinearLayout) findViewById(R.id.ll_relation_container1);
         mTnb = (TopNavigationBar) findViewById(R.id.tnb_relation);
         mImageViewPhone = (ImageView) findViewById(R.id.iv_relation_urgency_phone);
         mEditTextrgencyName = (EditText) findViewById(R.id.et_relation_urgency_name);
         mEditTextUrgencyPhone = (EditText) findViewById(R.id.et_relation_regency_phone);
-        mLayout = (LinearLayout) findViewById(R.id.ll_relation_container1);
         mButtonAdd = (Button) findViewById(R.id.bt_relation_add);
         mButtonSubmit = (Button) findViewById(R.id.bt_relation_submit);
         mButtonSubmit.setEnabled(true);
+
+        View view = LayoutInflater.from(RelationActivity.this).inflate(R.layout.relation_emergency, null, false);
+        view.findViewById(R.id.tv_relation_relation).setOnClickListener(this);
+        ll_relation_container.addView(view);
     }
 
     @Override
     public void onClick(View v) {
-        if (v != null) {
-            switch (v.getId()) {
-                case R.id.iv_relation_urgency_phone:
-                    cellPhone();
-                    break;
-                case R.id.bt_relation_add:
-                    Log.d(TAG, "++++++++++++++++++++++" + rows);
-                    try {
-                        if (rows == null) {
-                            mCount++;
-                            mLayout.addView(addView());
-                            if (mCount == 2) {
-                                mButtonAdd.setVisibility(View.GONE);
-                            }
-                        } else if (rows.length() == 1) {
-                            mCount++;
-                            mLayout.addView(addView());
-                            if (mCount == 2) {
-                                mButtonAdd.setVisibility(View.GONE);
-                            }
-                        } else if (rows.length() == 2) {
-                            mCount++;
-                            mLayout.addView(addView());
-                            if (mCount == 1) {
-                                mButtonAdd.setVisibility(View.GONE);
-                            }
-                        }
-                    } catch (Exception e) {
-                        return;
-                    }
-
-                    break;
-                case R.id.tv_relation_relation:
-                    relation(v);
-                    break;
-                case R.id.bt_relation_submit:
-                    submit();
-                    break;
-            }
-        }
-    }
-
-    //拨打电话
-    private void cellPhone() {
-        if (ContextCompat.checkSelfPermission(RelationActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(RelationActivity.this, Manifest.permission.CALL_PHONE)) {
-                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri);
-                startActivity(intent);
-            } else {
-                ActivityCompat.requestPermissions(RelationActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 100);
-            }
-        } else {
-            CallPhone();
-        }
-
-    }
-
-
-    private void CallPhone() {
-        String number = mEditTextUrgencyPhone.getText().toString().trim();
-        if (TextUtils.isEmpty(number)) {
-            Toast.makeText(RelationActivity.this, "号码不能为空！", Toast.LENGTH_SHORT).show();
-        } else {
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_CALL);
-            Uri data = Uri.parse("tel:" + number);
-            intent.setData(data);
-            startActivity(intent);
-        }
-    }
-
-    // 处理权限申请的回调
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case 100: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // 授权成功，继续打电话
-                    CallPhone();
-                    //cellPhoneurgency();
-                } else {
-                    // 授权失败！
-                    Toast.makeText(this, "授权失败！", Toast.LENGTH_LONG).show();
+        switch (v.getId()) {
+            case R.id.iv_relation_urgency_phone:
+                CallPhone(mEditTextUrgencyPhone);
+                break;
+            case R.id.bt_relation_add:
+                View view = LayoutInflater.from(RelationActivity.this).inflate(R.layout.relation_emergency, null, false);
+                view.findViewById(R.id.tv_relation_relation).setOnClickListener(this);
+                ll_relation_container.addView(view);
+                if (ll_relation_container.getChildCount() == 3) {
+                    mButtonAdd.setVisibility(View.GONE);
                 }
                 break;
-            }
-        }
-    }
-
-
-    //点击提交时
-    private void submit() {
-
-        textIsEmpty = true;
-        findViewAllValidateEmpty(findViewById(android.R.id.content));
-        if (!textIsEmpty) {
-            ToastUtil.show(this, "请将信息填写完整");
-            return;
-        }
-        if (stringBuffer.length() > 0)
-            stringBuffer.delete(0, stringBuffer.length());
-        String contact_name = getContactInfo(mLayout, CONTACT_NAME);
-        contact_name = contact_name.substring(0, contact_name.length() - 1);
-        if (stringBuffer.length() > 0)
-            stringBuffer.delete(0, stringBuffer.length());
-        String contact_phone_num = getContactInfo(mLayout, CONTACT_PHONE_NUM);
-        contact_phone_num = contact_phone_num.substring(0, contact_phone_num.length() - 1);
-
-        Log.d(TAG, contact_phone_num);
-        if (stringBuffer.length() > 0)
-            stringBuffer.delete(0, stringBuffer.length());
-        String contact_relation = getContactInfo(mLayout, CONTACT_RELATION);
-        contact_relation = contact_relation.substring(0, contact_relation.length() - 1);
-//        String name = mEditTextName.getText().toString().trim();
-//        //用户名
-        String nameRegular = "[\u4E00-\u9FA5]{2,5}(?:·[\u4E00-\u9FA5]{2,5})*";
-//        if (!name.matches(nameRegular)) {
-//            ToastUtil.show(this, "姓名格式错误");
-//            return;
-//        }
-//        String phone = mEditTextPhone.getText().toString().trim();
-//        if (!phone.matches("1\\d{10}")) {
-//            ToastUtil.show(this, "手机格式错误");
-//            return;
-//        }
-        String gencyName = mEditTextrgencyName.getText().toString().trim();
-        if (!gencyName.matches(nameRegular)) {
-            ToastUtil.show(this, "姓名格式错误");
-            return;
-        }
-        String urgencyphone = mEditTextUrgencyPhone.getText().toString().trim();
-        if (!urgencyphone.matches("1\\d{10}")) {
-            ToastUtil.show(this, "手机格式错误");
-            return;
-        }
-        final InfoRelation relation = new InfoRelation();
-        //客户端来源、用户令牌、直系亲属人编号、直系亲属姓名、直系亲属手机号、直系亲属关系、紧急联系人编号、紧急联系人姓名、紧急联系人
-        relation.setClientType("2");
-        relation.setToken(MyApplications.getToken());
-        if (rows != null && rows.length() > 0) {
-            relation.setId(new String(mStringBufferId));
-            StringBuffer stringBuffer = new StringBuffer();
-            String[] relations = contact_relation.split(",");
-            for (int i = 0; i < relations.length; i++) {
-                if (i == relations.length - 1) {
-                    stringBuffer.append(map.get(relations[i]));
-                } else {
-                    stringBuffer.append(map.get(relations[i]) + ",");
+            case R.id.tv_relation_relation:
+                if (v.getTag() != null) {
+                    v.setTag(0);
                 }
-            }
+                showRelationDialog((TextView) v, (Integer) v.getTag());
+                break;
+            case R.id.bt_relation_submit:
+                if (textIsEmpty()) {
+                    StringBuffer nameSB = new StringBuffer();
+                    StringBuffer phoneSB = new StringBuffer();
+                    StringBuffer idSB = new StringBuffer();
+                    StringBuffer relationSB = new StringBuffer();
+                    for (int i = 0; i < ll_relation_container.getChildCount(); i++) {
+                        view = ll_relation_container.getChildAt(i);
+                        TextView tv_relation_relation = (TextView) view.findViewById(R.id.tv_relation_relation);
+                        EditText et_relation_name = (EditText) view.findViewById(R.id.et_relation_name);
+                        EditText et_relation_phone = (EditText) view.findViewById(R.id.et_relation_phone);
+                        String id = (String) view.getTag();
+                        String name = et_relation_name.getText().toString();
+                        String phone = et_relation_phone.getText().toString();
+                        nameSB.append(name);
+                        phoneSB.append(phone);
+                        if (id != null)
+                            idSB.append(id);
+                        relationSB.append(tv_relation_relation.getTag().toString());
 
-            //  relation.setRelation(new String(mStringBufferRelayion) + new String(stringBuffer).replace("null", ""));
-            relation.setRelation((new String(mStringBufferRelayion) + new String(stringBuffer).replace("null", "")).substring(((new String(mStringBufferRelayion) + new String(stringBuffer).replace("null", ""))).length() - 1));
-        } else if (rows == null) {
-            relation.setId("");
-            StringBuffer stringBuffer = new StringBuffer();
-            String[] relations = contact_relation.split(",");
-            for (int i = 0; i < relations.length; i++) {
-                //  Log.i(TAG, "+++" + map.get(relations[i]));
-                if (i == relations.length - 1) {
-                    stringBuffer.append(map.get(relations[i]));
-                } else {
-                    stringBuffer.append(map.get(relations[i]) + ",");
-                }
-            }
-            relation.setRelation(new String(stringBuffer));
-        }
-        relation.setContractName(contact_name);
-        relation.setTelNo(contact_phone_num);
-        if (entity != null) {
-            relation.setUrgentId(urgentId1);
-        } else {
-            relation.setUrgentId("");
-        }
-        relation.setUrgentContractName(mEditTextrgencyName.getText().toString().trim());
-        relation.setUrgentTelNo(mEditTextUrgencyPhone.getText().toString().trim());
-       /* for (Integer key : map.values()) {
-            //  relation.setRelation(new Integer(key).toString());
-            Log.d(TAG, "key" + key);
-
-        }
-        for (String s : map.keySet()) {
-            Log.i(TAG, s);
-        }*/
-        /*StringBuffer stringBuffer = new StringBuffer();
-        String[] relations = contact_relation.split(",");
-        for (int i = 0; i < relations.length; i++) {
-            //  Log.i(TAG, "+++" + map.get(relations[i]));
-            if (i == relations.length - 1) {
-                stringBuffer.append(map.get(relations[i]));
-            } else {
-                stringBuffer.append(map.get(relations[i]) + ",");
-            }
-        }
-        relation.setRelation(new String(stringBuffer));*/
-        Gson gson = new Gson();
-        String json = gson.toJson(relation);
-        final NetProgressDialog dialog = new NetProgressDialog();
-        dialog.show(getSupportFragmentManager(),"11");
-        FormBody formbody = new FormBody.Builder().add("content", json).build();
-        OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_RELATION, formbody, new OkhttpUtils.HttpCallBack() {
-            @Override
-            public void onError(Request request, IOException e) {
-                dialog.dismissAllowingStateLoss();
-            }
-
-            @Override
-            public void onSuccess(Request request, String result) {
-                dialog.dismissAllowingStateLoss();
-                if (result != null) {
-                    try {
-                        Log.d(TAG, "提交联系人:" + result);
-                        JSONObject object = new JSONObject(result);
-                        String returnCode = object.getString("returnCode");
-                        String returnMsg = object.getString("returnMsg");
-                        if ("000000".equals(returnCode)) {
-                            ToastUtil.show(RelationActivity.this, returnMsg);
-                            finish();
-                        } else if (returnCode.equals("0042")) {
-                            startActivity(new Intent(RelationActivity.this, CarApproveActivity.class));
-                        } else if ("0002".equals(returnCode)) {
-                            ToastUtil.show(RelationActivity.this, returnMsg);
-
-                        } else {
-                            return;
+                        if (i != ll_relation_container.getChildCount() - 1) {
+                            nameSB.append(",");
+                            phoneSB.append(",");
+                            idSB.append(",");
+                            relationSB.append(",");
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
-                }
-            }
-        });
-    }
 
-    private StringBuffer stringBuffer = new StringBuffer();
 
-    private String getContactInfo(View view, String tag) {
-        if (view instanceof ViewGroup) {
-            ViewGroup container = (ViewGroup) view;
-            for (int i = 0, n = container.getChildCount(); i < n; i++) {
-                View child = container.getChildAt(i);
-                if (child instanceof TextView && child.getTag() != null && child.getTag().toString().equals(tag)) {
-                    stringBuffer.append((((TextView) child).getText()).toString());
-                    stringBuffer.append(",");
+                    AddContactParams addContactParams = new AddContactParams("2", MyApplications.getToken(), idSB.toString(), nameSB.toString(), phoneSB.toString(), relationSB.toString(), "", mEditTextrgencyName.getText().toString(), mEditTextUrgencyPhone.getText().toString());
+                    Log.d(TAG, new Gson().toJson(addContactParams));
+
+                    final NetProgressDialog netProgressDialog = new NetProgressDialog();
+                    netProgressDialog.show(getSupportFragmentManager(), "");
+                    FormBody formBody = new FormBody.Builder().add("content", new Gson().toJson(addContactParams)).build();
+                    OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_RELATION, formBody, new OkhttpUtils.HttpCallBack() {
+                        @Override
+                        public void onError(Request request, IOException e) {
+                            netProgressDialog.dismissAllowingStateLoss();
+                        }
+
+                        @Override
+                        public void onSuccess(Request request, String result) {
+                            Log.d(TAG, result);
+                            netProgressDialog.dismissAllowingStateLoss();
+                            if (result != null) {
+                                try {
+                                    JSONObject object = new JSONObject(result);
+                                    Log.d(TAG, object.getString("returnCode"));
+                                    if (object.getString("returnCode").equals("000000")) {
+                                        finish();
+                                    } else if ("0042".equals(object.getString("returnCode"))) {
+                                        new AlertDialog.Builder(RelationActivity.this)
+                                                .setMessage(object.getString("returnMsg"))
+                                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        dialog.dismiss();
+                                                    }
+                                                })
+                                                .setPositiveButton("去填写", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        dialog.dismiss();
+                                                        startActivity(new Intent(RelationActivity.this, CarApproveActivity.class));
+                                                    }
+                                                }).show();
+                                    } else {
+                                        ToastUtil.show(RelationActivity.this, object.getString("returnMsg"));
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                        }
+                    });
+
+
+                } else {
+                    ToastUtil.show(this, "所有信息均为必填项");
                 }
-                getContactInfo(child, tag);
-            }
+                break;
         }
-        return new String(stringBuffer);
     }
 
 
-    private void findViewAllValidateEmpty(View view) {
-        if (view instanceof ViewGroup) {
-            ViewGroup container = (ViewGroup) view;
-            for (int i = 0, n = container.getChildCount(); i < n; i++) {
-                View child = container.getChildAt(i);
-                if (child instanceof TextView) {
-                    if (((TextView) child).getText() == null || TextUtils.isEmpty(((TextView) child).getText())) {
-                        textIsEmpty = false;
-                    }
-                }
-                if (textIsEmpty) findViewAllValidateEmpty(child);
-            }
-        }
-    }
-
-
-    private void relation(final View view) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setSingleChoiceItems(R.array.relation, position, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                position = which;
-                final String[] aryShop = getResources().getStringArray(R.array.relation);
-                map.put(aryShop[which], which);
-                ((TextView) view).setText(aryShop[which]);
-                dialog.dismiss();
-            }
-        }).create().show();
-
-    }
-
-
-    //增加view的视图
-    private View addView() {
-        View view = LayoutInflater.from(this).inflate(R.layout.relation_emergency, null);
-        ImageView imageView = (ImageView) view.findViewById(R.id.iv_relation_cellPhone);
-        final EditText editTextPhone = (EditText) view.findViewById(R.id.et_relation_phone);
-        final TextView textViewRelation = (TextView) view.findViewById(R.id.tv_relation_relation);
-        textViewRelation.setOnClickListener(this);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cellPhoneurgency(editTextPhone.getText().toString());
-            }
-        });
-        return view;
-    }
-
-
-    private void cellPhoneurgency(String number) {
+    private void CallPhone(TextView textView) {
+        String number = textView.getText().toString().trim();
         if (TextUtils.isEmpty(number)) {
             Toast.makeText(RelationActivity.this, "号码不能为空！", Toast.LENGTH_SHORT).show();
         } else {
@@ -569,6 +317,22 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
             intent.setData(data);
             startActivity(intent);
         }
+    }
+
+
+    private boolean textIsEmpty() {
+        for (int i = 0; i < ll_relation_container.getChildCount(); i++) {
+            for (int i1 = 0; i1 < ((ViewGroup) ll_relation_container.getChildAt(i)).getChildCount(); i1++) {
+                if (((ViewGroup) ll_relation_container.getChildAt(i)).getChildAt(i1) instanceof TextView) {
+                    String cont = ((TextView) ((ViewGroup) ll_relation_container.getChildAt(i)).getChildAt(i1)).getText().toString();
+                    if (TextUtils.isEmpty(cont))
+                        return true;
+                }
+            }
+        }
+
+        return TextUtils.isEmpty(mEditTextUrgencyPhone.getText()) || TextUtils.isEmpty(mEditTextrgencyName.getText());
+
     }
 
 

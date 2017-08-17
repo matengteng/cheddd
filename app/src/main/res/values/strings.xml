@@ -69,7 +69,7 @@
     <string name="app_submit">提交</string>
     <string name="app_month">月收入</string>
     <string name="app_regard">关系</string>
-    <string name="app_relation_input">请输入联系认的姓名</string>
+    <string name="app_relation_input">请输入联系人的姓名</string>
     <string name="app_relation_urgency">紧急联系人</string>
     <string name="app_house">住房状态</string>
     <string name="app_month_monry">月租金</string>
