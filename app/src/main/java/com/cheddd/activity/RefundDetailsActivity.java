@@ -98,7 +98,7 @@ public class RefundDetailsActivity extends MyBaseActivity {
                             if (bindBankCardNo.length() > 4) {
                                 substring = bindBankCardNo.substring(bindBankCardNo.length() - 4);
                             }
-                            mTextViewOrder.setText(orderNo);
+                            mTextViewOrder.setText("交易编号:"+transactionId);
                             mTextViewMoney.setText(actualRepayAmt / 100 + "元");
                             mTextViewMark.setText(bindBank);
                             mTextViewNumber.setText("(" + substring + ")");

@@ -164,9 +164,40 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
 
             }
         });
+        loanInfo();
     }
 
+    private void loanInfo() {
+        String json = LoginTokenUtils.getJson();
+        final FormBody formbody = new FormBody.Builder().add("content", json).build();
+        OkhttpUtils.getInstance(this).asyncPost(NetConfig.OAUTH_SETP, formbody, new OkhttpUtils.HttpCallBack() {
+            @Override
+            public void onError(Request request, IOException e) {
 
+            }
+
+            @Override
+            public void onSuccess(Request request, String result) {
+                if (result != null) {
+                    try {
+                        JSONObject object = new JSONObject(result);
+                        //   JSONObject entity = object.getJSONObject("entity");
+                        int loanInitAud = object.getInt("loanInitAud");
+                        int contactsInfoAuth = object.getInt("contactsInfoAuth");
+                        if (loanInitAud == 0 || contactsInfoAuth == 1) {
+                            mButtonSubmit.setVisibility(View.GONE);
+                            mButtonAdd.setVisibility(View.GONE);
+                        } else {
+                            mButtonSubmit.setVisibility(View.VISIBLE);
+                            mButtonAdd.setVisibility(View.VISIBLE);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
     private void setListener() {
 
         mButtonSubmit.setOnClickListener(this);

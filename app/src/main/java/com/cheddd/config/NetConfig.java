@@ -9,7 +9,7 @@ public interface NetConfig {
     //http://47.93.163.237:9080/
     //String BASE_URL = "https://bssapp.cheddd.com/app/";
     String BASE_URL = "http://47.93.163.237:9080/app/";//测试
-    //String BASE_URL = "http://192.168.2.122:8080/cddd-app-server/app/";//科长
+   // String BASE_URL = "http://192.168.2.113:8080/cddd-app-server/app/";//科长
     String CLIENTTYPE = "?content={\"clientType\":2,}";
     String TYPE = "?";
     //消息滚动条

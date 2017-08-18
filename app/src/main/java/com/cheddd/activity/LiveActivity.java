@@ -88,7 +88,7 @@ public class LiveActivity extends MyBaseActivity implements View.OnClickListener
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    Log.d(TAG, "请求居住信息" + result);
+                //    Log.d(TAG, "请求居住信息" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         JSONObject entity = object.getJSONObject("entity");
@@ -253,6 +253,7 @@ public class LiveActivity extends MyBaseActivity implements View.OnClickListener
                         } else if ("0002".equals(returnCode)) {
                             ToastUtil.show(LiveActivity.this, returnMsg);
                         } else {
+                            ToastUtil.show(LiveActivity.this, returnMsg);
                             return;
                         }
                     } catch (JSONException e) {

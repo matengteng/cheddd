@@ -88,8 +88,8 @@ public class PettyLoanActivity extends MyBaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                   Log.d(TAG, "获取可借额度和总额度，还款试算" + result);
-                  //  Log.d(TAG, "onSuccess:" + NetConfig.INDEX_PETTYLOAN_INFO + "content" + "=" + json);
+                 //  Log.d(TAG, "获取可借额度和总额度，还款试算" + result);
+                  // Log.d(TAG, "onSuccess:" + NetConfig.INDEX_PETTYLOAN_INFO + "content" + "=" + json);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -100,6 +100,7 @@ public class PettyLoanActivity extends MyBaseActivity implements View.OnClickLis
                             int smallLoanSum = entity.getInt("smallLoanSum");
                             String orderNo = entity.getString("orderNo");
                             MyApplications.setOrderNo(orderNo);
+                           // Log.d(TAG,"+++++++++++++++++++++++++++++++++++++++"+orderNo);
                             String newRepaymentDate = entity.getString("newRepaymentDate");
                             double newRepayment = entity.getDouble("newRepayment");
                             mTextViewData.setText(newRepaymentDate + "应还");

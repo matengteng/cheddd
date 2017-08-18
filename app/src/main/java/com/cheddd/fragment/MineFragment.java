@@ -127,7 +127,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                       Log.d(TAG, "借钱" + result);
+                      // Log.d(TAG, "借钱" + result);
                         JSONObject object = new JSONObject(result);
                         returnCode1 = object.getString("returnCode");
                         returnMsg1 = object.getString("returnMsg");
@@ -292,8 +292,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     //借钱
     private void withDraw() {
-        Log.d(TAG, "returnCode:"+returnCode1);
-        Log.d(TAG, "canLoanYN:" + canLoanYN);
+      //  Log.d(TAG, "returnCode:"+returnCode1);
+      //  Log.d(TAG, "canLoanYN:" + canLoanYN);
         if ("000000".equals(returnCode1) || "0020".equals(returnCode1)) {
             if (canLoanYN == 0) {
                 startActivity(new Intent(mContext, PettyLoanActivity.class));

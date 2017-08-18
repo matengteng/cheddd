@@ -323,7 +323,7 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
     //    new NetProgressDialog().show(getSupportFragmentManager(), "11");
         final NetProgressDialog pro = new NetProgressDialog();
         pro.show(getSupportFragmentManager(), "11");
-        Log.d(TAG, "银行卡认证的提交" + json);
+      //  Log.d(TAG, "银行卡认证的提交" + json);
         FormBody formbody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_BANK, formbody, new OkhttpUtils.HttpCallBack() {
             @Override
@@ -335,7 +335,7 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
             public void onSuccess(Request request, String result) {
                  pro.dismissAllowingStateLoss();
                 if (result != null) {
-                    Log.d(TAG, result);
+                  //  Log.d(TAG, result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -353,6 +353,8 @@ public class BankApproveActivity extends MyBaseActivity implements View.OnClickL
                         } else if ("0033".equals(returnCode)) {
                             ToastUtil.show(BankApproveActivity.this, returnMsg);
                         } else if ("0002".equals(returnCode)) {
+                            ToastUtil.show(BankApproveActivity.this, returnMsg);
+                        }else {
                             ToastUtil.show(BankApproveActivity.this, returnMsg);
                         }
                     } catch (JSONException e) {

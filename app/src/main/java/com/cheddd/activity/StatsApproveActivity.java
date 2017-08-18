@@ -572,7 +572,7 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
             public void onSuccess(Request request, String result) {
                 dialog.dismissAllowingStateLoss();
                 if (result != null) {
-                    Log.d(TAG, "个人信息" + result);
+                  //  Log.d(TAG, "个人信息" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -586,10 +586,7 @@ public class StatsApproveActivity extends MyBaseActivity implements View.OnClick
                             finish();
                         } else if ("0002".equals(returnCode)) {
                             ToastUtil.show(StatsApproveActivity.this, returnMsg);
-
-                            dialog.dismissAllowingStateLoss();
-
-                        }
+                        }else {}
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

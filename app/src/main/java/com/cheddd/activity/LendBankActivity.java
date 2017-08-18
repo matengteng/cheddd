@@ -118,7 +118,7 @@ public class LendBankActivity extends MyBaseActivity implements View.OnClickList
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                   // Log.d(TAG, "借款银行卡" + result);
+                    // Log.d(TAG, "借款银行卡" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         JSONObject entity = object.getJSONObject("entity");
@@ -162,7 +162,7 @@ public class LendBankActivity extends MyBaseActivity implements View.OnClickList
                         } else if (mTextViewMark.getText().toString().equals("浦发银行")) {
                             mImageView.setImageResource(R.mipmap.bank_spdp);
                         } else {
-
+                            return;
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

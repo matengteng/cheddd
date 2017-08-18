@@ -94,7 +94,7 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                        Log.d("TAG", "车辆信息：" + result);
+                     //   Log.d("TAG", "车辆信息：" + result);
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
                         String returnMsg = object.getString("returnMsg");
@@ -150,7 +150,7 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
             public void onSuccess(Request request, String result) {
                 if (result != null) {
                     try {
-                        Log.d("TAG", "车辆信息：" + result);
+                    //    Log.d("TAG", "车辆信息：" + result);
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
                         String returnMsg = object.getString("returnMsg");
@@ -312,7 +312,7 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
         String json = gson.toJson(car);
         final NetProgressDialog dialog = new NetProgressDialog();
         dialog .show(getSupportFragmentManager(),"11");
-        Log.d(TAG, "车辆车辆提交" + json);
+       // Log.d(TAG, "车辆车辆提交" + json);
         FormBody formBody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INFO_CAR, formBody, new OkhttpUtils.HttpCallBack() {
             @Override
@@ -336,7 +336,8 @@ public class CarApproveActivity extends MyBaseActivity implements View.OnClickLi
                             finish();
                         } else if ("0002".equals(returnCode)) {
                             ToastUtil.show(CarApproveActivity.this, returnMsg);
-                            return;
+                        }else {
+                            ToastUtil.show(CarApproveActivity.this, returnMsg);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

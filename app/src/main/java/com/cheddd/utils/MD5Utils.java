@@ -30,7 +30,6 @@ public class MD5Utils {
 			e.printStackTrace();
 			// 没有该算法时,抛出异常, 不会走到这里
 		}
-
 		return "";
 	}
 }

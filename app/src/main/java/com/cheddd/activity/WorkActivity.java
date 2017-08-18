@@ -311,6 +311,7 @@ public class WorkActivity extends MyBaseActivity implements View.OnClickListener
                     } else if ("0002".equals(returnCode)) {
                         ToastUtil.show(WorkActivity.this, returnMsg);
                     } else {
+                        ToastUtil.show(WorkActivity.this, returnMsg);
                         return;
                     }
                 } catch (JSONException e) {

@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -422,11 +423,11 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
                             mRefundAdapter = new RefundDetailsAdapter(mList, LendMoneyActivity.this);
                         } else if ("0022".equals(returnCode)) {
                             ToastUtil.show(LendMoneyActivity.this, returnMsg);
-                            return;
                         } else if ("0017".equals(returnCode)) {
                             startActivity(new Intent(LendMoneyActivity.this, LoginActivity.class));
                         } else {
-                            ToastUtil.show(LendMoneyActivity.this, "未知错误");
+                            ToastUtil.show(LendMoneyActivity.this, returnMsg);
+                            mButtonNext.setEnabled(false);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -449,15 +450,19 @@ public class LendMoneyActivity extends MyBaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                    //  Log.d(TAG, "获取小额借贷试算结果" + result);
+                     Log.d(TAG, "获取小额借贷试算结果" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
+                        String returnMsg = object.getString("returnMsg");
                         if ("000000".equals(returnCode)) {
                             JSONObject entity = object.getJSONObject("entity");
                             double firstRepayTime = entity.getDouble("firstRepayment");
                             String repayTime = entity.getString("repayTime");
                             mTextViewfirstRepayTime.setText("￥" + firstRepayTime / 100 + "元" + "(" + repayTime + ")");
+                        }else {
+                            ToastUtil.show(LendMoneyActivity.this,returnMsg);
+                            mEdittextMoney.setText("");
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

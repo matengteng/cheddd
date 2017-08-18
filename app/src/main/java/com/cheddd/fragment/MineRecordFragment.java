@@ -82,7 +82,7 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
 
             @Override
             public void onSuccess(Request request, String result) {
-                Log.d(TAG, "借款记录" + result);
+              //  Log.d(TAG, "借款记录" + result);
                 //{"token":null,"returnCode":"000000","returnMsg":"操作成功","entity":null,
                 // "rows":[{"bindBankCardNo":"1234567o","loanAmt":6700,"orderNo":"EM000001E3",
                 // "loanStatus":0,"bindBankTag":"CMB","bindBank":"招商银行","loanAudDate":"2017-07-12 18:23:47"},
@@ -97,6 +97,7 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
                         for (int i = 0; i < rows.length(); i++) {
                             JSONObject jsonObject = rows.getJSONObject(i);
                             String bindBankCardNo = jsonObject.getString("bindBankCardNo");
+                        //    Log.d(TAG,"+++++++++++++++++++++++++++++"+bindBankCardNo);
                             String orderNo = jsonObject.getString("orderNo");
                             String bindBank = jsonObject.getString("bindBank");
                             orderType = jsonObject.getInt("orderType");
@@ -139,7 +140,7 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String orderNo = mData.get(position).getOrderNo();
         MyApplications.setOrderNo(orderNo);
-        CharSequence charSequence = orderNo.subSequence(0, 1);
+      // CharSequence charSequence = orderNo.subSequence(0, 1);
         if (orderType == 4) {
             startActivity(new Intent(getActivity(), LendDetailsActivity.class));
         } else {

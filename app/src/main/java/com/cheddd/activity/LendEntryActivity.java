@@ -43,7 +43,7 @@ public class LendEntryActivity extends MyBaseActivity implements View.OnClickLis
 
     private static String TAG = LendEntryActivity.class.getSimpleName();
     private Dialog mDialog;
-    private RelativeLayout mRelativeClose,mRelativeLayoutHetong;
+    private RelativeLayout mRelativeClose, mRelativeLayoutHetong;
     private Button mButton, mButtonKonow;
     private TopNavigationBar mTnb;
     //借款金额、收款账户、日利率、起止时间、首次还款日、还款日、借款期限、借款用途、还款银行卡，贷款发方法人
@@ -76,10 +76,11 @@ public class LendEntryActivity extends MyBaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                  //  Log.d(TAG, "确认借钱" + result);
+                    Log.d(TAG, "确认借钱" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
+                        String returnMsg = object.getString("returnMsg");
                         if ("000000".equals(returnCode)) {
                             JSONObject entity = object.getJSONObject("entity");
                             String bindBankCardNo = entity.getString("bindBankCardNo");
@@ -113,6 +114,9 @@ public class LendEntryActivity extends MyBaseActivity implements View.OnClickLis
                             mTextViewUse.setText("个人消费");
                             mTextViewrefundBank.setText(bindBank + "(" + substring + ")");
                             mTextViewIsuse.setText("车贷贷");
+                        } else {
+                            ToastUtil.show(LendEntryActivity.this, returnMsg);
+
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -158,7 +162,7 @@ public class LendEntryActivity extends MyBaseActivity implements View.OnClickLis
         mButton = (Button) findViewById(R.id.bt_lendEntry_affirm);
         mTnb = (TopNavigationBar) findViewById(R.id.tnb_lendEntry);
         mInsert = (TextView) findViewById(R.id.tv_lendentry_insert);
-        mRelativeLayoutHetong= (RelativeLayout) findViewById(R.id.rl_lend_hetonh);
+        mRelativeLayoutHetong = (RelativeLayout) findViewById(R.id.rl_lend_hetonh);
     }
 
     @Override
@@ -177,7 +181,7 @@ public class LendEntryActivity extends MyBaseActivity implements View.OnClickLis
                     mDialog.dismiss();
                     break;
                 case R.id.rl_lend_hetonh:
-                    startActivity(new Intent(this,HetongActivity.class));
+                    startActivity(new Intent(this, HetongActivity.class));
                     break;
                 case R.id.bt_petty_problem:
                     Intent intent = new Intent(LendEntryActivity.this, MoreQuestionActivity.class);
@@ -203,7 +207,7 @@ public class LendEntryActivity extends MyBaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                //    Log.d(TAG, "cvbnkml,;.==============" + result);
+                    //    Log.d(TAG, "cvbnkml,;.==============" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -217,6 +221,8 @@ public class LendEntryActivity extends MyBaseActivity implements View.OnClickLis
                         } else if ("0024".equals(returnCode)) {
                             ToastUtil.show(LendEntryActivity.this, returnMsg);
                         } else {
+                            ToastUtil.show(LendEntryActivity.this, returnMsg);
+                            mButton.setEnabled(false);
                             return;
                         }
 

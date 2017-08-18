@@ -22,7 +22,7 @@ import java.util.List;
 public class PayoffAdapter extends MyBaseAdapter implements View.OnClickListener {
     private List<LoanBean> mData;
     private Context mContext;
-    private String orderNo;
+
 
     public PayoffAdapter(List data, Context mContext) {
         super(data);
@@ -40,8 +40,7 @@ public class PayoffAdapter extends MyBaseAdapter implements View.OnClickListener
         } else {
             holder = (PayOffViewHolder) convertView.getTag();
         }
-        orderNo = mData.get(position).getOrderNo();
-        holder.mTextViewIndent.setText(orderNo);
+        holder.mTextViewIndent.setText(mData.get(position).getOrderNo());
         holder.mTextViewtime.setText(mData.get(position).getInterestTime());
         holder.mTextViewMoney.setText(mData.get(position).getContractAmt() + "元");
         holder.mTextViewMonth.setText(mData.get(position).getLoanCycle());
@@ -56,6 +55,7 @@ public class PayoffAdapter extends MyBaseAdapter implements View.OnClickListener
             holder.mMonthDay.setText("日利率");
         }
         holder.mTextViewList.setOnClickListener(this);
+        holder.mRelative.setTag(holder);
         holder.mRelative.setOnClickListener(this);
         return convertView;
     }
@@ -92,8 +92,9 @@ public class PayoffAdapter extends MyBaseAdapter implements View.OnClickListener
                 case R.id.tv_payoff_list:
                     break;
                 case R.id.rl_payoff_record:
+                    PayOffViewHolder tag = (PayOffViewHolder) v.getTag();
                     Intent intent = new Intent(mContext, RefundRecordActivity.class);
-                    intent.putExtra("orderNo", orderNo);
+                    intent.putExtra("orderNo",tag.mTextViewIndent.getText().toString());
                     mContext.startActivity(intent);
                     break;
                 default:

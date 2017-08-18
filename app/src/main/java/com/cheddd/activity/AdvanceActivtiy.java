@@ -255,10 +255,12 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
+                        String returnMsg = object.getString("returnMsg");
                         if ("0030".equals(returnCode)) {
                             return;
                         } else {
                             startActivity(new Intent(AdvanceActivtiy.this, SetPaymentActivity.class));
+                            ToastUtil.show(AdvanceActivtiy.this,returnMsg);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -368,6 +370,7 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
                                     }else if("0045".equals(returnCode)){
                                         ToastUtil.show(AdvanceActivtiy.this, returnMsg);
                                     }else {
+                                        ToastUtil.show(AdvanceActivtiy.this, returnMsg);
                                         return;
                                     }
                                 } catch (JSONException e) {
