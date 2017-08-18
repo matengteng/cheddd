@@ -24,6 +24,7 @@ import com.cheddd.application.MyApplications;
 import com.cheddd.base.MyBaseActivity;
 import com.cheddd.bean.AdvanceBean;
 import com.cheddd.bean.IndexLoanDetalis;
+import com.cheddd.bean.MineRecord;
 import com.cheddd.config.NetConfig;
 import com.cheddd.utils.LoginTokenUtils;
 import com.cheddd.utils.MD5Utils;
@@ -72,11 +73,14 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
     private String orderNo;
     private String indent;
     private StringBuffer str;
+    private String order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advance_activtiy);
+        Intent intent = getIntent();
+
         initView();
         initData();
         setData();
@@ -125,7 +129,13 @@ public class AdvanceActivtiy extends MyBaseActivity implements AdvanceAdapter.On
     private void initData() {
         mData = new ArrayList<>();
         mList = new ArrayList<>();
-        String json = LoginTokenUtils.getJson();
+
+        MineRecord record=new MineRecord();
+        record.setOrderNo(getIntent().getStringExtra("order"));
+        record.setToken(MyApplications.getToken());
+        record.setClientType("2");
+        Gson gson = new Gson();
+        String json = gson.toJson(record);
         FormBody formbody = new FormBody.Builder().add("content", json).build();
         OkhttpUtils.getInstance(this).asyncPost(NetConfig.INDEX_PETTYLOAN_ADVANCE, formbody, new OkhttpUtils.HttpCallBack() {
             @Override

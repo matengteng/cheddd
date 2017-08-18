@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.cheddd.R;
 import com.cheddd.activity.AdvanceActivtiy;
 import com.cheddd.activity.BorrowMoneyActivtiy;
+import com.cheddd.application.MyApplications;
 import com.cheddd.base.MyBaseAdapter;
 import com.cheddd.bean.LoanBean;
 import com.cheddd.bean.MoreLoansBean;
@@ -90,6 +91,7 @@ public class MoreLoanAdapter extends BaseExpandableListAdapter {
             holder = (MoreLoanGroupIdViewHolder) convertView.getTag();
         }
         holder.mTextViewIndent.setText(mData.get(groupPosition).getOrderNo());
+
         holder.mTextViewtime.setText(mData.get(groupPosition).getInterestTime());
         holder.mTextViewMoney.setText(mData.get(groupPosition).getContractAmt() + "元");
         holder.mTextViewMonth.setText(mData.get(groupPosition).getLoanCycle());
@@ -117,10 +119,12 @@ public class MoreLoanAdapter extends BaseExpandableListAdapter {
         holder.mTextViewalready.setText(mData.get(groupPosition).getAlreadyRepayAmt() + "");
         holder.mTextViewstay.setText(mData.get(groupPosition).getStayRepayAmt() + "");
         holder.mTextViewcurrent.setText(mData.get(groupPosition).getThisRepayAmt() + "");
+        holder.mRelative.setTag(holder);
         holder.mRelative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, AdvanceActivtiy.class));
+                MoreLoanGroupIdViewHolder tag = (MoreLoanGroupIdViewHolder) v.getTag();
+                mContext.startActivity(new Intent(mContext, AdvanceActivtiy.class).putExtra("order",tag.mTextViewIndent.getText().toString()));
             }
         });
         return convertView;

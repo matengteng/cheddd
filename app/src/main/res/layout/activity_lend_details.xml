@@ -114,7 +114,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_toRightOf="@id/bt_lendDetails_redtop"
                     android:enabled="false"
-                    android:text="提现申请"
+                    android:text="借款申请中"
                     android:textColor="#24CA86"
                     android:textSize="16sp" />
 
@@ -151,7 +151,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_toRightOf="@id/bt_lendDetails_finance"
                     android:enabled="false"
-                    android:text="审核中"
+                    android:text="借款审核中"
                     android:textColor="@color/text_tab"
                     android:textSize="16sp" />
 
@@ -188,7 +188,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_toRightOf="@id/bt_lendDetails_finsh"
                     android:enabled="false"
-                    android:text="提现成功"
+                    android:text="借款成功"
                     android:textColor="@color/text_tab"
                     android:textSize="16sp" />
 

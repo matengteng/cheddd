@@ -150,7 +150,7 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
                         ll_relation_container.addView(view);
                     }
 
-                    if (constantBean.getRows().size() == 3) {
+                    if (constantBean.getRows().size() >= 3) {
                         mButtonAdd.setVisibility(View.GONE);
                     }
 
@@ -164,7 +164,7 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
 
             }
         });
-        loanInfo();
+      loanInfo();
     }
 
     private void loanInfo() {
@@ -186,10 +186,10 @@ public class RelationActivity extends MyBaseActivity implements View.OnClickList
                         int contactsInfoAuth = object.getInt("contactsInfoAuth");
                         if (loanInitAud == 0 || contactsInfoAuth == 1) {
                             mButtonSubmit.setVisibility(View.GONE);
-                            mButtonAdd.setVisibility(View.GONE);
+                         //   mButtonAdd.setVisibility(View.GONE);
                         } else {
                             mButtonSubmit.setVisibility(View.VISIBLE);
-                            mButtonAdd.setVisibility(View.VISIBLE);
+                           // mButtonAdd.setVisibility(View.VISIBLE);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

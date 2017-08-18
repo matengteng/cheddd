@@ -14,20 +14,22 @@ public class MineRecord {
     private String bankID;
     private String orderNo;
     private String transactionId;
+    private int orderType;
 
     public MineRecord() {
     }
 
-    public MineRecord(String clientType, String transactionId, String orderNo, String bankID, String mark, String bank, String time, String token, double money) {
+    public MineRecord(String clientType, String token, double money, String time, String bank, String mark, String bankID, String orderNo, String transactionId, int orderType) {
         this.clientType = clientType;
-        this.transactionId = transactionId;
-        this.orderNo = orderNo;
-        this.bankID = bankID;
-        this.mark = mark;
-        this.bank = bank;
-        this.time = time;
         this.token = token;
         this.money = money;
+        this.time = time;
+        this.bank = bank;
+        this.mark = mark;
+        this.bankID = bankID;
+        this.orderNo = orderNo;
+        this.transactionId = transactionId;
+        this.orderType = orderType;
     }
 
     public String getClientType() {
@@ -38,52 +40,12 @@ public class MineRecord {
         this.clientType = clientType;
     }
 
-    public String getTransactionId() {
-        return transactionId;
+    public String getToken() {
+        return token;
     }
 
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public String getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo;
-    }
-
-    public String getBankID() {
-        return bankID;
-    }
-
-    public void setBankID(String bankID) {
-        this.bankID = bankID;
-    }
-
-    public String getMark() {
-        return mark;
-    }
-
-    public void setMark(String mark) {
-        this.mark = mark;
-    }
-
-    public String getBank() {
-        return bank;
-    }
-
-    public void setBank(String bank) {
-        this.bank = bank;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public double getMoney() {
@@ -94,12 +56,60 @@ public class MineRecord {
         this.money = money;
     }
 
-    public String getToken() {
-        return token;
+    public String getTime() {
+        return time;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getBank() {
+        return bank;
+    }
+
+    public void setBank(String bank) {
+        this.bank = bank;
+    }
+
+    public String getMark() {
+        return mark;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark;
+    }
+
+    public String getBankID() {
+        return bankID;
+    }
+
+    public void setBankID(String bankID) {
+        this.bankID = bankID;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public int getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(int orderType) {
+        this.orderType = orderType;
     }
 
     @Override
@@ -114,6 +124,7 @@ public class MineRecord {
                 ", bankID='" + bankID + '\'' +
                 ", orderNo='" + orderNo + '\'' +
                 ", transactionId='" + transactionId + '\'' +
+                ", orderType='" + orderType + '\'' +
                 '}';
     }
 }

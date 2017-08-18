@@ -75,6 +75,7 @@ public class MoreLoansFragment extends BaseFragment implements View.OnClickListe
     private String orderNo;
     private boolean flag;
     public static String money;
+    private String orderNo1;
 
     public static String getMoney() {
         return money;
@@ -107,6 +108,8 @@ public class MoreLoansFragment extends BaseFragment implements View.OnClickListe
                 } else {
                     mExpandableListView.expandGroup(position);
                     mButtonFinish.setVisibility(View.VISIBLE);
+                    orderNo1 = mList.get(position).getOrderNo();
+
                 }
 
             }
@@ -142,7 +145,7 @@ public class MoreLoansFragment extends BaseFragment implements View.OnClickListe
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                  //  Log.d(TAG, "" + result);
+                    //  Log.d(TAG, "" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -234,7 +237,7 @@ public class MoreLoansFragment extends BaseFragment implements View.OnClickListe
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                  //  Log.d(TAG, "判断支付密码是否设置" + result);
+                    //  Log.d(TAG, "判断支付密码是否设置" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
@@ -316,12 +319,12 @@ public class MoreLoansFragment extends BaseFragment implements View.OnClickListe
                 IndexLoanDetalis detalis = new IndexLoanDetalis();
                 detalis.setClientType("2");
                 detalis.setToken(MyApplications.getToken());
-                detalis.setOrderNo(orderNo);
+                detalis.setOrderNo(orderNo1);
                 String phone = SharedPreferencesUtils.getString(mContext, "phone", "");
                 detalis.setPayPassWord(MD5Utils.encode(phone + mEditTextPay.getText().toString().trim()));
                 Gson gson = new Gson();
                 String json = gson.toJson(detalis);
-              //  Log.d(TAG,"多个订单的支付密码"+json);
+                Log.d(TAG, "多个订单的支付密码" + json);
                 if (mEditTextPay.getSelectionEnd() == 6) {
                     FormBody formBody = new FormBody.Builder().add("content", json).build();
                     OkhttpUtils.getInstance(mContext).asyncPost(NetConfig.INDEX_PETTY_SINGLE_PAY, formBody, new OkhttpUtils.HttpCallBack() {
@@ -333,7 +336,7 @@ public class MoreLoansFragment extends BaseFragment implements View.OnClickListe
                         @Override
                         public void onSuccess(Request request, String result) {
                             if (result != null) {
-                              //  Log.d(TAG, "多个订单的提交" + result);
+                                Log.d(TAG, "多个订单的提交" + result);
                                 //{"token":null,"returnCode":"0023","returnMsg":"支付密码不正确","entity":null,"rows":[],"flag":"false"}
                                 try {
                                     JSONObject object = new JSONObject(result);
@@ -346,7 +349,7 @@ public class MoreLoansFragment extends BaseFragment implements View.OnClickListe
                                         getActivity().finish();
                                     } else if ("0023".equals(returnCode)) {
                                         ToastUtil.show(mContext, returnMsg);
-                                    } else if("0046".equals(returnCode)){
+                                    } else if ("0046".equals(returnCode)) {
                                         ToastUtil.show(mContext, returnMsg);
                                     }
                                 } catch (JSONException e) {

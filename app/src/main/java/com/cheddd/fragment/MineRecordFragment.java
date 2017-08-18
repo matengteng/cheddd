@@ -45,7 +45,7 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
     private List<MineRecord> mData;
     private Context mContent;
     private static final String TAG = MineRecordFragment.class.getSimpleName();
-    private int orderType;
+
 
 
     @Nullable
@@ -82,7 +82,7 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
 
             @Override
             public void onSuccess(Request request, String result) {
-              //  Log.d(TAG, "借款记录" + result);
+               Log.d(TAG, "借款记录" + result);
                 //{"token":null,"returnCode":"000000","returnMsg":"操作成功","entity":null,
                 // "rows":[{"bindBankCardNo":"1234567o","loanAmt":6700,"orderNo":"EM000001E3",
                 // "loanStatus":0,"bindBankTag":"CMB","bindBank":"招商银行","loanAudDate":"2017-07-12 18:23:47"},
@@ -100,7 +100,7 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
                         //    Log.d(TAG,"+++++++++++++++++++++++++++++"+bindBankCardNo);
                             String orderNo = jsonObject.getString("orderNo");
                             String bindBank = jsonObject.getString("bindBank");
-                            orderType = jsonObject.getInt("orderType");
+                            int orderType = jsonObject.getInt("orderType");
                             String loanAudDate = jsonObject.getString("loanAudDate");
                             double loanAmt = jsonObject.getDouble("loanAmt");
                             int loanStatus = jsonObject.getInt("loanStatus");
@@ -110,6 +110,7 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
                             record.setBankID(substring);
                             record.setMoney(loanAmt / 100);
                             record.setOrderNo(orderNo);
+                            record.setOrderType(orderType);
                             if (0 == loanStatus) {
                                 record.setMark("放款成功");
                             } else if (1 == loanStatus) {
@@ -139,9 +140,9 @@ public class MineRecordFragment extends BaseFragment implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String orderNo = mData.get(position).getOrderNo();
+        int orderType1 = mData.get(position).getOrderType();
         MyApplications.setOrderNo(orderNo);
-      // CharSequence charSequence = orderNo.subSequence(0, 1);
-        if (orderType == 4) {
+        if (orderType1 == 4) {
             startActivity(new Intent(getActivity(), LendDetailsActivity.class));
         } else {
             startActivity(new Intent(getActivity(), PledgeActivity.class).putExtra("che", "12"));

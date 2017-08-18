@@ -172,7 +172,7 @@ public class PettyLoanActivity extends MyBaseActivity implements View.OnClickLis
                     break;
                 //提前还请借款
                 case R.id.rl_petty_advance:
-                    startActivity(new Intent(this, AdvanceActivtiy.class).putExtra("order","12"));
+                    startActivity(new Intent(this, AdvanceActivtiy.class));
                     finish();
                     break;
                 case R.id.bt_petty_money:
@@ -205,7 +205,7 @@ public class PettyLoanActivity extends MyBaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(Request request, String result) {
                 if (result != null) {
-                 //   Log.d(TAG, "判断借钱的状态" + result);
+                    Log.d(TAG, "判断借钱的状态" + result);
                     try {
                         JSONObject object = new JSONObject(result);
                         String returnCode = object.getString("returnCode");
